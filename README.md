@@ -30,6 +30,7 @@ run
 ```
  php artisan db:seed --class=BranchSeeder
  php artisan db:seed --class=UserSeeder
+ php artisan db:seed --class=WalletSeeder
 ``
 สุดท้าย
 ______
