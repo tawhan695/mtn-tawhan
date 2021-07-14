@@ -18,8 +18,10 @@ class CreateOrderDetailsTable extends Migration
             $table->bigInteger('product_id')->unsigned()->nullable();
             $table->bigInteger('order_id')->unsigned()->nullable();
             $table->string('name')->nullable();
-            $table->string('price')->nullable();
-            $table->string('totol')->nullable();
+            $table->double('price',15,2)->default(0); // ราคาต้นทุน
+            $table->double('totol',15,2)->default(0); // ราคาต้นทุน
+            // $table->string('price')->nullable();
+            // $table->string('totol')->nullable();
             $table->unsignedInteger('qty')->default(0); // quantity
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
