@@ -1,51 +1,36 @@
-
-composer require laravel/sanctum
-
-php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
-
-php artisan make:controller Api\UserController
-
-# create
-``` php artisan make:controller Api\Auth\LoginController ```
-copy & paste to app\Api\Auth\LoginController
+การติดตั้ง
+1. 
 ```
-use App\Models\User;
-use Laravel\Sanctum\Sanctum;
-use Illuminate\Support\Facades\Validator;
-.....
-....
-....
-    public function login(Request $request)
-        {
-            $validator = Validator::make($request->all(), [
-                'username' => 'required',
-                'password' => 'required',
-            ]);
-        
-            if ($validator->fails()) {
-                return response()->json([
-                    'status' => $validator->errors(),
-                    'status_code' => 401,
-                    ]);
-            }else{
-        
-        
-        
-                
-                    return response()->json([
-                        'status_code' => 200,
-                        'status' => 'sucess',
-                        ]);
-            }
-        }
+composer install
 ```
+2.
+```
+cp .env.example .env
+```
+ 
 
-php artisan make:controller Api\Auth\LogoutController
-php artisan make:controller Api\Auth\ForgotController
+3.
+# สร้างดาต้าเบส dbmtn
+## แล้วconfig ในไฟล์ .env
+```
+DB_DATABASE=dbmtn
+DB_USERNAME=root
+DB_PASSWORD=
+```
+4.
+Run 
+```
+php artisan key:generate
+php artisan migrate
 
 
-## seed
-php artisan make:seeder UserSeeder
-php artisan db:seed
-php artisan db:seed --class=UserSeeder
-php artisan migrate:refresh --seed
+```
+สร้าง user
+run
+```
+ php artisan db:seed --class=BranchSeeder
+ php artisan db:seed --class=UserSeeder
+``
+สุดท้าย
+______
+php artisan serve
