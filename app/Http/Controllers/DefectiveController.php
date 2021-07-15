@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use App\Models\Defective;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DefectiveController extends Controller
 {
@@ -24,7 +26,8 @@ class DefectiveController extends Controller
      */
     public function index()
     {
-        return view('sales.defective');
+        $product = Product::all(['id','name','legular_price','qty']);
+        return view('sales.defective')->with(['product'=>$product]);
     }
 
     /**
@@ -45,7 +48,40 @@ class DefectiveController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'id' => 'required',
+            'defective' => 'required',
+            'status' => 'required',
+        ]);
+    
+        if($request->id == 'null'){
+            return redirect('defective')->withErrors(['id'=>'กรุณาเลือกสินค้า']);
+        }
+        if($request->defective == '0' || $request->defective == 0 ){
+            return redirect('defective')->withErrors(['defective'=>'กรุณาใส่ตัวเลขมากกว่า 0 ']);
+        }
+        if ($validator->fails()) {
+            return redirect('defective')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+         $QTY = Product::where('id', $request->id)->first()->qty;
+         if($QTY == 0 || $QTY == '0'){
+            return redirect('defective')->withErrors(['errorqty'=>'สินค้าในคลังหมด ไม่สามารถบันทึกการชำรุดได้']);
+         }
+         $count = intval($QTY) - intval($request->defective);
+         if($count < 0){
+            return redirect('defective')->withErrors(['errorqty'=>'สินค้าในคลังหมด ไม่สามารถบันทึกการชำรุดได้']);
+         }
+         Product::where('id', $request->id)->update(['qty'=> $count ]);
+
+        $Defective = new Defective;
+        $Defective->product_id = $request->id;
+        $Defective->qty = $request->defective;
+        $Defective->status = $request->status;
+        $Defective->save();
+        return redirect('defective')->withErrors(['saved'=>'บันทึกเรียบร้อย']);
+
     }
 
     /**

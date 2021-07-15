@@ -29,4 +29,4 @@ Route::resource('/sale/transection',App\Http\Controllers\TransectionController::
 Route::resource('sale',App\Http\Controllers\SaleController::class);
 Route::resource('return',App\Http\Controllers\ReturnProductController::class);
 Route::resource('user',App\Http\Controllers\UserController::class);
-Route::resource('defcetive',App\Http\Controllers\DefectiveController::class);
+Route::resource('defective',App\Http\Controllers\DefectiveController::class);
