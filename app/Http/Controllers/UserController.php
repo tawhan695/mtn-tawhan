@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
 class UserController extends Controller
 {
     /**
@@ -34,7 +34,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // //import 
+        // //use Illuminate\Support\Facades\Validator;
+        // $validator = Validator::make($request->all(), [
+        //     'image' => 'required|image|mimes:jpeg,png,jpg|max:2048', 
+        //     // ในหน้า html name="image"  ต้องเหมือนกัน <input name="image" >
+        // ]);
+        // if ($validator->fails()) {
+        //     return redirect('user')
+        //                 ->withErrors($validator)
+        //                 ->withInput();
+        // }
+    
+        // $imageName = time().'.'.$request->image->extension();  
+     
+        // $request->image->move(public_path('images/user'), $imageName);
+        // $pathImage = 'images/user'.$imageName;
+        // /* Store $imageName name in DATABASE from HERE */
+    
+        // return back()
+        //     ->with('success','You have successfully upload image.')
+        //     ->with('image',$pathImage); 
     }
 
     /**
