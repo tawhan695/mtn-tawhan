@@ -88,4 +88,64 @@
           
     </div> 
 </div> 
+<div class="container">
+  <div class="pt-4">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">ประวัติการขาย</h3>
+
+        <div class="card-tools">
+          <div class="input-group input-group-sm" style="width: 150px;">
+            <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+            <div class="input-group-append">
+              <button type="submit" class="btn btn-default">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- /.card-header -->
+      <div class="card-body table-responsive p-0">
+          <table class="table table-hover text-nowrap">
+          <thead>
+            <tr>
+              <th style="width: 10px">#</th>
+              <th>รหัสสินค้า</th>
+              <th>สินค้า</th>
+              <th>จำนวน</th>
+              <th>สถานะ</th>
+              <th>วันเดือนปี</th>
+            </tr>
+          </thead>
+          <tbody>
+              @foreach ($defec as $item)       
+                  <tr>
+                  <td style="width: 1px">{{ $loop->index}}</td>
+                  <td style="width: 1px">{{ $item->product_id}}</td>
+                  <td style="width: 1px">{{ App\Models\Product::where('id',$item->product_id)->first()->name}}</td>
+                  <td style="width: 1px">{{ $item->qty}}</td>
+                  <td style="width: 1px">{{ $item->status}}</td>
+                  <td style="width: 1px">{{ $item->created_at}}</td>
+                  </tr>
+              @endforeach
+            
+          </tbody>
+        </table>
+      </div>
+      <!-- /.card-body -->
+      <div class="card-footer clearfix">
+          <ul class="pagination pagination-sm m-0 float-left">
+              ทั้งหมด {{ $defec->total() }} รายการ
+          </ul>
+          <ul class="pagination pagination-sm m-0 float-right">
+              {{ $defec->onEachSide(5)->links("pagination::bootstrap-4")}}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- /.card -->
+  </div>
 @endsection

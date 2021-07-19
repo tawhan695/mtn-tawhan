@@ -12,8 +12,8 @@
 }
 </style>
 
-<div class="mt-3">
-    <div class="col-12">
+<div class="container">
+    <div class="pt-4">
       <div class="card">
         <div class="card-header">
           <h3 class="card-title">ประวัติการขาย</h3>
