@@ -47,11 +47,13 @@ class UserSeeder extends Seeder
         $Catagory = Catagory::create([
              'name' => 'ไข่ไก่',
              'slug' => 'ไข่ไก่',
+             'branch_id' => 1,
          ]);
         //  print_r( $Catagory->get()->id);
         $Catagory2 = Catagory::create([
              'name' => 'ทั่วไป',
              'slug' => 'ทั่วไป',
+             'branch_id' => 1,
          ]);
         $Branchs = Branchs::create([
              'name' => 'สาขา 1',

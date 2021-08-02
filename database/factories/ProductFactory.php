@@ -26,6 +26,7 @@ class ProductFactory extends Factory
             'name' => $name,
             'slug' => Str::slug($name),
             'des' => 'ไข่ไก่ มัทนาฟาร์ม',
+            'sku' => $this->faker->numberBetween(100000,900000),
             'legular_price' => $this->faker->numberBetween(100,200),
             'catagory_id' => 1,
             'branch_id' => 1,

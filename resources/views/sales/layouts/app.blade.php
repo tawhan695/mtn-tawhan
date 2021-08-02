@@ -126,11 +126,13 @@
           <img src="{{ asset(Auth::user()->image) }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="{{ route('user.index')}}" class="d-block" >{{ Auth::user()->name }}</a>
           <p class="">{{ App\Models\Branchs::where('id',App\Models\Has_Branchs::where('user_id',auth()->user()->id)->first()->id)->first()->name}}</p>
+          @if (auth()->user()->hasRole('admin'))  
+            <a href="{{ route('dashboard.index')}}">จัดการหลังร้าน</a>
+          @endif
         </div>
       </div>
-
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">

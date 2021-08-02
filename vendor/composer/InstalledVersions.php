@@ -25,12 +25,12 @@ class InstalledVersions
 private static $installed = array (
   'root' => 
   array (
-    'pretty_version' => '1.0.0+no-version-set',
-    'version' => '1.0.0.0',
+    'pretty_version' => 'dev-main',
+    'version' => 'dev-main',
     'aliases' => 
     array (
     ),
-    'reference' => NULL,
+    'reference' => 'f67f758210036016650081f5b36884e650a7513e',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -246,6 +246,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '8c3d0a3f6af734494ad8f6fbbee0ba92422859f3',
+    ),
+    'haruncpi/laravel-id-generator' => 
+    array (
+      'pretty_version' => 'v1.0.9',
+      'version' => '1.0.9.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '70a702b8941fe7056d2650de9fb5aa1abbc4e102',
     ),
     'illuminate/auth' => 
     array (
@@ -491,12 +500,12 @@ private static $installed = array (
     ),
     'laravel/laravel' => 
     array (
-      'pretty_version' => '1.0.0+no-version-set',
-      'version' => '1.0.0.0',
+      'pretty_version' => 'dev-main',
+      'version' => 'dev-main',
       'aliases' => 
       array (
       ),
-      'reference' => NULL,
+      'reference' => 'f67f758210036016650081f5b36884e650a7513e',
     ),
     'laravel/sail' => 
     array (
@@ -560,6 +569,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '3b9dff8aaf7323590c1d2e443db701eb1f9aa0d3',
+    ),
+    'milon/barcode' => 
+    array (
+      'pretty_version' => '8.0.1',
+      'version' => '8.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a1b1ee1a743c1368597f1742e6ee4765333a15a1',
     ),
     'mockery/mockery' => 
     array (
@@ -760,6 +778,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'f661659747f2f87f9e72095bb207bceb0f151cb4',
+    ),
+    'picqer/php-barcode-generator' => 
+    array (
+      'pretty_version' => 'v2.2.0',
+      'version' => '2.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7df93b40099e5fefad055543320a36b80dccda05',
     ),
     'pragmarx/google2fa' => 
     array (

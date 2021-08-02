@@ -26,7 +26,7 @@ class DefectiveController extends Controller
      */
     public function index()
     {
-        $product = Product::all(['id','name','legular_price','qty']);
+        $product = Product::where('qty','>', '0')->get();
         $Defective = Defective::orderBy('created_at', 'desc')->paginate(10);
         return view('sales.defective')->with(['product'=>$product,'defec'=>$Defective]);
     }

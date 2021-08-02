@@ -13,6 +13,6 @@ class Has_Branchs extends Model
         'branchs_id',
     ];
     public function branch(){
-        // $this->belog(Branchs::class);
+        $this->belog(Branchs::class);
     }
 }

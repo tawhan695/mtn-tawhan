@@ -23,14 +23,21 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 
 // Route::get('/test', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/sale/transection',App\Http\Controllers\TransectionController::class);
-// Route::middleware(['web'])->group(function () {
+// Route::middleware(['seller'])->group(function () {
     
 // });
 Route::resource('sale',App\Http\Controllers\SaleController::class);
 Route::resource('return',App\Http\Controllers\ReturnProductController::class);
 Route::resource('user',App\Http\Controllers\UserController::class);
+Route::resource('user2',App\Http\Controllers\UserAppController::class);
 Route::resource('defective',App\Http\Controllers\DefectiveController::class);
+// Route::middleware(['seller'])->group(function () {
+    
+// });
 
 
 //admin
 Route::resource('admin/dashboard',App\Http\Controllers\admin\DashboardController::class);
+// Route::resource('admin',App\Http\Controllers\admin\DashboardController::class);
+Route::resource('admin/product',App\Http\Controllers\admin\ProductController::class);
+Route::resource('admin/catagory',App\Http\Controllers\admin\CatagoryController::class);

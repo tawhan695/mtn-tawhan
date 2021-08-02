@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use \Laravel\Sanctum\HasApiTokens;
 use App\Models\Proflie;
 use App\Models\Branchs;
+use App\Models\Has_Branchs;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -55,7 +56,10 @@ class User extends Authenticatable
     // }
     public function Branch(){
         // echo $this->profile()->first();
-        return $this->hasOne(Branchs::class,);
+        return $this->hasOne(Has_Branchs::class);
+    }
+    public function branch_id(){
+       return Has_Branchs::where('user_id',auth()->user()->id)->first()->branchs_id;
     }
     // public function roles()
     // {

@@ -15,8 +15,9 @@ class CreateProductsTable extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('name')->index();
             $table->string('slug')->unique();
+            $table->string('sku', 128)->unique();
             $table->string('des')->default('');
             $table->string('unit')->nullable();
             $table->double('legular_price',15,2)->default(0); // ราคาต้นทุน

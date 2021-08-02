@@ -6,7 +6,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
-  <title>{{ config('app.name', 'Laravel') }}</title>
+  <title>{{ config('app.name', 'Admin') }}|Admin</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -57,8 +57,8 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light  " 
-        style="background-color: #F0C929;">
+  <nav class="main-header navbar navbar-expand navbar-orange navbar-light" 
+        style="">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
       <li class="nav-item">
@@ -122,11 +122,15 @@
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->name }}</a>
           <p class="">{{ App\Models\Branchs::where('id',App\Models\Has_Branchs::where('user_id',auth()->user()->id)->first()->id)->first()->name}}</p>
+          @if (auth()->user()->hasRole('admin'))
+           <a class="text-info" href="{{ route('sale.index')}}">จัดการหน้าร้าน</a>
+              
+          @endif
         </div>
       </div>
 
       <!-- Sidebar Menu -->
-      <nav class="mt-2">
+      <nav class="mt-2 ">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
@@ -146,13 +150,13 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('transection.index')}}" class="nav-link {{ request()->routeIs('transection.index')? 'active' : '' }}">
+                <a href="{{ route('catagory.index')}}" class="nav-link {{ request()->routeIs('catagory.index')? 'active' : '' }}">
                   <i class="nav-icon fas fa-history"></i>
                   <p>ประเภทสินค้า</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ route('return.index')}}" class="nav-link {{ request()->routeIs('return.index')? 'active' : '' }}">
+                <a href="{{ route('product.index')}}" class="nav-link {{ request()->routeIs('product.index')? 'active' : '' }}">
                   <i class="fas fa-undo nav-icon"></i>
                   <p>สินค้า</p>
                 </a>
