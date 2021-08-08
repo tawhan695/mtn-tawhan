@@ -71,29 +71,6 @@
    
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-     
-      <!-- Navbar Search -->
-      {{-- <li class="nav-item">
-        <a class="nav-link" data-widget="navbar-search" href="#" role="button">
-          <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-          <form class="form-inline">
-            <div class="input-group input-group-sm">
-              <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-              <div class="input-group-append">
-                <button class="btn btn-navbar" type="submit">
-                  <i class="fas fa-search"></i>
-                </button>
-                <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-      </li> --}}
-      
   {{-- full scean --}}
     <li class="nav-item">
       <a id="fullscreen_id" class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -145,27 +122,27 @@
             <ul class="nav nav-treeview"> --}}
               <li class="nav-item">
                 <a href="{{ route('dashboard.index')}}" class="nav-link {{ request()->routeIs('dashboard.index')? 'active' : '' }}">
-                  <i class="nav-icon fas fa-cart-plus"></i>
+                  <i class="nav-icon fas fa-chart-line"></i>
                   <p>รายงาน</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('catagory.index')}}" class="nav-link {{ request()->routeIs('catagory.index')? 'active' : '' }}">
-                  <i class="nav-icon fas fa-history"></i>
+                  <i class="nav-icon fas fa-list"></i>
                   <p>ประเภทสินค้า</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('product.index')}}" class="nav-link {{ request()->routeIs('product.index')? 'active' : '' }}">
-                  <i class="fas fa-undo nav-icon"></i>
+                  <i class="fas fa-cart-plus nav-icon"></i>
                   <p>สินค้า</p>
                 </a>
               </li>
             {{-- </ul>
           </li> --}}
           <li class="nav-item">
-            <a href="{{Route('defective.index')}}" class="nav-link {{ request()->routeIs('defcetive.index')? 'active' : '' }}">
-              <i class="nav-icon fas fa-trash"></i>
+            <a href="{{Route('employee.index')}}" class="nav-link {{ request()->routeIs('employee.index')? 'active' : '' }}">
+              <i class="nav-icon fas fa-users"></i>
               <p>
                 พนักงาน
                 <span class="right badge badge-danger">2</span>

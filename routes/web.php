@@ -41,3 +41,4 @@ Route::resource('admin/dashboard',App\Http\Controllers\admin\DashboardController
 // Route::resource('admin',App\Http\Controllers\admin\DashboardController::class);
 Route::resource('admin/product',App\Http\Controllers\admin\ProductController::class);
 Route::resource('admin/catagory',App\Http\Controllers\admin\CatagoryController::class);
+Route::resource('admin/employee',App\Http\Controllers\admin\EmployeeController::class);

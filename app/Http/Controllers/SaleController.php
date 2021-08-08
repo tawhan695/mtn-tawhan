@@ -10,6 +10,7 @@ use App\Models\Wallet;
 use App\Models\Has_Branchs;
 use Illuminate\Support\Facades\DB;
 use App\Models\Branchs;
+use App\Models\Catagory;
 class SaleController extends Controller
 {
       /**
@@ -30,7 +31,8 @@ class SaleController extends Controller
     public function index()
     {
         $Product = Product::all();
-        return view('sales.sale')->with(['products'=>$Product]);
+        $Catagory = Catagory::where('branch_id',auth()->user()->branch_id())->get();
+        return view('sales.sale')->with(['products'=>$Product,'catagory'=>$Catagory]);
         
     }
 
