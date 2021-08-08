@@ -245,13 +245,15 @@ function ListProduct(id,name,price){
         this.qty = 1;
     }
 
-
+var bmqty =0;
 function AddItem(p_id,p_name,p_price) {
-   var data  = new ListProduct(p_id,p_name,p_price);4
+   var data  = new ListProduct(p_id,p_name,p_price);
     if (list.length == 0) {
         list.push(data);
         addEnv(p_id,p_name,parseFloat(p_price).toFixed(2));
         $('#totol').text(parseFloat(Totol.data).toFixed(2));
+        bmqty+=1;
+        $('#mb-count').text('X'+bmqty+ '  ฿'+parseFloat(Totol.data).toFixed(2));
         document.getElementById('sub').disabled = false;
     } else {
         var isHas = false;
@@ -266,16 +268,22 @@ function AddItem(p_id,p_name,p_price) {
                 $('#count'+p_id).text(list[index].qty);
                 $('#totol'+p_id).text(parseFloat(list[index].totol).toFixed(2));
                 $('#totol').text(parseFloat(Totol.data).toFixed(2));
+                bmqty+=1;
+                $('#mb-count').text('X'+bmqty+ '  ฿'+parseFloat(Totol.data).toFixed(2));
+                // $('#mb-count').text('X'+1+ '฿'+parseFloat(Totol.data).toFixed(2));
             } 
             //console.log(index,e.id);
             
         });
         
         if(isHas == false){
+            bmqty+=1;
             list.push(data);
                 addEnv(p_id,p_name,parseFloat(p_price).toFixed(2))
                 $('#totol').text(parseFloat(Totol.data).toFixed(2));
-       
+                // console.log(333);
+                $('#mb-count').text('X'+bmqty+'฿'+parseFloat(Totol.data).toFixed(2));
+                console.log(list);
             }      
     }
     //console.log(list);

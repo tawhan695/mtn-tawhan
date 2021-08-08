@@ -30,7 +30,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'f67f758210036016650081f5b36884e650a7513e',
+    'reference' => '033f9f379b70dc95bcc693e25f2a0b5591e7005a',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -53,6 +53,15 @@ private static $installed = array (
       ),
       'reference' => '3e9d791b67d0a2912922b7b7c7312f4b37af41e4',
     ),
+    'bangnokia/laravel-serve-livereload' => 
+    array (
+      'pretty_version' => '1.1.4',
+      'version' => '1.1.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd459dca21a10e73f9ccfe66849109b2092067ade',
+    ),
     'brick/math' => 
     array (
       'pretty_version' => '0.9.2',
@@ -61,6 +70,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'dff976c2f3487d42c1db75a3b180e2b9f0e72ce0',
+    ),
+    'cboden/ratchet' => 
+    array (
+      'pretty_version' => 'v0.4.3',
+      'version' => '0.4.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '466a0ecc83209c75b76645eb823401b5c52e5f21',
     ),
     'cordoval/hamcrest-php' => 
     array (
@@ -138,6 +156,15 @@ private static $installed = array (
       array (
       ),
       'reference' => '0dbf5d78455d4d6a41d186da50adc1122ec066f4',
+    ),
+    'evenement/evenement' => 
+    array (
+      'pretty_version' => 'v3.0.1',
+      'version' => '3.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '531bfb9d15f8aa57454f5f0285b18bec903b8fb7',
     ),
     'facade/flare-client-php' => 
     array (
@@ -505,7 +532,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'f67f758210036016650081f5b36884e650a7513e',
+      'reference' => '033f9f379b70dc95bcc693e25f2a0b5591e7005a',
     ),
     'laravel/sail' => 
     array (
@@ -922,6 +949,78 @@ private static $installed = array (
       array (
       ),
       'reference' => 'cd4032040a750077205918c86049aa0f43d22947',
+    ),
+    'ratchet/rfc6455' => 
+    array (
+      'pretty_version' => 'v0.3',
+      'version' => '0.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c8651c7938651c2d55f5d8c2422ac5e57a183341',
+    ),
+    'react/cache' => 
+    array (
+      'pretty_version' => 'v1.1.1',
+      'version' => '1.1.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '4bf736a2cccec7298bdf745db77585966fc2ca7e',
+    ),
+    'react/dns' => 
+    array (
+      'pretty_version' => 'v1.8.0',
+      'version' => '1.8.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '2a5a74ab751e53863b45fb87e1d3913884f88248',
+    ),
+    'react/event-loop' => 
+    array (
+      'pretty_version' => 'v1.2.0',
+      'version' => '1.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'be6dee480fc4692cec0504e65eb486e3be1aa6f2',
+    ),
+    'react/promise' => 
+    array (
+      'pretty_version' => 'v2.8.0',
+      'version' => '2.8.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'f3cff96a19736714524ca0dd1d4130de73dbbbc4',
+    ),
+    'react/promise-timer' => 
+    array (
+      'pretty_version' => 'v1.7.0',
+      'version' => '1.7.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '607dd79990e32fcb402cb0a176b4a4be12f97e7c',
+    ),
+    'react/socket' => 
+    array (
+      'pretty_version' => 'v1.9.0',
+      'version' => '1.9.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'aa6e3f8ebcd6dec3ad1ee92a449b4cc341994001',
+    ),
+    'react/stream' => 
+    array (
+      'pretty_version' => 'v1.2.0',
+      'version' => '1.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '7a423506ee1903e89f1e08ec5f0ed430ff784ae9',
     ),
     'rhumsaa/uuid' => 
     array (
@@ -1393,6 +1492,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'bafc69caeb4d49c39fd0779086c03a3738cbb389',
+    ),
+    'yosymfony/resource-watcher' => 
+    array (
+      'pretty_version' => 'v2.0.1',
+      'version' => '2.0.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'a8c34f704e6bd4f786c97f3c0ba65bd86cb2bd73',
     ),
   ),
 );

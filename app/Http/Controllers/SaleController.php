@@ -32,8 +32,9 @@ class SaleController extends Controller
     {
         $Product = Product::all();
         $Catagory = Catagory::where('branch_id',auth()->user()->branch_id())->get();
+        // print_r($Catagory);
         return view('sales.sale')->with(['products'=>$Product,'catagory'=>$Catagory]);
-        
+
     }
 
     /**
@@ -54,8 +55,8 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-   
-        
+
+
         // print_r($request->product);
         $totol = 0.0;
         $discount = 0;
@@ -65,9 +66,9 @@ class SaleController extends Controller
         }
         $discount = number_format(floatval($request->discount), 2, '.', '');
         $cash = number_format(floatval($request->cash), 2, '.', '');
-        $change = $cash - ($totol - $discount); 
-        $net_amount = $totol - $discount; 
-        
+        $change = $cash - ($totol - $discount);
+        $net_amount = $totol - $discount;
+
         $order = new Order;
         $order->cash_totol=$totol;  // รวมราคาสินค้า
         $order->cash=$cash;   //เงินสด
@@ -79,7 +80,7 @@ class SaleController extends Controller
         $order->user_id=auth()->user()->id;  // คนขาย
         $order->branch_id = Has_Branchs::where('user_id',auth()->user()->id)->first()->id;  // สาขา
         $order->save();  // คนขาย
-        
+
         // เพิ่มเงินใส่กระเป๋า
 
         $walwt = Wallet::where('branch_id', Has_Branchs::where('user_id',auth()->user()->id)->first()->id)->first()->balance;
@@ -98,15 +99,22 @@ class SaleController extends Controller
             // ลบออกจากคลัง
             $p_qty = Product::where('id',$value['id'])->first()->qty;
             // $p_qty =  $Product;
-            Product::where('id',$value['id'])->update(['qty'=> intval($p_qty)  -  intval($value['qty']) ] );
+           Product::where('id',$value['id'])->update(['qty'=> intval($p_qty)  -  intval($value['qty']) ] );
+           $prod = Order::where('id',$value['id'])->first();
 
         }
 
 
         return response()->json([
-            'Change' => $change
+            'Change' => $change,
+            'order_detail' => $request->product,
+            'totol' => $totol,
+            'cash' => $cash,
+            'discount' => $discount,
+            'net_amount' => $net_amount,
+            'change' => $change,
             ]);
-      
+
     }
 
     /**
