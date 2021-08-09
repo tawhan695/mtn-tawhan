@@ -122,6 +122,7 @@
                     <ul class="nav nav-pills">
                         <li class="nav-item  "><a class=" nav-link active" href="#all" data-toggle="tab">ทั้งหมด</a></li>
                         @foreach ($catagory as $item)
+
                             <li class="nav-item  "><a class=" nav-link" href="#catagory{{ $item->id }}"
                                     data-toggle="tab">{{ $item->name }}</a></li>
                         @endforeach
@@ -143,7 +144,7 @@
                                         </div> <img class='' src="{{ asset($product->image) }}"
                                             style="width:120px;height:85px; " />
                                         <div class="card-body text-center mx-auto">
-                                            <h5 class="card-title">{{ $product->name }}</h5>
+                                            <h5 class="card-title" style="font-size:15px">{{ $product->name }}</h5>
                                             <p class="card-text">฿ {{ $product->legular_price }}</p>
                                         </div>
 
@@ -184,9 +185,71 @@
                                             <span class="am2 rounded">สินค้าหมด</span>
                                         @endif
                                     </div>
+
                                 @endforeach
                             </div>
                         </div>
+                        @foreach ($catagory as $item)
+                        <div class="tab-pane" id="catagory{{ $item->id }}">
+                            <div class="row text-center">
+                            @foreach ($products as $product)
+                                @if ($product->catagory_id == $item->id )
+                                    <div id="P{{ $product->id }}" class=" card m-1  p-2"
+                                        style="width: 140px; height: 200px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->legular_price }})" @endif>
+                                        {{-- <div id="op{{$product->id}}"></div> --}}
+                                        <div class="d-flex sale ">
+
+
+                                        </div> <img class='' src="{{ asset($product->image) }}"
+                                            style="width:120px;height:85px; " />
+                                        <div class="card-body text-center mx-auto">
+                                            <h5 class="card-title" style="font-size:15px">{{ $product->name }}</h5>
+                                            <p class="card-text">฿ {{ $product->legular_price }}</p>
+                                        </div>
+
+                                        <style>
+                                            #P{{ $product->id }} {
+                                                position: relative;
+
+                                                -webkit-transition-duration: 0.1s;
+                                                /* Safari */
+                                                transition-duration: 0s;
+                                                text-decoration: none;
+                                                overflow: hidden;
+                                                cursor: pointer;
+                                            }
+
+                                            #P{{ $product->id }}:after {
+                                                content: "";
+                                                background: #ffc107;
+                                                display: block;
+                                                position: absolute;
+                                                padding-top: 300%;
+                                                padding-left: 350%;
+                                                margin-left: -20px !important;
+                                                margin-top: -120%;
+                                                opacity: 0;
+                                                transition: all 0.4s
+                                            }
+
+                                            #P{{ $product->id }}:active:after {
+                                                padding: 0;
+                                                margin: 0;
+                                                opacity: 1;
+                                                transition: 0s
+                                            }
+
+                                        </style>
+                                        @if (intval($product->qty) < 1)
+                                            <span class="am2 rounded">สินค้าหมด</span>
+                                        @endif
+                                    </div>
+                                @endif
+                            @endforeach
+                                </div>
+                        </div>
+
+                        @endforeach
 
                         <!-- /.tab-pane -->
                     </div>
@@ -195,26 +258,26 @@
             </div>
         </div>
         <div class="order col-xl-3 col-lg-4 col-md-12" id="destination2">
-            <div id="source" style="   font-size: 15px; ">
-                <h6 class=" text-center">รายการสั่งชื้อ</h6>
+            <div id="source" class="bg-white shadow-sm" style="font-size: 15px;">
+                <h4 class=" text-center pt-3"style="text-size: 28px;">รายการสั่งชื้อ</h4>
 
                 <div id="additem" data-offset="0" class="bg-white m-2" style="overflow: auto;  text-size:10px">
 
                 </div>
                 <div style="height: 100%">
 
-                    <div class="row m-3 ">
+                    <div class="row m-3 " style="background:#f7f7f7;">
 
                         <div class="  col-12 ">
                             <p class="float-left">รวมทั้งหมด</p>
                             <p class="float-right" id="totol">0.00฿</p>
                         </div>
-                        <p class="bg-danger">อย่าลืม นะครับอย่าลืม อก้ตรงนี้ด้วย มันยังไม่เสร็จ</p>
-                        <div></div>
-                        <div></div>
-                        <button id="sub" class=" btn btn-success btn-block btn-lg" disabled data-toggle="modal"
-                            data-target="#PaymentModalCenter"
-                            >ชำระเงิน</button>
+                        {{-- <p class="bg-danger">อย่าลืม นะครับอย่าลืม อก้ตรงนี้ด้วย มันยังไม่เสร็จ</p> --}}
+                        <div id="mb-sub" class="row w-100">
+
+                        </div>
+
+
                         <script>
                             $('#sub').click(function() {
 
@@ -302,6 +365,7 @@
                             <div onclick="Keyinput('full')" class="col-3 btn text-center shadow-sm">เต็ม</div>
                         </div>
                     </div>
+
                     <div class="input-group mb-3 mt-2">
                         <div class="input-group-prepend">
                             <span class="input-group-text">ส่วนลด</span>
@@ -424,8 +488,10 @@
                                                         resourceH += '<th class="text-center"><p> '+element.totol+'</p></th>';
                                                         resourceH +='</tr>';
                                                     });
-                                                var head =  `<div >
-                                                        <img src="{{ asset('/images/logo/logo.jpg') }}" style="width:60%; height:60%">
+                                                var head =  `<div id="printText">
+                                                        <div class="image text-center" style="width:200px; height:200px; margin:auto;">
+                                                            <img src="{{ asset('/images/logo/logo.jpg') }}" style="width:100%; height:100%">
+                                                        </div>
                                                         <p class="centered">
                                                             {{ App\Models\Branchs::where('id',auth()->user()->branch_id())->first()->name }}
                                                             <br>
@@ -433,6 +499,7 @@
                                                             <br>------------------------------
                                                             <br>        ใบเสร็จรับเงิน
                                                             <br>------------------------------
+                                                            <br>        สินค้า/บริการ
                                                             <hr>
                                                         <table class="table table-borderless" style="text-size:12px">
                                                             <thead>
@@ -467,10 +534,16 @@
                                                                 </tbody>
                                                             </table>
                                                                 <hr>
-                                                        <p class="centered">Thanks for your purchase!
-                                                            <br>parzibyte.me/blog</p>
+                                                        <p class="centered">ขอบคุณที่ใช้บริการ
+
+                                                            <button class="btn btn-primary btn-block" id="btnPrint" onclick="printT()">ปริ๊นท์</button>
+
                                                     </div>`;
-                                                Swal.fire({html:head+body+footer});
+                                                Swal.fire({
+                                                    showConfirmButton: false,
+                                                    showCloseButton: true,
+                                                    html:head+body+footer,
+                                                });
                                                 $('#o1').text(data['totol']);
                                                 $('#o2').text(data['discount']);
                                                 $('#o3').text(data['net_amount']);
@@ -479,6 +552,9 @@
                                                 location.reload();
                                             }
                                         })
+
+
+
                                         $('.swal2-confirm').click(function() {
                                             // var w = window.open();
                                             //     var html = "<!DOCTYPE HTML>";
@@ -501,10 +577,7 @@
                                 });
                             });
                         });
-                        const $btnPrint = document.querySelector("#btnPrint");
-                                $btnPrint.addEventListener("click", () => {
-                                    window.print();
-                                });
+
                     </script>
 
                 </div>
@@ -522,9 +595,20 @@
             if (x.matches) { // If media query matches
                 var source = document.getElementById("source");
                 document.getElementById("destination").appendChild(source);
+                $("#sub").remove();
+                $('#mb-sub').append(`
+                <button id="sub" class=" btn btn-success btn-block btn-lg" disabled
+                            >ชำระเงิน</button>
+                `);
             } else {
                 var source = document.getElementById("source");
                 document.getElementById("destination2").appendChild(source);
+                $("#sub").remove();
+                $('#mb-sub').append(`
+                <button id="sub" class=" btn btn-success btn-block btn-lg" disabled data-toggle="modal"
+                            data-target="#PaymentModalCenter"
+                            >ชำระเงิน</button>
+                `);
             }
         }
 
@@ -550,6 +634,18 @@
             //     cancelButtonAriaLabel: 'Thumbs down'
             // })
         })
+
+        // const $btnPrint = document.querySelector("#btnPrint");
+        //                         $btnPrint.addEventListener("click", () => {
+        //                             window.print();
+        //                         });
+         function printT (){
+            console.log("print");
+            // p = document.querySelector("#printText")
+            $('#btnPrint').remove();
+            // $('.swal2-confirm').remove();
+            window.print();
+        }
     </script>
 
 @endsection
