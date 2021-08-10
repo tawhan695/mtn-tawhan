@@ -18,10 +18,12 @@ class DashboardController extends Controller
      */
     public function index()
     {
+//         $mytime = \Carbon\Carbon::now();
+// echo $mytime->toDateTimeString();
 //WHERE `created_at` LIKE '%2021-07-14%' ORDER BY `legular_price` ASC
-        $dayDefective = Defective::where('created_at','like','%'.'2021-07-19'.'%')->count();
-        $dayOrder = Order::where('created_at','like','%'.'2021-07-19'.'%')->count();
-        $sumOrder = Order::where('created_at','like','%'.'2021-07-19'.'%')->sum('net_amount');
+        $dayDefective = Defective::where('created_at','like','%'.date('Y-m-d').'%')->count();
+        $dayOrder = Order::where('created_at','like','%'.date('Y-m-d').'%')->count();
+        $sumOrder = Order::where('created_at','like','%'.date('Y-m-d').'%')->sum('net_amount');
         // print_r(date());
         return view('admin.dashboard.index')->with(['Defective'=>$dayDefective,'Order'=>$dayOrder,'ordersum'=>$sumOrder]);
     }

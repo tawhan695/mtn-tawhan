@@ -440,6 +440,7 @@
                     <script>
                         $(document).ready(function() {
                             $(document).on('click', '#ok', function() {
+                                $('#discount').prop( "disabled", true );
                                 var discount = document.getElementById('discount').value;
                                 //console.log('dis '+ discount);
                                 $.ajax({

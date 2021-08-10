@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('javascript')
-       
+
 @endsection
 @section('content')
 <section class="content">
@@ -11,7 +11,7 @@
           <!-- small box -->
           <div class="small-box bg-info">
             <div class="inner">
-              <h3>{{ $Order}}</h3>
+              <p>{{ $Order}}</p>
 
               <p>ยอดขายวันนี้</p>
             </div>
@@ -26,7 +26,7 @@
           <!-- small box -->
           <div class="small-box bg-success">
             <div class="inner">
-              <h3>{{ number_format($ordersum, 2, '.', ',')}}</h3>
+              <p>{{ number_format($ordersum, 2, '.', ',')}}</p>
 
               <p>กำไรวันนี้</p>
             </div>
@@ -41,7 +41,7 @@
           <!-- small box -->
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3>{{number_format( App\Models\Wallet::where('branch_id',App\Models\Has_Branchs::where('user_id',Auth::user()->id)->first()->id)->first()->balance, 2, '.', ',')  }}</h3>
+              <p>{{number_format( App\Models\Wallet::where('branch_id',App\Models\Has_Branchs::where('user_id',Auth::user()->id)->first()->id)->first()->balance, 2, '.', ',')  }}</p>
 
               <p>เงินในกระเป๋า</p>
             </div>
@@ -56,7 +56,7 @@
           <!-- small box -->
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3>{{$Defective}}</h3>
+              <p>{{$Defective}}</p>
 
               <p>สินค้าชำรุดวันนี้</p>
             </div>
@@ -69,7 +69,7 @@
         <!-- ./col -->
       </div>
     </div>
-    
+
 </div>
 
 @endsection
