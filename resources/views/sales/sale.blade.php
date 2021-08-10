@@ -117,15 +117,15 @@
 
         </div>
         <div class="product1 col-xl-9 col-lg-8 col-md-12">
-            <div class="card">
+            <div class="card" >
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
                         <li class="nav-item  "><a class=" nav-link active" href="#all" data-toggle="tab">ทั้งหมด</a></li>
-                        @foreach ($catagory as $item)
+                        {{-- @foreach ($catagory as $item)
 
                             <li class="nav-item  "><a class=" nav-link" href="#catagory{{ $item->id }}"
                                     data-toggle="tab">{{ $item->name }}</a></li>
-                        @endforeach
+                        @endforeach --}}
 
                     </ul>
                 </div><!-- /.card-header -->
@@ -189,67 +189,66 @@
                                 @endforeach
                             </div>
                         </div>
-                        @foreach ($catagory as $item)
-                        <div class="tab-pane" id="catagory{{ $item->id }}">
-                            <div class="row text-center">
-                            @foreach ($products as $product)
-                                @if ($product->catagory_id == $item->id )
-                                    <div id="P{{ $product->id }}" class=" card m-1  p-2"
-                                        style="width: 140px; height: 200px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->legular_price }})" @endif>
-                                        {{-- <div id="op{{$product->id}}"></div> --}}
-                                        <div class="d-flex sale ">
+                        {{-- @foreach ($catagory as $item)
+                            <div class="tab-pane" id="catagory{{ $item->id }}">
+                                <div class="row text-center">
+                                @foreach ($products as $product)
+                                    @if ($product->catagory_id == $item->id )
+                                        <div id="P{{ $product->id }}" class=" card m-1  p-2"
+                                            style="width: 140px; height: 200px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->legular_price }})" @endif>
+
+                                            <div class="d-flex sale ">
 
 
-                                        </div> <img class='' src="{{ asset($product->image) }}"
-                                            style="width:120px;height:85px; " />
-                                        <div class="card-body text-center mx-auto">
-                                            <h5 class="card-title" style="font-size:15px">{{ $product->name }}</h5>
-                                            <p class="card-text">฿ {{ $product->legular_price }}</p>
+                                            </div> <img class='' src="{{ asset($product->image) }}"
+                                                style="width:120px;height:85px; " />
+                                            <div class="card-body text-center mx-auto">
+                                                <h5 class="card-title" style="font-size:15px">{{ $product->name }}</h5>
+                                                <p class="card-text">฿ {{ $product->legular_price }}</p>
+                                            </div>
+
+                                            <style>
+                                                #P{{ $product->id }} {
+                                                    position: relative;
+
+                                                    -webkit-transition-duration: 0.1s;
+                                                    /* Safari */
+                                                    transition-duration: 0s;
+                                                    text-decoration: none;
+                                                    overflow: hidden;
+                                                    cursor: pointer;
+                                                }
+
+                                                #P{{ $product->id }}:after {
+                                                    content: "";
+                                                    background: #ffc107;
+                                                    display: block;
+                                                    position: absolute;
+                                                    padding-top: 300%;
+                                                    padding-left: 350%;
+                                                    margin-left: -20px !important;
+                                                    margin-top: -120%;
+                                                    opacity: 0;
+                                                    transition: all 0.4s
+                                                }
+
+                                                #P{{ $product->id }}:active:after {
+                                                    padding: 0;
+                                                    margin: 0;
+                                                    opacity: 1;
+                                                    transition: 0s
+                                                }
+
+                                            </style>
+                                            @if (intval($product->qty) < 1)
+                                                <span class="am2 rounded">สินค้าหมด</span>
+                                            @endif
                                         </div>
-
-                                        <style>
-                                            #P{{ $product->id }} {
-                                                position: relative;
-
-                                                -webkit-transition-duration: 0.1s;
-                                                /* Safari */
-                                                transition-duration: 0s;
-                                                text-decoration: none;
-                                                overflow: hidden;
-                                                cursor: pointer;
-                                            }
-
-                                            #P{{ $product->id }}:after {
-                                                content: "";
-                                                background: #ffc107;
-                                                display: block;
-                                                position: absolute;
-                                                padding-top: 300%;
-                                                padding-left: 350%;
-                                                margin-left: -20px !important;
-                                                margin-top: -120%;
-                                                opacity: 0;
-                                                transition: all 0.4s
-                                            }
-
-                                            #P{{ $product->id }}:active:after {
-                                                padding: 0;
-                                                margin: 0;
-                                                opacity: 1;
-                                                transition: 0s
-                                            }
-
-                                        </style>
-                                        @if (intval($product->qty) < 1)
-                                            <span class="am2 rounded">สินค้าหมด</span>
-                                        @endif
+                                    @endif
+                                @endforeach
                                     </div>
-                                @endif
-                            @endforeach
-                                </div>
-                        </div>
-
-                        @endforeach
+                            </div>
+                        @endforeach --}}
 
                         <!-- /.tab-pane -->
                     </div>
@@ -543,7 +542,10 @@
                                                     showConfirmButton: false,
                                                     showCloseButton: true,
                                                     html:head+body+footer,
-                                                });
+                                                }).then((result) => {
+                                                    if (!result.isConfirmed) {
+                                                        window.location.reload();
+                                                    }});
                                                 $('#o1').text(data['totol']);
                                                 $('#o2').text(data['discount']);
                                                 $('#o3').text(data['net_amount']);
@@ -597,7 +599,8 @@
                 document.getElementById("destination").appendChild(source);
                 $("#sub").remove();
                 $('#mb-sub').append(`
-                <button id="sub" class=" btn btn-success btn-block btn-lg" disabled
+                <button id="sub" class=" btn btn-success btn-block btn-lg" disabled type="button" data-toggle="modal"
+                data-target="#PaymentModalCenter"
                             >ชำระเงิน</button>
                 `);
             } else {
@@ -605,7 +608,7 @@
                 document.getElementById("destination2").appendChild(source);
                 $("#sub").remove();
                 $('#mb-sub').append(`
-                <button id="sub" class=" btn btn-success btn-block btn-lg" disabled data-toggle="modal"
+                <button id="sub" class=" btn btn-success btn-block btn-lg" disabled data-toggle="modal" type="button"
                             data-target="#PaymentModalCenter"
                             >ชำระเงิน</button>
                 `);
