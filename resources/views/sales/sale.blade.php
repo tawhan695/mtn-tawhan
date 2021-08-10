@@ -136,7 +136,7 @@
                                 @foreach ($products as $product)
 
                                     <div id="P{{ $product->id }}" class=" card m-1  p-2"
-                                        style="width: 140px; height: 200px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->legular_price }})" @endif>
+                                        style="width: 130px; height: 180px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->legular_price }})" @endif>
                                         {{-- <div id="op{{$product->id}}"></div> --}}
                                         <div class="d-flex sale ">
 
