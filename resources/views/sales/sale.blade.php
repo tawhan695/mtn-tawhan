@@ -119,8 +119,8 @@
             <div class="card" >
                 <div class="card-header p-2">
                     <ul class="nav nav-pills row">
-                        <li class="nav-item order2 col-12 pb-1"><a class=" nav-link btn btn-block btn-default" href="#order-list" data-toggle="tab">ชำระเงิน <span id="mb-count" class="badge badge-warning text-white"></a></li>
                         <li class="nav-item col-md-12 col-lg-3 "><a class=" nav-link active btn btn-block btn-default" href="#all" data-toggle="tab">รายการสินค้า</a></li>
+                        <li class="nav-item order2 col-12 pb-1"><a class=" nav-link btn btn-block btn-default" href="#order-list" data-toggle="tab">ชำระเงิน <span id="mb-count" class="badge badge-warning text-white"></a></li>
                         {{-- @foreach ($catagory as $item)
 
                             <li class="nav-item  "><a class=" nav-link" href="#catagory{{ $item->id }}"
@@ -189,8 +189,8 @@
                                 @endforeach
                             </div>
                         </div>
-                        <div class="tab-pane active text-center" id="order-list">
-                            <div id="destination" style="">
+                        <div class="tab-pane  text-center" id="order-list">
+                            <div id="destination" >
 
                             </div>
                         </div>
