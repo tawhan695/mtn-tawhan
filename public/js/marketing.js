@@ -13,13 +13,13 @@
 // //add product
 // var list =[];
 // function AddItem(p_id,p_name,p_price) {
-    
+
 // }
 //  //   //console.log('input  -- ','id ',p_id,'name',p_name,'price',p_price);
-//    let item = {id:p_id,name:p_name,price:parseFloat(p_price).toFixed(2),totol:parseFloat(p_price).toFixed(2),qty:1}; 
+//    let item = {id:p_id,name:p_name,price:parseFloat(p_price).toFixed(2),totol:parseFloat(p_price).toFixed(2),qty:1};
 //  //   //console.log('len',list.length);
 //    if (list.length < 1) {
-       
+
 //      list.push(item);
 //    } else {
 //      let acc = false;
@@ -44,7 +44,7 @@
 //  //         Totol();
 //  //         document.getElementById('sub').disabled = false;
 //  // //   list.forEach(EditItem);
-//  //   } else { 
+//  //   } else {
 
 //  //   var index =0;
 //  //   var same = -1;
@@ -67,14 +67,14 @@
 //  //             ps.setAttribute('id','amont'+p_id);
 //  //             ps.setAttribute('class','am rounded');
 //  //             envProduct.appendChild(ps);
-             
+
 //  //             $('P'+p_id).attr();
 
 //  //         }
 //  //         // $('#P'+p_id).text(list[index].qty);
 //  //         // <span id="amont{{$product->id}}" class="am rounded" >1</span>
 //  //         list[index].totol = tp;
-//  //         // price 
+//  //         // price
 //  //         var id_to = "totol"+p_id;
 //  //         document.getElementById(id_to).innerText =parseFloat(list[index].totol).toFixed(2);
 //  //         //qty
@@ -82,14 +82,14 @@
 //  //         document.getElementById(id_c).innerText =""+list[index].qty;
 //  //         same = index;
 //  //         Totol();
-//  //       } 
-      
+//  //       }
+
 //  //       index+=1;
 
 //  //         });
 //  //     if(same == -1){
 //  //         list.push({id:p_id,name:p_name,price:parseFloat(p_price).toFixed(2),totol:parseFloat(p_price).toFixed(2),qty:1});
-//  //         addEnv(p_id,p_name,parseFloat(p_price).toFixed(2)) 
+//  //         addEnv(p_id,p_name,parseFloat(p_price).toFixed(2))
 //  //         Totol();
 //  //     }
 //  //   }
@@ -104,11 +104,11 @@ function addEnv(p_id,p_name,p_price) {
          var pLeft_span = document.createElement("span");
          var pRight = document.createElement("p");
          var pRight_span = document.createElement("span");
-         divMain.className ="list row  m-1 pb-0 border border-right-0 border-left-0 border-top-0"; 
+         divMain.className ="list row  m-1 pb-0 border border-right-0 border-left-0 border-top-0";
          divMain.setAttribute("id", "ID"+p_id);
          divMain.setAttribute("onclick", "editQTY('"+p_id+"')");
          // divMain.setAttribute("data-target", "#pdModalCenter");
-         
+
          divName.setAttribute("class", "col-12");
          divName.appendChild(document.createTextNode(p_name))
          divMain.appendChild(divName)
@@ -118,7 +118,7 @@ function addEnv(p_id,p_name,p_price) {
          pLeft_span.setAttribute("id", "count"+p_id);
          pLeft_span.appendChild(document.createTextNode('1'))
          pLeft.appendChild(pLeft_span);
-         
+
          pRight.setAttribute("class", "float-right");
          pRight_span.setAttribute("id", "totol"+p_id);
          pRight.appendChild(document.createTextNode('฿'))
@@ -134,8 +134,8 @@ function addEnv(p_id,p_name,p_price) {
          ps.setAttribute('class','am rounded');
          envProduct.appendChild(ps);
          env.appendChild(divMain);
-         
-   
+
+
 }
 const Toast = Swal.mixin({
     toast: true,
@@ -163,47 +163,42 @@ function editQTY(id) {
              cancelButtonText:'ยกเลิก',
              inputValidator: (value) => {
                  if (!value) {
-                 
-                
+
+
                  }
              }
              }).then((result) => {
              /* Read more about isConfirmed, isDenied below */
                  if (result.isConfirmed) {
                      var val =parseInt(result.value);
-                    list.forEach((element,index) => {
-                        if(list[index].id == id ){
-                            list[index].qty = val;
-                            list[index].totol = parseFloat(list[index].price) * parseInt(list[index].qty)
-                                            // chang
-                            $('#amont'+id).text(list[index].qty);
-                            $('#count'+id).text(list[index].qty);
-                            $('#totol'+id).text(parseFloat(list[index].totol).toFixed(2));
-                            $('#totol').text(parseFloat(Totol.data).toFixed(2));
-                        }
-                    
-                    });
-                    Toast.fire({
-                        icon: 'success',
-                        title: 'บันทึกเรียบร้อย'+result.value
+                    if(val > 0 ){
+                        list.forEach((element,index) => {
+                            if(list[index].id == id ){
+                                list[index].qty = val;
+                                list[index].totol = parseFloat(list[index].price) * parseInt(list[index].qty)
+                                                // chang
+                                $('#amont'+id).text(list[index].qty);
+                                $('#count'+id).text(list[index].qty);
+                                $('#totol'+id).text(parseFloat(list[index].totol).toFixed(2));
+                                $('#totol').text(parseFloat(Totol.data).toFixed(2));
+                                // $('#mb-count').text(parseInt($('#mb-count').text())+val);
+                                functionqty();
+                            }
+
                         });
-                        $('#totol').text(parseFloat(Totol.data).toFixed(2));    
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'บันทึกเรียบร้อย'+result.value
+                            });
+                            $('#totol').text(parseFloat(Totol.data).toFixed(2));
+                    }else{
+                        functionDel(id);
+                    }
                  } else if (result.isDenied) {
-                     $('#ID'+id).remove();
-                     $('#amont'+id).remove();
-                     
-                     // //console.log(list['id']);
-                     var INDEX = 0;
-                     var getID = '';
-                     list.forEach(element => {
-                         if(list[INDEX].id == id ){
-                             list.pop(INDEX)
-                         }
-                         INDEX++;
-                     });
+
                      //console.log(list);
                     //  list[INDEX]
-                 
+                            functionDel(id);
 
                          Toast.fire({
                          icon: 'warning',
@@ -213,12 +208,52 @@ function editQTY(id) {
                     // ถ้าไม่มีรายการสินค้าให้ปิดปุ่ม ชำระเงิน
                     if (list.length < 1) {
                         document.getElementById('sub').disabled = true;
-                    } 
+                    }
                  }
-             })  
+             })
+}
+async function functionqty(){
+    var QQ = 0;
+    await list.forEach((element,index) => {
+        QQ +=parseInt(element.qty)
+    })
+    $('#mb-count').text(''+QQ);
+}
+async function functionDel(id){
+    $('#ID'+id).remove();
+    $('#amont'+id).remove();
+
+    console.log(list);
+    var INDEX = 0;
+    var getID = '';
+    await list.forEach((element, index) => {
+        // const element = await fetch(e);
+        if(list[index].id == id ){
+           INDEX = index;
+            // console.log(list[index].id);
+            // console.log('id',id +'=');
+            // // let qty = $('#mb-count').text();
+            // console.log(list);
+            // console.log('qty',parseInt( qty));
+            // console.log('index',parseInt( list[index].qty));
+            // $('#mb-count').text((parseInt( qty) - parseInt( list[index].qty)));
+            // list.pop(index)
+            functionqty();
+            list.splice(index, 1);
+            // console.log(list);
+
+            // bmqty =parseInt($('#mb-count').text());
+
+            // if($('#mb-count').text() == '0'){
+            // }
+           //  continue;
+        }
+        //  INDEX++;
+    });
+    functionqty();
 }
 // //   function moveList(id) {
-   
+
 // //   }
 
 
@@ -231,9 +266,9 @@ var Totol = {
             price += parseFloat(element.totol);
             // //console.log('this.price ',price);
         });
-        
+
         $('#Amout').text(parseFloat(price).toFixed(2));
-       return parseFloat(price).toFixed(2) 
+       return parseFloat(price).toFixed(2)
     }
 
 }
@@ -253,8 +288,10 @@ function AddItem(p_id,p_name,p_price) {
         addEnv(p_id,p_name,parseFloat(p_price).toFixed(2));
         $('#totol').text(parseFloat(Totol.data).toFixed(2));
         bmqty+=1;
-        $('#mb-count').text('X'+bmqty+ '  ฿'+parseFloat(Totol.data).toFixed(2));
+        // $('#mb-count').text(bmqty);
+        functionqty();
         document.getElementById('sub').disabled = false;
+        console.log(list);
     } else {
         var isHas = false;
         list.forEach((e, index) => {
@@ -269,22 +306,25 @@ function AddItem(p_id,p_name,p_price) {
                 $('#totol'+p_id).text(parseFloat(list[index].totol).toFixed(2));
                 $('#totol').text(parseFloat(Totol.data).toFixed(2));
                 bmqty+=1;
-                $('#mb-count').text('X'+bmqty+ '  ฿'+parseFloat(Totol.data).toFixed(2));
+                // $('#mb-count').text(bmqty);
+                functionqty();
                 // $('#mb-count').text('X'+1+ '฿'+parseFloat(Totol.data).toFixed(2));
-            } 
+            }
             //console.log(index,e.id);
-            
+            console.log(list);
         });
-        
+
         if(isHas == false){
             bmqty+=1;
             list.push(data);
+
                 addEnv(p_id,p_name,parseFloat(p_price).toFixed(2))
                 $('#totol').text(parseFloat(Totol.data).toFixed(2));
                 // console.log(333);
-                $('#mb-count').text('X'+bmqty+'฿'+parseFloat(Totol.data).toFixed(2));
+                // $('#mb-count').text(bmqty);
+                functionqty();
                 console.log(list);
-            }      
+            }
     }
     //console.log(list);
     //console.log(Totol.data);

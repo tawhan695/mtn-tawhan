@@ -108,19 +108,19 @@
 
 
     {{-- endscript --}}
+    {{-- <input type="button" id="onedit"> --}}
     <div class="row m-2 pt-3">
 
-        <div class="order2 col-xl-3 col-lg-4 col-md-12">
-            <button class="btn btn-block btn-info mb-2" id="mb-order" data-toggle="modal"
-                data-target="#exampleModalLong">ชำระเงิน <span id="mb-count"></span></button>
-            {{-- <div id="destination"></div> --}}
-
-        </div>
+        {{-- <div class=" col-xl-3 col-lg-4 col-md-12">
+            <button class="btn btn-block btn-info mb-2" id="mb-order"
+            href="#order-list" data-toggle="tab">ชำระเงิน <span id="mb-count"></span></button>
+        </div> --}}
         <div class="product1 col-xl-9 col-lg-8 col-md-12">
             <div class="card" >
                 <div class="card-header p-2">
-                    <ul class="nav nav-pills">
-                        <li class="nav-item  "><a class=" nav-link active" href="#all" data-toggle="tab">ทั้งหมด</a></li>
+                    <ul class="nav nav-pills row">
+                        <li class="nav-item order2 col-12 pb-1"><a class=" nav-link btn btn-block btn-default" href="#order-list" data-toggle="tab">ชำระเงิน <span id="mb-count" class="badge badge-warning text-white"></a></li>
+                        <li class="nav-item col-md-12 col-lg-3 "><a class=" nav-link active btn btn-block btn-default" href="#all" data-toggle="tab">รายการสินค้า</a></li>
                         {{-- @foreach ($catagory as $item)
 
                             <li class="nav-item  "><a class=" nav-link" href="#catagory{{ $item->id }}"
@@ -144,8 +144,8 @@
                                         </div> <img class='' src="{{ asset($product->image) }}"
                                             style="width:120px;height:85px; " />
                                         <div class="card-body text-center mx-auto">
-                                            <h5 class="card-title" style="font-size:15px">{{ $product->name }}</h5>
-                                            <p class="card-text">฿ {{ $product->legular_price }}</p>
+                                            <h5 class="card-title" style="font-size:12px">{{ $product->name }}</h5>
+                                            <p class="card-text" style="font-size:15px">฿ {{ $product->legular_price }}</p>
                                         </div>
 
                                         <style>
@@ -187,6 +187,11 @@
                                     </div>
 
                                 @endforeach
+                            </div>
+                        </div>
+                        <div class="tab-pane active text-center" id="order-list">
+                            <div id="destination" style="">
+
                             </div>
                         </div>
                         {{-- @foreach ($catagory as $item)
@@ -295,12 +300,11 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    {{-- <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    {{-- <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5> --}}
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -311,7 +315,7 @@
 
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Modal -->
     <div class="modal fade" id="PaymentModalCenter" tabindex="-1" role="dialog" aria-labelledby="PaymentModalLongTitle"
         aria-hidden="true">
@@ -481,8 +485,8 @@
                                                 var resourceH = '';
 
                                                 data['order_detail'].forEach(element => {
-                                                        resourceH +='<tr>';
-                                                        resourceH += '<th class=""><p>'+element.name+'</p></th>';
+                                                        resourceH +='<tr style="padding:-10px;margin:-10px" >';
+                                                        resourceH += '<th class=""><p >'+element.name+'</p></th>';
                                                         resourceH += '<th class="text-center"><p>'+element.qty+'</p></th>';
                                                         resourceH += '<th class="text-center"><p>'+element.price+'</p></th>';
                                                         resourceH += '<th class="text-center"><p> '+element.totol+'</p></th>';
@@ -501,8 +505,8 @@
                                                             <br>------------------------------
                                                             <br>        สินค้า/บริการ
                                                             <hr>
-                                                        <table class="table table-borderless" style="text-size:12px">
-                                                            <thead>
+                                                        <table class="table table-borderless  " style="text-size:8px;width:100%">
+                                                            <thead style="text-size:8px;">
                                                                 <tr>
                                                                     <th class=""><p>รายการ</p></th>
                                                                     <th class="text-center"><p>จำนวน</p></th>
@@ -622,22 +626,12 @@
 
 
         //pop up
-        $('#mb-order').click(function() {
-            // Swal.fire({
-            //     title: '<strong>HTML <u>example</u></strong>',
-            //     icon: 'info',
-            //     html:'<div id="destination"></div>',
-            //     showCloseButton: true,
-            //     showCancelButton: true,
-            //     focusConfirm: false,
-            //     confirmButtonText:
-            //         '<i class="fa fa-thumbs-up"></i> Great!',
-            //     confirmButtonAriaLabel: 'Thumbs up, great!',
-            //     cancelButtonText:
-            //         '<i class="fa fa-thumbs-down"></i>',
-            //     cancelButtonAriaLabel: 'Thumbs down'
-            // })
-        })
+        // $('#mb-order').click(function() {
+        //     Swal.fire({
+        //         title: '<strong>HTML <u>example</u></strong>',
+        //         htm;: document.getElementById("source").appendChild(source);
+        //     })
+        // })
 
         // const $btnPrint = document.querySelector("#btnPrint");
         //                         $btnPrint.addEventListener("click", () => {
@@ -650,6 +644,20 @@
             // $('.swal2-confirm').remove();
             window.print();
         }
-    </script>
 
+        // $('#mb-order').click(function (){
+        //     Swal.fire({
+        //         target: document.getElementById("source")
+        //     })
+        // })
+    </script>
+    <style>
+        @media (max-width: 900px) {
+    .table-borderless {
+        font-size:15px !important;
+        margin-left: -20px;
+        padding: -10px;
+    }
+}
+    </style>
 @endsection
