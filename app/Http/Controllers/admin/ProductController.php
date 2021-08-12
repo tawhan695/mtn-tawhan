@@ -87,7 +87,7 @@ class ProductController extends Controller
 
         $Product = new Product;
         $Product->name = $request->name;
-        $Product->slug = Str::slug($request->name,'mtn.');
+        $Product->slug = Str::slug($request->name);
         $Product->image =  'images/products/'.$imageName;
         $Product->des = $request->des;
         $Product->sku = $request->sku;
