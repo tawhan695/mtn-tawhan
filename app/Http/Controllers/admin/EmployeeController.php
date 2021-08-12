@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -16,10 +20,9 @@ class EmployeeController extends Controller
     public function index()
     {
         $users = User::join('has__branchs', 'users.id', '=', 'has__branchs.user_id')
-                
-        ->where('has__branchs.branchs_id',auth()->user()->branch_id())
-               ->get(['users.*', 'has__branchs.branchs_id']);
-        return view('admin.employee.index')->with(['employee'=>$users]);
+            ->where('has__branchs.branchs_id', auth()->user()->branch_id())
+            ->get(['users.*', 'has__branchs.*']);
+        return view('admin.employee.index')->with(['employee' => $users]);
     }
 
     /**

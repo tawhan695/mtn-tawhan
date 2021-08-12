@@ -24,15 +24,16 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 // Route::get('/test', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/sale/transection',App\Http\Controllers\TransectionController::class);
 // Route::middleware(['seller'])->group(function () {
-    
+
 // });
 Route::resource('sale',App\Http\Controllers\SaleController::class);
+Route::resource('sale2',App\Http\Controllers\Sale2Controller::class);
 Route::resource('return',App\Http\Controllers\ReturnProductController::class);
 Route::resource('user',App\Http\Controllers\UserController::class);
 Route::resource('user2',App\Http\Controllers\UserAppController::class);
 Route::resource('defective',App\Http\Controllers\DefectiveController::class);
 // Route::middleware(['seller'])->group(function () {
-    
+
 // });
 
 
@@ -42,3 +43,4 @@ Route::resource('admin/dashboard',App\Http\Controllers\admin\DashboardController
 Route::resource('admin/product',App\Http\Controllers\admin\ProductController::class);
 Route::resource('admin/catagory',App\Http\Controllers\admin\CatagoryController::class);
 Route::resource('admin/employee',App\Http\Controllers\admin\EmployeeController::class);
+Route::resource('admin/branchs',App\Http\Controllers\admin\BranchsController::class);

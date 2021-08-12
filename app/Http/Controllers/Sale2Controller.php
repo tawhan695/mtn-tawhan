@@ -1,15 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
 use App\Models\Product;
-use App\Models\Defective;
 use App\Models\Order;
+use App\Models\Order_Details;
+use App\Models\Wallet;
+use App\Models\Has_Branchs;
+use Illuminate\Support\Facades\DB;
+use App\Models\Branchs;
+use App\Models\Catagory;
 
-class DashboardController extends Controller
+class Sale2Controller extends Controller
 {
     public function __construct()
     {
@@ -22,14 +25,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-//         $mytime = \Carbon\Carbon::now();
-// echo $mytime->toDateTimeString();
-//WHERE `created_at` LIKE '%2021-07-14%' ORDER BY `legular_price` ASC
-        $dayDefective = Defective::where('created_at','like','%'.date('Y-m-d').'%')->count();
-        $dayOrder = Order::where('created_at','like','%'.date('Y-m-d').'%')->count();
-        $sumOrder = Order::where('created_at','like','%'.date('Y-m-d').'%')->sum('net_amount');
-        // print_r(date());
-        return view('admin.dashboard.index')->with(['Defective'=>$dayDefective,'Order'=>$dayOrder,'ordersum'=>$sumOrder]);
+        $Product = Product::all();
+        $Catagory = Catagory::where('branch_id',auth()->user()->branch_id())->get();
+        // print_r($Catagory);
+        return view('sales.sale2')->with(['products'=>$Product,'catagory'=>$Catagory]);
     }
 
     /**

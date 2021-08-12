@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
   <title>{{ config('app.name', 'Laravel') }}</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -45,7 +45,7 @@
     </script>
     @yield('javascript')
 </head>
-{{-- control-sidebar-slide-open layout-navbar-fixed sidebar-collapse sidebar-mini 
+{{-- control-sidebar-slide-open layout-navbar-fixed sidebar-collapse sidebar-mini
   hold-transition sidebar-mini layout-fixed sidebar-collapse
   --}}
 <body id="body" class=" layout-navbar-fixed sidebar-collapse sidebar-mini" style="font-family:  'Itim', cursive">
@@ -57,7 +57,7 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light  " 
+  <nav class="main-header navbar navbar-expand navbar-white navbar-light  "
         style="background-color: #F0C929;">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -68,7 +68,7 @@
         <a href="#" class="nav-link"><h5>{{ App\Models\Branchs::where('id',App\Models\Has_Branchs::where('user_id',auth()->user()->id)->first()->id)->first()->name}}</h5></a>
       </li> --}}
     </ul>
-   
+
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
       {{-- wallet  --}}
@@ -99,7 +99,7 @@
           </form>
         </div>
       </li> --}}
-      
+
   {{-- full scean --}}
     <li class="nav-item">
       <a id="fullscreen_id" class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -128,7 +128,7 @@
         <div class="info">
           <a href="{{ route('user.index')}}" class="d-block" >{{ Auth::user()->name }}</a>
           <p class="">{{ App\Models\Branchs::where('id',App\Models\Has_Branchs::where('user_id',auth()->user()->id)->first()->id)->first()->name}}</p>
-          @if (auth()->user()->hasRole('admin'))  
+          @if (auth()->user()->hasRole('admin'))
             <a href="{{ route('dashboard.index')}}">จัดการหลังร้าน</a>
           @endif
         </div>
@@ -151,6 +151,12 @@
                 <a href="{{ route('sale.index')}}" class="nav-link {{ request()->routeIs('sale.index')? 'active' : '' }}">
                   <i class="nav-icon fas fa-cart-plus"></i>
                   <p>ขาย</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('sale2.index')}}" class="nav-link {{ request()->routeIs('sale2.index')? 'active' : '' }}">
+                  <i class="nav-icon fas fa-cart"></i>
+                  <p>ขายส่ง</p>
                 </a>
               </li>
               <li class="nav-item">
@@ -235,7 +241,7 @@
   <!-- /.content-wrapper -->
   {{-- <footer class="main-footer" >
     <strong>Power By   <a href="https://www.facebook.com/TawhanStudio">Tawhan Studio</a>.</strong>
-    
+
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0.0
     </div>

@@ -20,13 +20,14 @@ class CreateProductsTable extends Migration
             $table->string('sku', 128)->unique();
             $table->string('des')->default('');
             $table->string('unit')->nullable();
-            $table->double('legular_price',15,2)->default(0); // ราคาต้นทุน
-            $table->double('sale_price',15,2)->default(0); // ราคาขาย
+            $table->double('legular_price',15,2)->default(0); // ราคาส่ง
+            $table->double('wholesale_price',15,2)->default(0); // ราคาปลีก
+            $table->double('sale_price',15,2)->default(0); // ราคาลดราคา
             // $table->double('price',15,2)->default(0);
             $table->unsignedInteger('qty')->default(0); // quantity
-            $table->boolean('featured')->default(false); 
+            $table->boolean('featured')->default(false);
             $table->boolean('retail')->default(true);  // ขายปลีก
-            $table->string('image')->default('images/products/default.png'); 
+            $table->string('image')->default('images/products/default.png');
             $table->bigInteger('catagory_id')->unsigned()->nullable();
             $table->bigInteger('branch_id')->unsigned()->nullable();
             $table->timestamps();
@@ -34,7 +35,7 @@ class CreateProductsTable extends Migration
             $table->foreign('branch_id')->references('id')->on('branchs')->onDelete('cascade');
         });
     }
-    
+
     /**
      * Reverse the migrations.
      *
@@ -45,3 +46,4 @@ class CreateProductsTable extends Migration
         Schema::dropIfExists('products');
     }
 }
+

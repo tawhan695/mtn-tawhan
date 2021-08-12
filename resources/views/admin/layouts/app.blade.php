@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
   <title>{{ config('app.name', 'Admin') }}|Admin</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -45,7 +45,7 @@
     </script>
     @yield('javascript')
 </head>
-{{-- control-sidebar-slide-open layout-navbar-fixed sidebar-collapse sidebar-mini 
+{{-- control-sidebar-slide-open layout-navbar-fixed sidebar-collapse sidebar-mini
   hold-transition sidebar-mini layout-fixed sidebar-collapse
   --}}
 <body id="body" class=" layout-navbar-fixed sidebar-collapse sidebar-mini" style="font-family:  'Itim', cursive">
@@ -57,7 +57,7 @@
   </div>
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-orange navbar-light" 
+  <nav class="main-header navbar navbar-expand navbar-orange navbar-light"
         style="">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
@@ -68,7 +68,7 @@
         <a href="#" class="nav-link"><h5>{{ App\Models\Branchs::where('id',App\Models\Has_Branchs::where('user_id',auth()->user()->id)->first()->id)->first()->name}}</h5></a>
       </li> --}}
     </ul>
-   
+
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
   {{-- full scean --}}
@@ -101,7 +101,7 @@
           <p class="">{{ App\Models\Branchs::where('id',App\Models\Has_Branchs::where('user_id',auth()->user()->id)->first()->id)->first()->name}}</p>
           @if (auth()->user()->hasRole('admin'))
            <a class="text-info" href="{{ route('sale.index')}}">จัดการหน้าร้าน</a>
-              
+
           @endif
         </div>
       </div>
@@ -144,8 +144,17 @@
             <a href="{{Route('employee.index')}}" class="nav-link {{ request()->routeIs('employee.index')? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>
-                พนักงาน
-                <span class="right badge badge-danger">2</span>
+                จักการพนักงาน
+                {{-- <span class="right badge badge-danger">2</span> --}}
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{Route('branchs.index')}}" class="nav-link {{ request()->routeIs('branchs.index')? 'active' : '' }}">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                จัดการสาขา
+                {{-- <span class="right badge badge-danger">2</span> --}}
               </p>
             </a>
           </li>
@@ -208,7 +217,7 @@
   <!-- /.content-wrapper -->
   {{-- <footer class="main-footer" >
     <strong>Power By   <a href="https://www.facebook.com/TawhanStudio">Tawhan Studio</a>.</strong>
-    
+
     <div class="float-right d-none d-sm-inline-block">
       <b>Version</b> 1.0.0
     </div>

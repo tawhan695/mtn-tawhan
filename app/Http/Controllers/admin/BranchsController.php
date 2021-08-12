@@ -3,13 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branchs;
 use Illuminate\Http\Request;
 
-use App\Models\Product;
-use App\Models\Defective;
-use App\Models\Order;
-
-class DashboardController extends Controller
+class BranchsController extends Controller
 {
     public function __construct()
     {
@@ -22,14 +19,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-//         $mytime = \Carbon\Carbon::now();
-// echo $mytime->toDateTimeString();
-//WHERE `created_at` LIKE '%2021-07-14%' ORDER BY `legular_price` ASC
-        $dayDefective = Defective::where('created_at','like','%'.date('Y-m-d').'%')->count();
-        $dayOrder = Order::where('created_at','like','%'.date('Y-m-d').'%')->count();
-        $sumOrder = Order::where('created_at','like','%'.date('Y-m-d').'%')->sum('net_amount');
-        // print_r(date());
-        return view('admin.dashboard.index')->with(['Defective'=>$dayDefective,'Order'=>$dayOrder,'ordersum'=>$sumOrder]);
+        $branchs = Branchs::all();
+        return view('admin.branchs.index')->with(['branchs'=>$branchs]);
     }
 
     /**
@@ -39,7 +30,7 @@ class DashboardController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.branchs.create');
     }
 
     /**
@@ -56,10 +47,10 @@ class DashboardController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Branchs  $branchs
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Branchs $branchs)
     {
         //
     }
@@ -67,10 +58,10 @@ class DashboardController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Branchs  $branchs
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Branchs $branchs)
     {
         //
     }
@@ -79,10 +70,10 @@ class DashboardController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Branchs  $branchs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Branchs $branchs)
     {
         //
     }
@@ -90,10 +81,10 @@ class DashboardController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Branchs  $branchs
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Branchs $branchs)
     {
         //
     }
