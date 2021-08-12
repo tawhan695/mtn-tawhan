@@ -23,7 +23,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        
+
         return view('admin.product.index')->with(['product'=>Product::where('branch_id',auth()->user()->branch_id())->paginate(10),'catagory'=>Catagory::where('branch_id',auth()->user()->branch_id())->get(),'sku'=>$current_timestamp = Carbon::now()->timestamp]);
     }
 
@@ -55,7 +55,7 @@ class ProductController extends Controller
             'catagory' => 'required',
             // 'image' => 'required',
         ]);
-    
+
         if ($validator->fails()) {
             return back()->with([
                 'error' => $validator->errors(),
@@ -75,19 +75,19 @@ class ProductController extends Controller
         }
         print_r($request->all());
 
-        //Array ( [_token] => sUR44FvKgyfilaXODmQDFSL158hqLjoygZCLVfAD 
-        // [image] => 
-        // [name] => 1627746078768 
-        // [price] => 80.00 
-        // [qty] => 20 
-        // [unit] => แผง 
-        // [des] => 5555555 
-        // [catagory] => 1 
-        
+        //Array ( [_token] => sUR44FvKgyfilaXODmQDFSL158hqLjoygZCLVfAD
+        // [image] =>
+        // [name] => 1627746078768
+        // [price] => 80.00
+        // [qty] => 20
+        // [unit] => แผง
+        // [des] => 5555555
+        // [catagory] => 1
+
 
         $Product = new Product;
         $Product->name = $request->name;
-        $Product->slug = Str::slug($request->name);
+        $Product->slug = Str::slug($request->name,'mtn.');
         $Product->image =  'images/products/'.$imageName;
         $Product->des = $request->des;
         $Product->sku = $request->sku;
@@ -152,7 +152,7 @@ class ProductController extends Controller
             'catagory' => 'required',
             // 'image' => 'required',
         ]);
-    
+
         if ($validator->fails()) {
             return back()->with([
                 'error' => $validator->errors(),
@@ -185,7 +185,7 @@ class ProductController extends Controller
         $Product->update();
 
 
-        return redirect(route('product.index'))->withErrors(['sucess'=>'บันทึกสำเร็จ']);        
+        return redirect(route('product.index'))->withErrors(['sucess'=>'บันทึกสำเร็จ']);
 
     }
 
