@@ -26,13 +26,13 @@ class UserSeeder extends Seeder
        Role::create(['name' =>'admin']);
        Role::create(['name' =>'seller']);
        $user = \App\Models\User::factory()->create([
-            'name' => Str::random(10),
+            'name' => 'หจก.มัทนาไข่สด ฟาร์ม',
             'username' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('123456789'),
         ]);
-        
-        
+
+
         $user->assignRole('admin');
         // ประเภทไข่ไก่
 
@@ -59,12 +59,13 @@ class UserSeeder extends Seeder
              'name' => 'สาขา 1',
              'des' => 'สาขา 1',
          ]);
-        $Branchs2 = Branchs::create([
-             'name' => 'สาขา 2',
-             'des' => 'สาขา 2',
-         ]);
+        // $Branchs2 = Branchs::create([
+        //      'name' => 'สาขา 2',
+        //      'des' => 'สาขา 2',
+        //  ]);
     // $user->;
     //    print_r($user);
-     \App\Models\Product::factory(5)->create();
+     \App\Models\Product::factory(2)->create();
+     DB::insert("INSERT INTO `products` (`id`, `name`, `slug`, `sku`, `des`, `unit`, `retail_price`, `wholesale_price`, `sale_price`, `qty`, `featured`, `retail`, `image`, `catagory_id`, `branch_id`, `created_at`, `updated_at`) VALUES (NULL, 'แผงกระดาษ','1628978951527', '1628978951527', 'แผงกระดาษ','แผง', '1.00', '1.00', '0.00', '0', '0', '1', 'images/products/1628978988.jpg', 2, 1, NULL, NULL)");
     }
 }

@@ -16,7 +16,7 @@ class CreateBranchsTable extends Migration
         Schema::create('branchs', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->string('des');
+            $table->text('des');
             $table->timestamps();
         });
     }

@@ -158,7 +158,7 @@
               </p>
             </a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a href="{{ Route('user.index')}}" class="nav-link {{ request()->routeIs('user.index')? 'active' : '' }}">
               <i class="nav-icon fas fa-user"></i>
               <p>
@@ -166,12 +166,12 @@
                 <span class="right badge badge-danger">me</span>
               </p>
             </a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>
+              <i class="nav-icon fas fa-sign-out-alt text-danger"></i>
+              <p class="text-danger">
                  ออกจากระบบ
                 {{-- <span class="right badge badge-danger">me</span> --}}
               </p>

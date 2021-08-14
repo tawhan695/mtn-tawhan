@@ -1,6 +1,6 @@
 @extends('sales.layouts.app')
 @section('javascript')
-     
+
 @endsection
 @section('content')
 <div class="container">
@@ -22,8 +22,8 @@
                       <select name="id" id="product" class="custom-select  @error('id') is-invalid @enderror">
                           <option value="null">---</option>
                           @foreach ($product as $item)
-                              
-                            <option value="{{$item->id}}">รหัสสินค้า {{$item->id .' '.$item->name .' ฿' .$item->legular_price. ' คลัง' .$item->qty}}</option>
+
+                            <option value="{{$item->id}}">รหัสสินค้า {{$item->id .' '.$item->name .'ราคาปลีก' .$item->wholesale_price.' ราคาส่ง' .$item->retail_price. ' คลัง' .$item->qty}}</option>
                           @endforeach
                       </select>
                       @error('id')
@@ -64,7 +64,7 @@
                 function sub(){
                     $('#submit1').submit();
                 }
-                @error('errorqty') 
+                @error('errorqty')
                 Swal.fire(
                 'เกิดข้อผิดพลาด',
                 '{{$message}}',
@@ -85,9 +85,9 @@
 
             </script>
           </div>
-          
-    </div> 
-</div> 
+
+    </div>
+</div>
 <div class="container">
   <div class="pt-4">
     <div class="card">
@@ -106,7 +106,7 @@
           </div>
         </div>
       </div>
-      
+
       <!-- /.card-header -->
       <div class="card-body table-responsive p-0">
           <table class="table table-hover text-nowrap">
@@ -121,7 +121,7 @@
             </tr>
           </thead>
           <tbody>
-              @foreach ($defec as $item)       
+              @foreach ($defec as $item)
                   <tr>
                   <td style="width: 1px">{{ $loop->index}}</td>
                   <td style="width: 1px">{{ $item->product_id}}</td>
@@ -131,7 +131,7 @@
                   <td style="width: 1px">{{ $item->created_at}}</td>
                   </tr>
               @endforeach
-            
+
           </tbody>
         </table>
       </div>

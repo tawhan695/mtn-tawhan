@@ -17,7 +17,7 @@
         <div class="card-header">
           แก้ไขสินค้า
         </div>
-        
+
         <div class="tab-content">
           <div class="tab-pane active" id="add">
             <form action="{{ route('product.update',$product->id)}}" method="post" aria-multiline="true" enctype="multipart/form-data">
@@ -28,20 +28,20 @@
                 <div class="form-group row">
                   <div class="center" style=" margin: auto;  ">
                     <div style=" width: 250px;height: 250px;">
-                      
+
                       <img id="IMG" src="" alt="image product" width="100%" height="100%" accept="image/png, image/gif, image/jpeg">
-                      
+
                     </div>
                     <div class="mt-1">
                       <input class="btn btn-info" style="width: 250px" type="file" name="image" id="exampleInputFile">
                     </div>
                   </div>
-                  
+
                 </div>
                 <div class="form-group row">
                   <label for="inputName3" class="col-sm-2 col-form-label">ชื่อ</label>
                   <div class="col-sm-10">
-                    <input type="text" class="form-control  @error('name') is-invalid @enderror" 
+                    <input type="text" class="form-control  @error('name') is-invalid @enderror"
                             id="inputName3" placeholder="Name" name="name" required value="{{ $product->name}}">
                     @error('name')
                         <p class="text-danger">{{ $message }}</p>
@@ -54,10 +54,10 @@
                     <input type="text" class="form-control isbn" id="isbn_input" class="isbn"
                      placeholder="sku" name="sku"  required value="{{ $product->sku}}">
                   </div>
-                  
+
                   <div class="col-sm-4 row">
                      <div class="col-sm-6">
-                      
+
                        <button type="button" class="btn btn-success btn-block" disabled >สแกน</button>
                      </div>
                      <div class="col-sm-6">
@@ -74,10 +74,17 @@
                   {{-- </div> --}}
                 </div>
                 <div class="form-group row">
-                  <label for="inputPrice3" class="col-sm-2 col-form-label">ราคา</label>
+                  <label for="inputPrice3" class="col-sm-2 col-form-label">ราคาปลีก</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" id="inputPrice3" placeholder="Price"
-                     name="price" min="0" max="100000" step="0.01"  required value="{{ $product->legular_price}}">
+                     name="price" min="0" max="100000" step="0.01"  required value="{{ $product->wholesale_price}}">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputPrice3" class="col-sm-2 col-form-label">ราคาส่ง</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" id="inputPrice3" placeholder="Price"
+                     name="price2" min="0" max="100000" step="0.01"  required value="{{ $product->retail_price}}">
                   </div>
                 </div>
                 <div class="form-group row">
@@ -105,23 +112,23 @@
                 <div class="form-group row">
                   <label for="inputCat3" class="col-sm-2 col-form-label">หมวดหมู่</label>
                   <div class="col-sm-10">
-                    
+
                     {{-- <input type="Unit" class="form-control" id="inputCat3" placeholder="Cat"> --}}
                     <select class="form-control" name="catagory" id="catagory">
                       <option>เลือกหมวดหมู่</option>
                       @foreach ($catagory as $item)
                           @if ($product->catagory_id == $item->id)
-                              
+
                             <option value="{{ $item->id}}" selected >{{ $item->name}}</option>
                           @else
-                              
+
                             <option value="{{ $item->id}}">{{ $item->name}}</option>
                           @endif
                       @endforeach
                     </select>
                   </div>
                 </div>
-  
+
                 {{--  --}}
               </div>
               <div class="card-footer">
@@ -133,7 +140,7 @@
                       //console.log(55555);
                       $( "#LList" ).click();
                     }
-                   
+
                 </script>
               </div>
             </form>
@@ -141,9 +148,9 @@
 
         </div>
       </div>
-      
+
     </div>
-    
+
 </div>
 <script>
   $('#IMG').attr('src', '/images/products/default.png');
@@ -152,7 +159,7 @@
           var url = $(this).val();
           console.log(url);
           var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-          if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) 
+          if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg"))
           {
               var reader = new FileReader();
 
@@ -168,7 +175,7 @@
         });
 
         @error('sucess')
-        
+
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -179,9 +186,9 @@
         icon: 'success',
         title: '{{ $message }} '
         })
-    
+
         @enderror
-    
+
 </script>
 {{-- https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js --}}
 {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>

@@ -92,7 +92,8 @@ class ProductController extends Controller
         $Product->des = $request->des;
         $Product->sku = $request->sku;
         $Product->qty = $request->qty;
-        $Product->legular_price = $request->price;
+        $Product->retail_price = $request->price;
+        $Product->wholesale_price = $request->price2;
         $Product->catagory_id = $request->catagory;
         $Product->branch_id = auth()->user()->branch_id();
         $Product->unit = $request->unit;
@@ -178,7 +179,8 @@ class ProductController extends Controller
         $Product->sku = $request->sku;
         $Product->des = $request->des;
         $Product->qty = $request->qty;
-        $Product->legular_price = $request->price;
+        $Product->retail_price = $request->price;
+        $Product->wholesale_price = $request->price2;
         // $Product->catagory_id = $request->catagory;
         // $Product->branch_id = auth()->user()->branch_id();
         $Product->unit = $request->unit;

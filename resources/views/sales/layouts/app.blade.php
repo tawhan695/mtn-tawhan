@@ -129,7 +129,7 @@
           <a href="{{ route('user.index')}}" class="d-block" >{{ Auth::user()->name }}</a>
           <p class="">{{ App\Models\Branchs::where('id',App\Models\Has_Branchs::where('user_id',auth()->user()->id)->first()->id)->first()->name}}</p>
           @if (auth()->user()->hasRole('admin'))
-            <a href="{{ route('dashboard.index')}}">จัดการหลังร้าน</a>
+            <a class="text-success" href="{{ route('dashboard.index')}}">จัดการหลังร้าน</a>
           @endif
         </div>
       </div>
@@ -155,7 +155,7 @@
               </li>
               <li class="nav-item">
                 <a href="{{ route('sale2.index')}}" class="nav-link {{ request()->routeIs('sale2.index')? 'active' : '' }}">
-                  <i class="nav-icon fas fa-cart"></i>
+                  <i class="nav-icon fas fa-shopping-cart"></i>
                   <p>ขายส่ง</p>
                 </a>
               </li>
@@ -194,8 +194,8 @@
           <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link" onclick="event.preventDefault();
                   document.getElementById('logout-form').submit();">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p>
+              <i class="nav-icon fas fa-sign-out-alt text-danger"></i>
+              <p class=" text-danger">
                  ออกจากระบบ
                 {{-- <span class="right badge badge-danger">me</span> --}}
               </p>

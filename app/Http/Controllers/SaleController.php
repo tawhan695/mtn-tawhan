@@ -9,7 +9,7 @@ use App\Models\Order_Details;
 use App\Models\Wallet;
 use App\Models\Has_Branchs;
 use Illuminate\Support\Facades\DB;
-use App\Models\Branchs;
+use App\Models\User;
 use App\Models\Catagory;
 class SaleController extends Controller
 {
@@ -76,6 +76,7 @@ class SaleController extends Controller
         $order->net_amount=$net_amount;   // ยอดสุุทธิ
         $order->change=$change;   // เงินทอน
         $order->status=$request->status;   // สถานะ
+        $order->status_sale=$request->status_sale;   // สถานะ
         $order->paid_by=$request->paid_by;   // ชำระโดย
         $order->user_id=auth()->user()->id;  // คนขาย
         $order->branch_id = Has_Branchs::where('user_id',auth()->user()->id)->first()->id;  // สาขา
@@ -104,6 +105,7 @@ class SaleController extends Controller
 
         }
 
+        $date = date_create($prod->created_at);
 
         return response()->json([
             'Change' => $change,
@@ -113,6 +115,8 @@ class SaleController extends Controller
             'discount' => $discount,
             'net_amount' => $net_amount,
             'change' => $change,
+            'date' =>date_format($date,'Y-m-d H:i:s') ,
+            'sale' => User::where('id',$prod->user_id)->first()->name
             ]);
 
     }

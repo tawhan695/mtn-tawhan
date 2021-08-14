@@ -3,6 +3,7 @@
     <script src="{{ asset('js/marketing.js') }}" defer></script>
 @endsection
 @section('content')
+
     {{-- <script> --}}
     <style>
         @media only screen and (max-width: 991px) {
@@ -116,28 +117,40 @@
             href="#order-list" data-toggle="tab">ชำระเงิน <span id="mb-count"></span></button>
         </div> --}}
         <div class="product1 col-xl-9 col-lg-8 col-md-12">
-            <div class="card" >
-                <div class="card-header p-2">
-                    <ul class="nav nav-pills row">
-                        <li class="nav-item col-md-12 col-lg-3 "><a class=" nav-link active btn btn-block btn-default" href="#all" data-toggle="tab">รายการสินค้า</a></li>
-                        <li class="nav-item order2 col-12 pb-1"><a class=" nav-link btn btn-block btn-default" href="#order-list" data-toggle="tab">ชำระเงิน <span id="mb-count" class="badge badge-warning text-white"></a></li>
-                        {{-- @foreach ($catagory as $item)
-
-                            <li class="nav-item  "><a class=" nav-link" href="#catagory{{ $item->id }}"
-                                    data-toggle="tab">{{ $item->name }}</a></li>
-                        @endforeach --}}
-
-                    </ul>
+            <div class="card card-warning" >
+                <div class="card-header p-2 pl-3 text-white">
+                    <h4>ขายปลีก</h4>
                 </div><!-- /.card-header -->
                 <div class="card-body">
-                    <div class="tab-content">
-                        <div class="tab-pane active text-center" id="all">
-                            <div class="row text-center">
-                                @foreach ($products as $product)
+                    <ul class="nav nav-pills row">
+                        <li class="nav-item col-md-12 col-lg-3 "><a class=" nav-link bg-info text-white   btn btn-block btn-default" href="#order-list" data-toggle="tab">ชำระเงิน
+                            <span id="mb-count" class="badge badge-warning text-white">
+                        </a></li>
 
+                        @foreach ($catagory as $item)
+                        <li class="nav-item order2 col-12 pb-1 mt-1"><a class=" nav-link btn btn-block btn-default @if($loop->index == 0)active @endif"
+                            href="#catagory{{ $item->id }}"
+                            data-toggle="tab">{{ $item->name }}
+                            </a></li>
+
+                        @endforeach
+
+                    </ul>
+                    <div class="tab-content">
+
+                        <div class="tab-pane  text-center" id="order-list">
+                            <div id="destination" >
+
+                            </div>
+                        </div>
+                         @foreach ($catagory as $item)
+                            <div class="tab-pane @if($loop->index == 0)active @endif" id="catagory{{ $item->id }}">
+                                <div class="row text-center">
+                                @foreach ($products as $product)
+                                    @if ($product->catagory_id == $item->id )
                                     <div id="P{{ $product->id }}" class=" card m-1  p-2"
-                                        style="width: 130px; height: 180px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->legular_price }})" @endif>
-                                        {{-- <div id="op{{$product->id}}"></div> --}}
+                                        style="width: 130px; height: 180px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->retail_price }},{{ $product->qty }})" @endif>
+
                                         <div class="d-flex sale ">
 
 
@@ -145,7 +158,7 @@
                                             style="width:120px;height:85px; " />
                                         <div class="card-body text-center mx-auto">
                                             <h5 class="card-title" style="font-size:12px">{{ $product->name }}</h5>
-                                            <p class="card-text" style="font-size:15px">฿ {{ $product->legular_price }}</p>
+                                            <p class="card-text" style="font-size:15px">฿ {{ $product->retail_price }}</p>
                                         </div>
 
                                         <style>
@@ -185,75 +198,11 @@
                                             <span class="am2 rounded">สินค้าหมด</span>
                                         @endif
                                     </div>
-
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="tab-pane  text-center" id="order-list">
-                            <div id="destination" >
-
-                            </div>
-                        </div>
-                        {{-- @foreach ($catagory as $item)
-                            <div class="tab-pane" id="catagory{{ $item->id }}">
-                                <div class="row text-center">
-                                @foreach ($products as $product)
-                                    @if ($product->catagory_id == $item->id )
-                                        <div id="P{{ $product->id }}" class=" card m-1  p-2"
-                                            style="width: 140px; height: 200px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->legular_price }})" @endif>
-
-                                            <div class="d-flex sale ">
-
-
-                                            </div> <img class='' src="{{ asset($product->image) }}"
-                                                style="width:120px;height:85px; " />
-                                            <div class="card-body text-center mx-auto">
-                                                <h5 class="card-title" style="font-size:15px">{{ $product->name }}</h5>
-                                                <p class="card-text">฿ {{ $product->legular_price }}</p>
-                                            </div>
-
-                                            <style>
-                                                #P{{ $product->id }} {
-                                                    position: relative;
-
-                                                    -webkit-transition-duration: 0.1s;
-                                                    /* Safari */
-                                                    transition-duration: 0s;
-                                                    text-decoration: none;
-                                                    overflow: hidden;
-                                                    cursor: pointer;
-                                                }
-
-                                                #P{{ $product->id }}:after {
-                                                    content: "";
-                                                    background: #ffc107;
-                                                    display: block;
-                                                    position: absolute;
-                                                    padding-top: 300%;
-                                                    padding-left: 350%;
-                                                    margin-left: -20px !important;
-                                                    margin-top: -120%;
-                                                    opacity: 0;
-                                                    transition: all 0.4s
-                                                }
-
-                                                #P{{ $product->id }}:active:after {
-                                                    padding: 0;
-                                                    margin: 0;
-                                                    opacity: 1;
-                                                    transition: 0s
-                                                }
-
-                                            </style>
-                                            @if (intval($product->qty) < 1)
-                                                <span class="am2 rounded">สินค้าหมด</span>
-                                            @endif
-                                        </div>
                                     @endif
                                 @endforeach
-                                    </div>
                             </div>
-                        @endforeach --}}
+                            </div>
+                        @endforeach
 
                         <!-- /.tab-pane -->
                     </div>
@@ -459,8 +408,16 @@
                                         'cash': cash,
                                         'discount': discount,
                                         'status': 'สำเร็จ',
+                                        'status_sale': 'ขายปลีก',
                                         'paid_by': 'เงินสด',
                                     },
+                                    beforeSend: function(){
+                                        $("#ok").attr('disabled',true);
+                                        $("#ok").append('<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
+                                        $("#ok").text('รอสักครู่...');
+                                        // $("#loading").show();
+                                    },
+
                                     success: function(data) {
                                         console.log(data['product']);
                                         console.log("@222222");
@@ -470,17 +427,18 @@
                                         number = number.toLocaleString('en');
                                         $('#PaymentModalCenter').modal('hide');
                                         Swal.fire({
-                                            title: 'เงินทอน',
-                                            text: number,
+                                            title: number,
+                                            text: 'เงินทอน',
                                             imageUrl: '{{ asset('/images/logo/logo.jpg') }}',
-                                            imageWidth: 200,
-                                            imageHeight: 200,
+                                            imageWidth: 150,
+                                            imageHeight: 150,
                                             imageAlt: 'icon',
                                             confirmButtonText: 'พิมพ์ใบเสร็จ',
                                             cancelButtonText: 'ปิด',
                                             showCancelButton: true,
                                         }).then((result) => {
                                             /* Read more about isConfirmed, isDenied below */
+                                            console.log(data);
                                             if (result.isConfirmed) {
                                                 var resourceH = '';
 
@@ -493,18 +451,18 @@
                                                         resourceH +='</tr>';
                                                     });
                                                 var head =  `<div id="printText">
-                                                        <div class="image text-center" style="width:200px; height:200px; margin:auto;">
+                                                        <div class="image text-center" style="width:120px; height:120px; margin:auto;">
                                                             <img src="{{ asset('/images/logo/logo.jpg') }}" style="width:100%; height:100%">
                                                         </div>
                                                         <p class="centered">
                                                             {{ App\Models\Branchs::where('id',auth()->user()->branch_id())->first()->name }}
                                                             <br>
                                                             {{ App\Models\Branchs::where('id',auth()->user()->branch_id())->first()->des }}
-                                                            <br>------------------------------
-                                                            <br>        ใบเสร็จรับเงิน
-                                                            <br>------------------------------
-                                                            <br>        สินค้า/บริการ
                                                             <hr>
+                                                                        ใบเสร็จรับเงิน
+                                                            <hr>
+                                                                        สินค้า/บริการ
+
                                                         <table class="table table-borderless  " style="text-size:8px;width:100%">
                                                             <thead style="text-size:8px;">
                                                                 <tr>
@@ -516,6 +474,7 @@
                                                             </thead>
                                                             <tbody>`;
                                                 var body =resourceH;
+                                                // var dt = new Date();
                                                 var footer = `
                                                                 <tr>
                                                                     <th class=""><p></p></th>
@@ -538,8 +497,20 @@
                                                                 </tbody>
                                                             </table>
                                                                 <hr>
-                                                        <p class="centered">ขอบคุณที่ใช้บริการ
+                                                                <p class="centered">
+                                                                    พนักงานขาย :${data['sale']}
+                                                                    <br>
+                                                                    วันเวลา : ${data['date']}
+                                                                </p>
+                                                                <hr>
+                                                        <p class="centered">ขอขอบพระคุณทุกท่านที่มาอุดหนุนนะคะ
 
+                                                                ช่องทางการติดต่อ 👉🏻
+                                                                FB: หจก.มัทนาไข่สดฟาร์ม
+                                                                โทร.092-293-1906
+                                                                หรือ@line : 092-293-1906
+                                                                <br>
+                                                                <hr>
                                                             <button class="btn btn-primary btn-block" id="btnPrint" onclick="printT()">ปริ๊นท์</button>
 
                                                     </div>`;

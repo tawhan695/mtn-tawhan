@@ -21,9 +21,9 @@
             <li class="nav-item"><a class="nav-link" href="#add" data-toggle="tab">เพิ่มรายการสินค้า</a></li>
           </ul>
 
-          
+
         </div>
-        
+
         <div class="tab-content">
           <div class="tab-pane active" id="list">
             <!-- /.card-header -->
@@ -31,24 +31,26 @@
                 <table class="table table-hover text-nowrap">
                 <thead>
                   <tr>
-                    <th style="width: 10px">รหัสสินค้า</th>
+                    <th style="width: 10px">id</th>
                     <th>รูป</th>
                     <th>สินค้า</th>
                     <th>จำนวน</th>
-                    <th>ราคา</th>
+                    <th>ราคาปลีก</th>
+                    <th>ราคาส่ง</th>
                     <th>หมวดหมู่</th>
                     <th style="width: 150px">จัดการ</th>
-                    
+
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($product as $item)       
+                    @foreach ($product as $item)
                         <tr>
                         <td style="width: 1px;">{{ $item->id}}</td>
                         <td style="width: 1px;"><img width="100px" src="{{  asset($item->image) }}" alt="{{$item->name}}"></td>
                         <td style="width: 1px">{{ $item->name}}</td>
                         <td style="width: 1px">@if ($item->qty > 0) {{$item->qty}}@else <span class="badge bg-danger">สินค้าหมด</span> @endif</td>
-                        <td style="width: 1px">{{  number_format( $item->legular_price, 2, '.', ',') }}</td>
+                        <td style="width: 1px">{{  number_format( $item->wholesale_price, 2, '.', ',') }}</td>
+                        <td style="width: 1px">{{  number_format( $item->retail_price, 2, '.', ',') }}</td>
                         <td style="width: 1px">{{ App\Models\Catagory::where('id',$item->catagory_id)->first()->name}}</td>
                         <td style="width: 1px;hieght: 20px">
                           <div class="btn-group">
@@ -63,10 +65,10 @@
                             {{-- <div class="col-4 ">  --}}
                               <form action="{{ route('product.edit',$item->id)}}" method="GET">
                                 @csrf
-                                
+
                                 <button type="submit" class="btn btn-warning" >แก้ไข</button>
                               </form>
-                              
+
                             {{-- </div> --}}
                             {{-- <div class="col-4 "> --}}
                               <form action="{{ route('product.destroy',$item->id) }}" method="post" id="sbu{{ $item->id }}">
@@ -76,7 +78,7 @@
                               </form>
 
                               <script>
-                                
+
                                 async function  add{{$item->id}}(){
                                   const { value: number } = await Swal.fire({
                                       title: 'เพิ่มจำนวนสินค้า',
@@ -117,7 +119,7 @@
                                     'success'
                                     )
                                     $('#sbu{{ $item->id }}').submit();
-                                } 
+                                }
                               })
                                 }
                               </script>
@@ -126,7 +128,7 @@
                         </td>
                         </tr>
                     @endforeach
-                  
+
                 </tbody>
               </table>
             </div>
@@ -148,15 +150,15 @@
                 <div class="form-group row">
                   <div class="center" style=" margin: auto;  ">
                     <div style=" width: 250px;height: 250px;">
-                      
+
                       <img id="IMG" src="" alt="image product" width="100%" height="100%" accept="image/png, image/gif, image/jpeg">
-                      
+
                     </div>
                     <div class="mt-1">
                       <input class="btn btn-info" style="width: 250px" type="file" name="image" id="exampleInputFile">
                     </div>
                   </div>
-                  
+
                 </div>
                 <div class="form-group row">
                   <label for="inputName3" class="col-sm-2 col-form-label">ชื่อ</label>
@@ -172,10 +174,10 @@
                   <div class="col-sm-6">
                     <input type="text" class="form-control isbn" id="isbn_input" class="isbn" placeholder="sku" name="sku" value="" required>
                   </div>
-                  
+
                   <div class="col-sm-4 row">
                      <div class="col-sm-6">
-                      
+
                        <button type="button" class="btn btn-success btn-block" disabled >สแกน</button>
                      </div>
                      <div class="col-sm-6">
@@ -192,9 +194,15 @@
                   {{-- </div> --}}
                 </div>
                 <div class="form-group row">
-                  <label for="inputPrice3" class="col-sm-2 col-form-label">ราคา</label>
+                  <label for="inputPrice3" class="col-sm-2 col-form-label">ราคาปลีก</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" id="inputPrice3" placeholder="Price" name="price" min="0" max="100000" step="0.01" value="0.00" required>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputPrice4" class="col-sm-2 col-form-label">ราคาส่ง</label>
+                  <div class="col-sm-10">
+                    <input type="number" class="form-control" id="inputPrice4" placeholder="Price" name="price2" min="0" max="100000" step="0.01" value="0.00" required>
                   </div>
                 </div>
                 <div class="form-group row">
@@ -228,7 +236,7 @@
                     </select>
                   </div>
                 </div>
-  
+
                 {{--  --}}
               </div>
               <div class="card-footer">
@@ -240,7 +248,7 @@
                       //console.log(55555);
                       $( "#LList" ).click();
                     }
-                   
+
                 </script>
               </div>
             </form>
@@ -248,9 +256,9 @@
 
         </div>
       </div>
-      
+
     </div>
-    
+
 </div>
 <script>
   $('#IMG').attr('src', '/images/products/default.png');
@@ -259,7 +267,7 @@
           var url = $(this).val();
           console.log(url);
           var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
-          if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) 
+          if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg"))
           {
               var reader = new FileReader();
 
@@ -275,7 +283,7 @@
         });
 
         @error('sucess')
-        
+
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -286,9 +294,9 @@
         icon: 'success',
         title: '{{ $message }} '
         })
-    
+
         @enderror
-    
+
 </script>
 {{-- https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js --}}
 {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/quagga/0.12.1/quagga.min.js"></script>

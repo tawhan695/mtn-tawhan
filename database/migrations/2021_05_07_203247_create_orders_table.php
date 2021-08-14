@@ -21,13 +21,14 @@ class CreateOrdersTable extends Migration
             $table->double('net_amount',15,2)->default(0)->comment('ยอดสุทธิ');
             $table->double('change',15,2)->default(0)->comment('เงินทอน');
             $table->string('status')->default('รอชำระเงิน')->comment('สถานะ');
+            $table->string('status_sale')->default('ขายปลีก')->comment('การขาย');
             $table->string('paid_by')->default('เงินสด')->comment('ชำระโดย');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->bigInteger('customer_id')->unsigned()->nullable();
             $table->bigInteger('branch_id')->unsigned()->nullable();
             $table->timestamps();
             $table->foreign('branch_id')->references('id')->on('branchs')->onDelete('cascade');
-            
+
         });
     }
 

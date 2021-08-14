@@ -20,8 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('sku', 128)->unique();
             $table->string('des')->default('');
             $table->string('unit')->nullable();
-            $table->double('legular_price',15,2)->default(0); // ราคาส่ง
-            $table->double('wholesale_price',15,2)->default(0); // ราคาปลีก
+            $table->double('retail_price',15,2)->default(0)->comment('ราคาปลีก'); // ราคาส่ง
+            $table->double('wholesale_price',15,2)->default(0)->comment('ราคาส่ง'); // ราคาปลีก
             $table->double('sale_price',15,2)->default(0); // ราคาลดราคา
             // $table->double('price',15,2)->default(0);
             $table->unsignedInteger('qty')->default(0); // quantity

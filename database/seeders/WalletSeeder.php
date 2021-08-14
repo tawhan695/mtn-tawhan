@@ -14,16 +14,16 @@ class WalletSeeder extends Seeder
      * @return void
      */
     public function run()
-    {   
+    {
         // เพิ่ม ค่าดีฟอล ให้ทุกสาขา
         $branch = Branchs::all();
         foreach ($branch as $key => $value) {
             // echo $value->id.'/n';
             // column
-            // id	balance	branch_id	created_at	updated_at	
+            // id	balance	branch_id	created_at	updated_at
             $wallet = new Wallet;
             $wallet->timestamps   = false;
-            $wallet->balance = 0;
+            $wallet->balance = 1000;
             $wallet->branch_id =$value->id;
             $wallet->save();
         }
