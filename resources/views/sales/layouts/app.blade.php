@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    {{-- <style>
+        .nav_sale{
+            display: none;
+        }
+    </style> --}}
   <title>{{ config('app.name', 'Laravel') }}</title>
 
   <!-- Google Font: Source Sans Pro -->
@@ -248,13 +252,30 @@
   </footer> --}}
 
   <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
+  
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+{{-- <nav_sale class="nav_sale">
 
+    <a href="{{ route('sale.index')}}" class="nav_sale__link {{ request()->routeIs('sale.index')? 'nav_sale__link--active' : '' }}">
+      <i class="material-icons nav_sale__icon">point_of_sale</i>
+      <span class="nav_sale__text">ปลีก</span>
+    </a>
+    <a href="#" class="nav_sale__link cart_nav" id="cart_popup_btn" data-toggle="modal" data-target="#modal-lg">
+
+            <i class="material-icons nav_sale__icon">shopping_cart</i>
+            <span class="cart-basket d-flex align-items-center justify-content-center" id="mb-count">0</span>
+            <span class="nav_sale__text">ชำระเงิน</span>
+
+    </a>
+    <a href="{{ route('sale2.index')}}" class="nav_sale__link  {{ request()->routeIs('sale2.index')? 'nav_sale__link--active' : '' }}">
+      <i class="material-icons nav_sale__icon">point_of_sale</i>
+      <span class="nav_sale__text">ส่ง</span>
+    </a>
+
+
+  </nav_sale> --}}
 
 <!-- jQuery -->
 {{-- <script type="text/javascript" src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script> --}}

@@ -95,45 +95,66 @@
 //  //   }
 
 // }
-function addEnv(p_id, p_name, p_price, max_qty) {
-    var env = document.getElementById('additem');
-    var divMain = document.createElement("div");
-    var divName = document.createElement("div");
-    var divCol = document.createElement("div");
-    var pLeft = document.createElement("p");
-    var pLeft_span = document.createElement("span");
-    var pRight = document.createElement("p");
-    var pRight_span = document.createElement("span");
-    divMain.className = "list row  m-1 pb-0 border border-right-0 border-left-0 border-top-0";
-    divMain.setAttribute("id", "ID" + p_id);
-    divMain.setAttribute("onclick", "editQTY('" + p_id + "','" + max_qty + "')");
-    // divMain.setAttribute("data-target", "#pdModalCenter");
+function addEnv(p_id, p_name, p_price, max_qty,img) {
 
-    divName.setAttribute("class", "col-12");
-    divName.appendChild(document.createTextNode(p_name))
-    divMain.appendChild(divName)
-    divCol.setAttribute("class", "col-12");
-    pLeft.setAttribute("class", "float-left");
-    pLeft.appendChild(document.createTextNode(parseFloat(p_price).toFixed(2) + ' ' + 'X'))
-    pLeft_span.setAttribute("id", "count" + p_id);
-    pLeft_span.appendChild(document.createTextNode('1'))
-    pLeft.appendChild(pLeft_span);
+const E =
+`
+<div class="list row  m-1 pb-0 border border-right-0 border-left-0 border-top-0" id="ID${p_id}"
+    onclick="editQTY('${p_id}','${max_qty}')">
+    <div class="col-2 image-list">
+        <img class="image" style="width:80px; height:80px" src="${img}">
+    </div>
+    <div class="col-10 p-3">
+        <div class="col-12">
+            ${p_name}</div>
+        <div class="col-12">
+            <p class="float-left">${p_price} X<span id="count${p_id}">1</span></p>
+            <p class="float-right">฿<span id="totol${p_id}">${p_price}</span></p>
+        </div>
+    </div>
 
-    pRight.setAttribute("class", "float-right");
-    pRight_span.setAttribute("id", "totol" + p_id);
-    pRight.appendChild(document.createTextNode('฿'))
-    pRight_span.appendChild(document.createTextNode(parseFloat(p_price).toFixed(2)))
-    pRight.appendChild(pRight_span);
-    divCol.appendChild(pLeft);
-    divCol.appendChild(pRight);
-    divMain.appendChild(divCol)
+</div>
+`
+$('#additem').append(E)
+
+    // var env = document.getElementById('additem');
+    // var divMain = document.createElement("div");
+    // var divName = document.createElement("div");
+    // var divCol = document.createElement("div");
+    // var pLeft = document.createElement("p");
+    // var pLeft_span = document.createElement("span");
+    // var pRight = document.createElement("p");
+    // var pRight_span = document.createElement("span");
+    // divMain.className = "list row  m-1 pb-0 border border-right-0 border-left-0 border-top-0";
+    // divMain.setAttribute("id", "ID" + p_id);
+    // divMain.setAttribute("onclick", "editQTY('" + p_id + "','" + max_qty + "')");
+    // // divMain.setAttribute("data-target", "#pdModalCenter");
+
+    // divName.setAttribute("class", "col-12");
+    // divName.appendChild(document.createTextNode(p_name))
+    // divMain.appendChild(divName)
+    // divCol.setAttribute("class", "col-12");
+    // pLeft.setAttribute("class", "float-left");
+    // pLeft.appendChild(document.createTextNode(parseFloat(p_price).toFixed(2) + ' ' + 'X'))
+    // pLeft_span.setAttribute("id", "count" + p_id);
+    // pLeft_span.appendChild(document.createTextNode('1'))
+    // pLeft.appendChild(pLeft_span);
+
+    // pRight.setAttribute("class", "float-right");
+    // pRight_span.setAttribute("id", "totol" + p_id);
+    // pRight.appendChild(document.createTextNode('฿'))
+    // pRight_span.appendChild(document.createTextNode(parseFloat(p_price).toFixed(2)))
+    // pRight.appendChild(pRight_span);
+    // divCol.appendChild(pLeft);
+    // divCol.appendChild(pRight);
+    // divMain.appendChild(divCol)
     var envProduct = document.getElementById('P' + p_id);
     var ps = document.createElement('span');
     ps.appendChild(document.createTextNode('1'))
     ps.setAttribute('id', 'amont' + p_id);
     ps.setAttribute('class', 'am rounded');
     envProduct.appendChild(ps);
-    env.appendChild(divMain);
+    // env.appendChild(divMain);
 
 
 }
@@ -282,11 +303,11 @@ function ListProduct(id, name, price) {
 }
 
 var bmqty = 0;
-function AddItem(p_id, p_name, p_price, max_qty) {
+function AddItem(p_id, p_name, p_price, max_qty,img) {
     var data = new ListProduct(p_id, p_name, p_price);
     if (list.length == 0) {
         list.push(data);
-        addEnv(p_id, p_name, parseFloat(p_price).toFixed(2), max_qty);
+        addEnv(p_id, p_name, parseFloat(p_price).toFixed(2), max_qty,img);
         $('#totol').text(parseFloat(Totol.data).toFixed(2));
         bmqty += 1;
         // $('#mb-count').text(bmqty);
@@ -330,7 +351,7 @@ function AddItem(p_id, p_name, p_price, max_qty) {
                 bmqty += 1;
                 list.push(data);
 
-                addEnv(p_id, p_name, parseFloat(p_price).toFixed(2), max_qty)
+                addEnv(p_id, p_name, parseFloat(p_price).toFixed(2), max_qty,img)
                 $('#totol').text(parseFloat(Totol.data).toFixed(2));
                 // console.log(333);
                 // $('#mb-count').text(bmqty);

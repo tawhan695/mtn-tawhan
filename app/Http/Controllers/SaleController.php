@@ -101,11 +101,11 @@ class SaleController extends Controller
             $p_qty = Product::where('id',$value['id'])->first()->qty;
             // $p_qty =  $Product;
            Product::where('id',$value['id'])->update(['qty'=> intval($p_qty)  -  intval($value['qty']) ] );
-           $prod = Order::where('id',$value['id'])->first();
 
         }
+        $prod = Order::where('id',$order->id)->first();
 
-        $date = date_create($prod->created_at);
+        $date = date_create($order->created_at);
 
         return response()->json([
             'Change' => $change,
@@ -116,7 +116,8 @@ class SaleController extends Controller
             'net_amount' => $net_amount,
             'change' => $change,
             'date' =>date_format($date,'Y-m-d H:i:s') ,
-            'sale' => User::where('id',$prod->user_id)->first()->name
+            'sale' => User::where('id',$prod->user_id)->first()->name,
+            'D' =>  $order
             ]);
 
     }
