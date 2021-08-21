@@ -2,12 +2,17 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" style="font-family:  'Itim', cursive">
 <head>
   <meta charset="utf-8">
+  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'Admin') }}|Admin</title>
-
+    <title>{{ config('app.name', 'Admin') }}|Admin</title>
+    <link rel="stylesheet" type="text/css" href="asset('homescreen/style/addtohomescreen.css')">
+    <script src="asset('homescreen/src/addtohomescreen.js')"></script>
+    <script>
+        addToHomescreen();
+    </script>
   <!-- Google Font: Source Sans Pro -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">

@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" style="font-family:  'Itim', cursive">
 <head>
   <meta charset="utf-8">
+  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -48,6 +49,11 @@
     });
     </script>
     @yield('javascript')
+    <link rel="stylesheet" type="text/css" href="asset('homescreen/style/addtohomescreen.css')">
+    <script src="asset('homescreen/src/addtohomescreen.js')"></script>
+    <script>
+        addToHomescreen();
+    </script>
 </head>
 {{-- control-sidebar-slide-open layout-navbar-fixed sidebar-collapse sidebar-mini
   hold-transition sidebar-mini layout-fixed sidebar-collapse
@@ -252,7 +258,7 @@
   </footer> --}}
 
   <!-- Control Sidebar -->
-  
+
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
