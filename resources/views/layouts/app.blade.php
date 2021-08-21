@@ -20,8 +20,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="asset('homescreen/style/addtohomescreen.css')">
-    <script src="asset('homescreen/src/addtohomescreen.js')"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('homescreen/style/addtohomescreen.css') }}">
+    <script src="{{ asset('homescreen/src/addtohomescreen.js') }}"></script>
     <script>
         addToHomescreen();
     </script>

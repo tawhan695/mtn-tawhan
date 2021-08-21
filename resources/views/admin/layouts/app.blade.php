@@ -8,8 +8,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Admin') }}|Admin</title>
-    <link rel="stylesheet" type="text/css" href="asset('homescreen/style/addtohomescreen.css')">
-    <script src="asset('homescreen/src/addtohomescreen.js')"></script>
+    <link rel="stylesheet" type="text/css" href="{{ asset('homescreen/style/addtohomescreen.css') }}">
+    <script src="{{ asset('homescreen/src/addtohomescreen.js') }}"></script>
     <script>
         addToHomescreen();
     </script>
