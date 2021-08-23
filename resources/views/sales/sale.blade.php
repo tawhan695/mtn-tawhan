@@ -155,7 +155,7 @@
                                     @foreach ($products as $product)
                                         @if ($product->catagory_id == $item->id)
                                             <div id="P{{ $product->id }}" class=" card m-1  p-2"
-                                                style="width: 130px; height: 180px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->retail_price }},{{ $product->qty }},'{{ asset($product->image) }}')" @endif>
+                                                style="width: 130px; height: 195px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->retail_price }},{{ $product->qty }},'{{ asset($product->image) }}')" @endif>
 
                                                 <div class="d-flex sale ">
 
