@@ -181,7 +181,7 @@ class ProductController extends Controller
         $Product->qty = $request->qty;
         $Product->retail_price = $request->price;
         $Product->wholesale_price = $request->price2;
-        // $Product->catagory_id = $request->catagory;
+        $Product->catagory_id = $request->catagory;
         // $Product->branch_id = auth()->user()->branch_id();
         $Product->unit = $request->unit;
         $Product->update();

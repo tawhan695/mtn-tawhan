@@ -1,6 +1,6 @@
 @extends('admin.layouts.app')
 @section('javascript')
-     
+
 @endsection
 @section('content')
 <section class="content">
@@ -13,7 +13,7 @@
             <li class="nav-item"><a class="nav-link" href="#add" data-toggle="tab">เพิ่มประเภทสินค้า</a></li>
           </ul>
 
-          
+
         </div>
         <div class="tab-content">
           <div class="tab-pane active" id="list">
@@ -29,11 +29,11 @@
                     <th>ราคา</th>
                     <th>หมวดหมู่</th> --}}
                     <th style="width: 150px">จัดการ</th>
-                    
+
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach ($catagory as $item)       
+                    @foreach ($catagory as $item)
                         <tr>
                         <td>{{ ($loop->index)+1}}</td>
                         {{-- <td style="width: 80px"><img width="100%" src="{{ $item->image}}" alt="{{$item->name}}"></td> --}}
@@ -43,17 +43,17 @@
                         {{-- <td style="width: 1px">{{ App\Models\Catagory::where('id',$item->catagory_id)->first()->name}}</td> --}}
                         <td style="width: 1px;hieght: 20px">
                           <div class="row">
-                            <button class="btn btn-success mr-1">แก้ไข</button>
-                            <form action="{{route('catagory.destroy',$item->id)}}" method="post">
+                            <button class="btn btn-success h-100" onclick="update({{ $item->id }})">แก้ไข</button>
+                            <form id="btn_sub{{ $item->id }}" action="{{route('catagory.destroy',$item->id)}}" method="post">
                               {{ csrf_field() }}
                               {{ method_field('DELETE') }}
-                              <button type="submit" class="btn btn-danger">ลบ</button>
+                              <button type="button"  onclick="btn_submit({{ $item->id }},'{{ $item->name }}')" class="btn btn-danger h-100">ลบ</button>
                             </form>
                           </div>
                         </td>
                         </tr>
                     @endforeach
-                  
+
                 </tbody>
               </table>
             </div>
@@ -69,7 +69,7 @@
           </div>
           <div class="tab-pane" id="add">
             <div class="card card-info m-2">
-             
+
               <!-- /.card-header -->
               <!-- form start -->
               <form class="form-horizontal" action="{{ route('catagory.store')}}" method="POST">
@@ -81,8 +81,8 @@
                       <input type="catagory" name="catagory" class="form-control" id="inputcatagory" placeholder="ชื่อประเภทสินค้า" oninput="enbtn()" required>
                     </div>
                   </div>
-                 
-                  
+
+
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -106,10 +106,45 @@
 
         </div>
       </div>
-      
+
     </div>
-    
+
 </div>
+<script type="text/javascript">
+    async function update(id){
+        const { value: name } = await Swal.fire({
+  title: 'แก้ไขประเภทสินค้า',
+  input: 'text',
+  inputLabel: 'ใส่ชื่อประเภทสินค้า',
+  inputPlaceholder: 'Enter your name'
+})
+
+if (name) {
+  Swal.fire(`Entered name: ${name} product id ${id}`)
+}
+
+    }
+ function btn_submit(id,name) {
+    Swal.fire({
+  title: 'ยืนยันการลบ "'+name+'"',
+  text: "ไม่สามารกู้คืนได้",
+  icon: 'warning',
+  showCancelButton: true,
+  confirmButtonColor: '#3085d6',
+  cancelButtonColor: '#d33',
+  confirmButtonText: 'Yes, delete it!'
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire(
+      'Deleted!',
+      'Your file has been deleted.',
+      'success'
+    )
+    $('#btn_sub'+id).submit();
+  }
+})
+ }
+</script>
 @if (session()->has('success'))
 <script>
   const Toast = Swal.mixin({
@@ -133,7 +168,7 @@
   text: '{{ $message }}',
   })
   </script>
-    
+
 @enderror
 
 

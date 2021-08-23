@@ -84,7 +84,7 @@ class CatagoryController extends Controller
      */
     public function update(Request $request, Catagory $catagory)
     {
-        //
+        
     }
 
     /**

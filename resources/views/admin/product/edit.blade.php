@@ -29,7 +29,7 @@
                   <div class="center" style=" margin: auto;  ">
                     <div style=" width: 250px;height: 250px;">
 
-                      <img id="IMG" src="" alt="image product" width="100%" height="100%" accept="image/png, image/gif, image/jpeg">
+                      <img id="IMG" src="{{ asset($product->image) }}" alt="image product" width="100%" height="100%" >
 
                     </div>
                     <div class="mt-1">
@@ -153,7 +153,7 @@
 
 </div>
 <script>
-  $('#IMG').attr('src', '/images/products/default.png');
+//   $('#IMG').attr('src', '/images/products/default.png');
   $('#exampleInputFile').change(function(){
           var input = this;
           var url = $(this).val();
