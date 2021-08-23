@@ -162,7 +162,7 @@
 
                                                 </div> <img class='' src="{{ asset($product->image) }}"
                                                     style="width:100%;height:115px; " />
-                                                <div class="card-body text-center mx-auto">
+                                                <div class="card-body text-center mx-auto pt-2">
                                                     <h5 class="card-title" style="font-size:15px">{{ $product->name }}
                                                     </h5>
                                                     <p class="card-text" style="font-size:15px">฿
