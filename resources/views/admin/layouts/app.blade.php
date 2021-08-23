@@ -158,6 +158,7 @@
                                 <p>รายงาน</p>
                             </a>
                         </li>
+
                         <li class="nav-item">
                             <a href="{{ route('catagory.index') }}"
                                 class="nav-link {{ request()->routeIs('catagory.index') ? 'active' : '' }}">
@@ -172,8 +173,20 @@
                                 <p>สินค้า</p>
                             </a>
                         </li>
-                        {{-- </ul>
-          </li> --}}
+                        <li class="nav-item">
+                            <a href="{{ URL('admin/history') }}"
+                                class="nav-link {{ request()->is('admin/history') ? 'active' : '' }}">
+                                <i class="fas fa-cart-arrow-down nav-icon"></i>
+                                <p>ประวัติเพิ่มสินค้า</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('admin/finance') }}"
+                                class="nav-link {{ request()->is('admin/finance') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-coins"></i>
+                                <p>การเงิน</p>
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a href="{{ Route('employee.index') }}"
                                 class="nav-link {{ request()->routeIs('employee.index') ? 'active' : '' }}">

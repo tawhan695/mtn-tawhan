@@ -67,7 +67,6 @@
                                     <div class="overlay">
                                         <i class="fas fa-3x fa-plus" style=""></i>
 
-                                        {{-- <i class=""></i> --}}
                                     </div>
                                     <div class="widget-user-header bg-warning">
                                         <h3 class="widget-user-username">มัทนาไข่สด ฟาร์ม</h3>

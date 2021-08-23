@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\Branchs;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -22,7 +23,9 @@ class EmployeeController extends Controller
         $users = User::join('has__branchs', 'users.id', '=', 'has__branchs.user_id')
             ->where('has__branchs.branchs_id', auth()->user()->branch_id())
             ->get(['users.*', 'has__branchs.*']);
-        return view('admin.employee.index')->with(['employee' => $users]);
+
+        $branchs = Branchs::all();
+        return view('admin.employee.index')->with(['employee' => $users,'branchs' => $branchs]);
     }
 
     /**

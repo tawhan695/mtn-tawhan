@@ -18,7 +18,7 @@
             <div class="icon">
               <i class="ion ion-bag"></i>
             </div>
-            <a href="#" class="small-box-footer">ดูเพิ่มเติม..<i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{ route('transection.index') }}" class="small-box-footer">ดูเพิ่มเติม..<i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -63,7 +63,7 @@
             <div class="icon">
               <i class="ion ion-pie-graph"></i>
             </div>
-            <a href="#" class="small-box-footer">ดูเพิ่มเติม.. <i class="fas fa-arrow-circle-right"></i></a>
+            <a href="{{ route('defective.index') }}" class="small-box-footer">ดูเพิ่มเติม.. <i class="fas fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

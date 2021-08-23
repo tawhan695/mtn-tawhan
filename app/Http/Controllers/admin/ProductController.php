@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Catagory;
+use App\Models\HistoryProduct;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -141,6 +142,15 @@ class ProductController extends Controller
             Product::where('id',$product->id)->update([
                 'qty'=> $product->qty + intval($request->updateQTY)
             ]);
+
+            $user = auth()->user()->id;
+        // $product = Product::find($request->product_id);
+
+        $His =new HistoryProduct;
+        $His->qty = $request->updateQTY;
+        $His->product_id = $product->id;
+        $His->user_id = auth()->user()->id;
+        $His->save();
             return redirect()->back();
         }
         // update all
@@ -202,4 +212,8 @@ class ProductController extends Controller
         $product->delete();
         return redirect()->back();
     }
+    // public function history()
+    // {
+
+    // }
 }
