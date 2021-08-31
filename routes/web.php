@@ -47,3 +47,6 @@ Route::resource('admin/branchs',App\Http\Controllers\admin\BranchsController::cl
 
 Route::get('admin/finance',[App\Http\Controllers\admin\FinanceController::class,'index']);
 Route::get('admin/history',[App\Http\Controllers\admin\HistoryProductController::class,'index']);
+
+Route::post('admin/finance/deposit',[App\Http\Controllers\admin\FinanceController::class,'deposit']);
+Route::post('admin/finance/withdraw',[App\Http\Controllers\admin\FinanceController::class,'withdraw']);

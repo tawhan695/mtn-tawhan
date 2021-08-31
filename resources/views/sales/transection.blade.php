@@ -1,6 +1,6 @@
 @extends('sales.layouts.app')
 @section('javascript')
-    <script src="{{ asset('js/transection.js') }}" defer></script>    
+    <script src="{{ asset('js/transection.js') }}" defer></script>
 @endsection
 @section('content')
 
@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>
-        
+
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
             <table class="table table-hover text-nowrap">
@@ -46,7 +46,7 @@
               </tr>
             </thead>
             <tbody>
-                @foreach ($order as $item)       
+                @foreach ($order as $item)
                     <tr onclick="showdetails{{$item->id}}()">
                     {{-- <td>{{ $item->id}}</td>
                     <td>{{ $item->id}}</td> --}}
@@ -61,7 +61,7 @@
                     </tr>
 
                     <script>
-                        var re{{$item->id}} = 
+                        var re{{$item->id}} =
                         `
                         <div class="row float-left">
                         <div class="col-sm-3 col-12">
@@ -103,9 +103,9 @@
                     <tbody>
                         @php
                             $order_details = App\Models\Order_Details::join('products','products.id','=','order__details.product_id')->where('order_id',$item->id)->select('products.unit', 'order__details.*')->get();
-                           
+
                             @endphp
-                        @foreach ($order_details as $i)       
+                        @foreach ($order_details as $i)
                             <tr>
                                 <td style="width: 1px">{{ $i->id}}</td>
                                 <td style="width: 1px">{{ $i->name}}</td>
@@ -113,7 +113,7 @@
                                 <td style="width: 1px">{{ $i->qty .'/'.$i->unit }}</td>
                                 <td style="width: 1px">฿ {{ number_format( $i->totol, 2, '.', ',')}}</td>
                             </tr>
-                            
+
                             @endforeach
                             <style>
                                 tr.noBorder td {
@@ -125,29 +125,30 @@
                                 <td style="width: 1px"></td>
                                 <td style="width: 1px"></td>
                                 <td style="width: 1px">รวม</td>
-                                <td style="width: 1px">฿ {{number_format( $item->cash_totol , 2, '.', ',')}}</td>  
+                                <td style="width: 1px">฿ {{number_format( $item->cash_totol , 2, '.', ',')}}</td>
                             </tr>
                             <tr class="noBorder">
                                 <td style="width: 1px"></td>
                                 <td style="width: 1px"></td>
                                 <td style="width: 1px"></td>
                                 <td style="width: 1px">ส่วนลด</td>
-                                <td style="width: 1px">฿ {{number_format( $item->discount, 2, '.', ',')}}</td>  
+                                <td style="width: 1px">฿ {{number_format( $item->discount, 2, '.', ',')}}</td>
                             </tr>
                             <tr class="noBorder">
                                 <td style="width: 1px"></td>
                                 <td style="width: 1px"></td>
                                 <td style="width: 1px"></td>
                                 <td style="width: 1px">ยอดสุทธิ</td>
-                                <td style="width: 1px">฿ {{number_format($item->net_amount , 2, '.', ',')}}</td> 
+                                <td style="width: 1px">฿ {{number_format($item->net_amount , 2, '.', ',')}}</td>
                             </tr>
-                        
+
                     </tbody>
                     </table>
+                    <a class="btn btn-warning"type="" href="{{url('return')}}/{{ $item->id }}/edit?id={{ $item->id }}">แก้ไข</a>
                     </div>
-                        
+
                         `;
-                        
+
                         function showdetails{{$item->id}}() {
                             Swal.fire({
                                 title: '',
@@ -161,7 +162,7 @@
                         }
                     </script>
                 @endforeach
-              
+
             </tbody>
           </table>
         </div>
@@ -178,7 +179,7 @@
       </div>
       <!-- /.card -->
     </div>
-    
+
 
 
 

@@ -77,14 +77,14 @@
                   <label for="inputPrice3" class="col-sm-2 col-form-label">ราคาปลีก</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" id="inputPrice3" placeholder="Price"
-                     name="price" min="0" max="100000" step="0.01"  required value="{{ $product->wholesale_price}}">
+                     name="price" min="0" max="100000" step="0.01"  required value="{{ $product->retail_price}}">
                   </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputPrice3" class="col-sm-2 col-form-label">ราคาส่ง</label>
                   <div class="col-sm-10">
                     <input type="number" class="form-control" id="inputPrice3" placeholder="Price"
-                     name="price2" min="0" max="100000" step="0.01"  required value="{{ $product->retail_price}}">
+                     name="price2" min="0" max="100000" step="0.01"  required value="{{ $product->wholesale_price}}">
                   </div>
                 </div>
                 <div class="form-group row">

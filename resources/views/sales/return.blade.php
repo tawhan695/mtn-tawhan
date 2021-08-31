@@ -1,6 +1,6 @@
 @extends('sales.layouts.app')
 @section('javascript')
-     
+
 @endsection
 @section('content')
 
@@ -8,7 +8,7 @@
     <div class="pt-4">
         <div class="card card-info">
             <div class="card-header">
-              <h3 class="card-title">คืนสินค้า</h3>
+              <h3 class="card-title">แก้ไขคำสั่งชื้อ</h3>
             </div>
             <div class="card-body">
                 <p>เลขที่ใบสั่งชื้อ</p>
@@ -72,7 +72,7 @@
                     // console.log(index+1);
                     todate= new Date(e.created_at)
                     let dd = todate.getDate();
-                    let mm = todate.getMonth(); 
+                    let mm = todate.getMonth();
                     const yyyy = todate.getFullYear();
                     var date = yyyy+'/'+mm+'/'+dd+ '  '+todate.getHours()+':'+todate.getMinutes();
                     $('#list').append(
@@ -87,12 +87,12 @@
             });
         }else{
             $('#list').empty();
-        } 
-    }    
-</script>  
+        }
+    }
+</script>
 
 
-    
+
 
 
 

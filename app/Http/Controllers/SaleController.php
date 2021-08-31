@@ -106,6 +106,8 @@ class SaleController extends Controller
         $prod = Order::where('id',$order->id)->first();
 
         $date = date_create($order->created_at);
+        $walet = Wallet::where('branch_id',auth()->user()->branch_id())->first()
+        ->payment_add($order->id,$change,'เงินทอน');
 
         return response()->json([
             'Change' => $change,

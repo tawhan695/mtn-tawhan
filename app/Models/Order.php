@@ -11,8 +11,11 @@ class Order extends Model
     protected $table = "orders";
     protected $fillable = [
         'cash_totol',
-         'discount', 
+         'discount',
          'change',
          'user_id',
         ];
+    public function order_details() {
+            return $this->hasMany('App\Models\Order_Details');
+    }
 }

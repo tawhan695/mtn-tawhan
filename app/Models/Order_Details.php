@@ -11,8 +11,11 @@ class Order_Details extends Model
     protected $table = "order__details";
     protected $fillable = [
         'product_id',
-         'order_id', 
+         'order_id',
          'qty',
          'user_id',
         ];
+        public function order() {
+            return $this->belongsTo('App\Models\Order');
+        }
 }

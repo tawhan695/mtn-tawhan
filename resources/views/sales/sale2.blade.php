@@ -122,7 +122,7 @@
         <div class="product1 col-xl-7 col-lg-7 col-md-12">
             <div class="card card-warning">
                 <div class="card-header p-2 pl-3 text-white">
-                    <h4>ขายปลีก</h4>
+                    <h4>ขายส่ง</h4>
                 </div><!-- /.card-header -->
                 <div class="card-body">
                     <ul class="nav nav-pills row shadow-sm mb-2">
@@ -155,7 +155,7 @@
                                     @foreach ($products as $product)
                                         @if ($product->catagory_id == $item->id)
                                             <div id="P{{ $product->id }}" class=" card m-1  p-2"
-                                                style="width: 130px; height: 195px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->retail_price }},{{ $product->qty }},'{{ asset($product->image) }}')" @endif>
+                                                style="width: 130px; height: 195px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->wholesale_price }},{{ $product->qty }},'{{ asset($product->image) }}')" @endif>
 
                                                 <div class="d-flex sale ">
 

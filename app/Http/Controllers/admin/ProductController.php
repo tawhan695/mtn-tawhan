@@ -157,6 +157,7 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'price' => 'required',
+            'price2' => 'required',
             'qty' => 'required',
             'unit' => 'required',
             'des' => 'required',
@@ -189,8 +190,8 @@ class ProductController extends Controller
         $Product->sku = $request->sku;
         $Product->des = $request->des;
         $Product->qty = $request->qty;
-        $Product->retail_price = $request->price;
-        $Product->wholesale_price = $request->price2;
+        $Product->retail_price = $request->price; //ราคาขายปลีก
+        $Product->wholesale_price = $request->price2; //ราคาขายส่ง
         $Product->catagory_id = $request->catagory;
         // $Product->branch_id = auth()->user()->branch_id();
         $Product->unit = $request->unit;

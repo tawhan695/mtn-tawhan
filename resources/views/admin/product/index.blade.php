@@ -49,8 +49,8 @@
                         <td style="width: 1px;"><img width="100px" src="{{  asset($item->image) }}" alt="{{$item->name}}"></td>
                         <td style="width: 1px">{{ $item->name}}</td>
                         <td style="width: 1px">@if ($item->qty > 0) {{$item->qty}}@else <span class="badge bg-danger">สินค้าหมด</span> @endif</td>
-                        <td style="width: 1px">{{  number_format( $item->wholesale_price, 2, '.', ',') }}</td>
                         <td style="width: 1px">{{  number_format( $item->retail_price, 2, '.', ',') }}</td>
+                        <td style="width: 1px">{{  number_format( $item->wholesale_price, 2, '.', ',') }}</td>
                         <td style="width: 1px">{{ App\Models\Catagory::where('id',$item->catagory_id)->first()->name}}</td>
                         <td style="width: 1px;hieght: 20px">
                           <div class="btn-group">
