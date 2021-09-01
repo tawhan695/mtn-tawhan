@@ -550,7 +550,7 @@
                                                             </section>
                                                     </div>`;
                                                 Swal.fire({
-                                                    width:'220px',
+                                                    width:'260px',
                                                     showConfirmButton: false,
                                                     showCloseButton: true,
                                                     html: head + body + footer,

@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '033f9f379b70dc95bcc693e25f2a0b5591e7005a',
+    'reference' => '309587d93cfa94f83a9eab480e344bbe1510f81c',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -55,6 +55,15 @@
       array (
       ),
       'reference' => '466a0ecc83209c75b76645eb823401b5c52e5f21',
+    ),
+    'charlieuki/receiptprinter' => 
+    array (
+      'pretty_version' => '1.2.4',
+      'version' => '1.2.4.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'cf0e682289972ff89b3ce7504433c8bb0203386c',
     ),
     'cordoval/hamcrest-php' => 
     array (
@@ -508,7 +517,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '033f9f379b70dc95bcc693e25f2a0b5591e7005a',
+      'reference' => '309587d93cfa94f83a9eab480e344bbe1510f81c',
     ),
     'laravel/sail' => 
     array (
@@ -572,6 +581,15 @@
       array (
       ),
       'reference' => '3b9dff8aaf7323590c1d2e443db701eb1f9aa0d3',
+    ),
+    'mike42/escpos-php' => 
+    array (
+      'pretty_version' => 'v2.2',
+      'version' => '2.2.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'e5496cf819b048b11877117bd14a9cea4fb17c03',
     ),
     'milon/barcode' => 
     array (

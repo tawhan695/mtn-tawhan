@@ -26,15 +26,15 @@
 
             td.quantity,
             th.quantity {
-                width: 40px;
-                max-width: 40px;
+                width: 100%;
+                max-width: 100%;
                 word-break: break-all;
             }
 
             td.price,
             th.price {
-                width: 40px;
-                max-width: 40px;
+                width: 100%;
+                max-width: 100%;
                 word-break: break-all;
             }
 
@@ -44,13 +44,15 @@
             }
 
             .ticket {
-                width: 155px;
-                max-width: 155px;
+                width: 300px;
+                max-width: 300px;
             }
 
             img {
                 max-width: inherit;
-                width: inherit;
+                width: 60%;
+                margin: auto;
+                /* height: 20%; */
             }
 
             @media print {
@@ -64,7 +66,9 @@
     </head>
     <body>
         <div class="ticket">
-            <img src="./logo.png" alt="Logo">
+            <div class="centered">
+                <img src="{{ asset('/images/logo/logo.jpg') }}" alt="Logo">
+            </div>
             <p class="centered">RECEIPT EXAMPLE
                 <br>Address line 1
                 <br>Address line 2</p>

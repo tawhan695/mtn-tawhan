@@ -19,17 +19,17 @@ class Wallet extends Model
             return $this->hasMany('App\Models\payment');
     }
     public function payment_add($order,$amount,$des) {
-        if($amount > 0) {
+        if($amount >= 0) {
 
             $payment  = new payment;
             if ($des == "ฝากเงิน") {
                 # code...
-                $payment->amount = $amount;
+                $payment->amount = 0+$amount;
             }else if ($des == "ถอนเงิน"){
 
                 $payment->amount = 0-$amount;
             }
-            else if ($des == "เงินทอน"){
+            else {
 
                 $payment->amount = 0-$amount;
             }
@@ -56,9 +56,11 @@ class Wallet extends Model
     }
     public function del_payment($order_id){
       $payment =   $this->payment()->where('order_id',$order_id);
-      $this->update([
-        'balance' => $this->balance + $payment->first()->change
-      ]);
-      $payment->delete();
+      if($payment->first()){
+        $this->update([
+            'balance' => $this->balance + $payment->first()->change
+          ]);
+        $payment->delete();
+      }
     }
 }
