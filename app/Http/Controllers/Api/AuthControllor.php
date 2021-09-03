@@ -30,7 +30,7 @@ class AuthControllor extends Controller
         }else{
             $Username= $request->username;
             $Password= $request->password;
-            $user = User::where('username','=',$Username)->first();
+            $user = User::where('email','=',$Username)->first();
             if (! $user || ! Hash::check( $Password, $user->password)) {
                 return response()->json([
                     'sucess' => false,
