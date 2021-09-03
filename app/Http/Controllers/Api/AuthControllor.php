@@ -23,8 +23,8 @@ class AuthControllor extends Controller
 
         if ($validator->fails()) {
             return response()->json([
-                'status_error' => $validator->errors(),
-                'status_code' => 401,
+                'error' => $validator->errors(),
+                // 'status_code' => 401,
 
                 ]);
         }else{
@@ -34,8 +34,8 @@ class AuthControllor extends Controller
             if (! $user || ! Hash::check( $Password, $user->password)) {
                 return response()->json([
                     'sucess' => false,
-                    'status_error' => 'ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง',
-                    'status_code' => 401,
+                    'error' => 'ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง',
+                    // 'status_code' => 401,
                     ])
                     ->header('Content-Type', 'application/json','charset=utf-8');
 
@@ -48,8 +48,8 @@ class AuthControllor extends Controller
                 }
                 return response()->json([
                     'sucess' => true,
-                    'status_code' => 201,
-                    'status_sucess' => $token,
+                    // 'status_code' => 201,
+                    'token' => $token,
                     ])
                     ->header('Content-Type', 'application/json','charset=utf-8');
             }
@@ -58,8 +58,8 @@ class AuthControllor extends Controller
     public function logout( Request $request) {
         // $request()->user();
         return response()->json([
-            'success' => true,
-            '$request()->user()'=> $request->user()->currentAccessToken()->delete(),
+            // 'success' => true,
+            'success'=> $request->user()->currentAccessToken()->delete(),
         ]);
     }
 }
