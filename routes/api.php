@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\BranchsController;
 use App\Http\Controllers\Api\WalletController;
+use App\Http\Controllers\Api\AuthControllor;
 use App\Http\Controllers\Api\ProductController;
 
 // use App\Http\Controllers\;
@@ -35,23 +36,29 @@ use App\Http\Controllers\Api\ProductController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('login',[LoginController::class,'login']);
+Route::post('login',[AuthControllor::class,'login']);
+
 Route::get('login',function(){
     abort(401);
 });
+// Route::middleware(['auth:api','request.log'])->get('/logout', function (Request $request) {
+//     $request->user()->token()->revoke();
+// });
 
 Route::group(['middleware' => 'auth:sanctum'],function (){
-    // test  
-    Route::get('test',function(){
-        return response()->json([
-            'status_code' => User::all(),
-            ]);
-    });
+    Route::post('logout',[AuthControllor::class,'logout']);
 
-    // user upload image
-    Route::resource('role',RoleController::class);
-    Route::resource('branch',BranchsController::class);
-    Route::resource('wallet',WalletController::class);
-    Route::resource('product',ProductController::class);
+    // // test
+    // Route::get('test',function(){
+    //     return response()->json([
+    //         'status_code' => User::all(),
+    //         ]);
+    // });
+
+    // // user upload image
+    // Route::resource('role',RoleController::class);
+    // Route::resource('branch',BranchsController::class);
+    // Route::resource('wallet',WalletController::class);
+    // Route::resource('product',ProductController::class);
 
 });
