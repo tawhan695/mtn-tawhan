@@ -48,7 +48,7 @@ class AuthControllor extends Controller
                 }
                 return response()->json([
                     'sucess' => true,
-                    // 'status_code' => 201,
+                    'user' => $user,
                     'token' => $token,
                     ])
                     ->header('Content-Type', 'application/json','charset=utf-8');
