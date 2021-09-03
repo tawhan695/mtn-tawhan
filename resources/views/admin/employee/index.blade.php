@@ -57,7 +57,7 @@
                                         </div>
                                     @endif
                                 @endforeach
-                                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch" onclick="create({{ $branch->id }})">
                                     <div class="card bg-light">
                                         <div class="overlay">
                                             <i class="fas fa-3x fa-plus" style=""></i>
@@ -125,6 +125,13 @@
             </script>
 
         @enderror
+
+        <script>
+            function create(id){
+                window.location.replace(`{{ route('employee.create') }}/?id=`+id);
+                // window.location.replace
+            }
+        </script>
 
 
     @endsection
