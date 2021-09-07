@@ -10,4 +10,8 @@ class Catagory extends Model
     use HasFactory;
 
     protected $table = "catagories";
+
+    public function product() {
+        return $this->belongsTo('App\Models\Product');
+    }
 }

@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use App\Models\User;
-use Illuminate\Support\Facades\Validator;     
-use Laravel\Sanctum\Sanctum;   
+use Illuminate\Support\Facades\Validator;
+use Laravel\Sanctum\Sanctum;
 class ProductController extends Controller
 {
     /**
@@ -19,7 +19,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+      
     }
 
     /**
@@ -48,16 +48,16 @@ class ProductController extends Controller
             'catagory_id' => 'required',
             'branch_id' => 'required',
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json([
                 'error' => $validator->errors(),
                 'status_code' => 401,
-    
+
                 ]);
         }else{
             if(auth()->user()->hasRole(['admin','seller'])){
-               
+
                 $product = new Product;
                 $product->name = $request->name;
                 $product->slug = $request->slug;
@@ -66,17 +66,17 @@ class ProductController extends Controller
                 $product->catagory_id = $request->catagory_id;
                 $product->branch_id = $request->branch_id;
                 $product->save();
-                       
+
             }else{
                 return response()->json([
                     'error' => 'สิทธิ์ไม่สามารถเข้าถึง',
                     'status_code' => 401,
                     ])
-                    ->header('Content-Type', 'application/json','charset=utf-8'); 
+                    ->header('Content-Type', 'application/json','charset=utf-8');
             }
-    
+
         }
-    
+
     }
 
     /**
@@ -118,16 +118,16 @@ class ProductController extends Controller
             'catagory_id' => 'required',
             'branch_id' => 'required',
         ]);
-    
+
         if ($validator->fails()) {
             return response()->json([
                 'error' => $validator->errors(),
                 'status_code' => 401,
-    
+
                 ]);
         }else{
             if(auth()->user()->hasRole(['admin','seller'])){
-               
+
                 // $product = new Product;
                 $product->name = $request->name;
                 $product->slug = $request->slug;
@@ -136,15 +136,15 @@ class ProductController extends Controller
                 $product->catagory_id = $request->catagory_id;
                 $product->branch_id = $request->branch_id;
                 $product->save();
-                       
+
             }else{
                 return response()->json([
                     'error' => 'สิทธิ์ไม่สามารถเข้าถึง',
                     'status_code' => 401,
                     ])
-                    ->header('Content-Type', 'application/json','charset=utf-8'); 
+                    ->header('Content-Type', 'application/json','charset=utf-8');
             }
-    
+
         }
     }
 

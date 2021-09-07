@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\BranchsController;
 use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\AuthControllor;
+use App\Http\Controllers\Api\ApiProduct;
 use App\Http\Controllers\Api\ProductController;
 
 // use App\Http\Controllers\;
@@ -45,8 +46,10 @@ Route::get('login',function(){
 //     $request->user()->token()->revoke();
 // });
 
+// Route::post('product',[ApiProduct::class,'product']);
 Route::group(['middleware' => 'auth:sanctum'],function (){
     Route::post('logout',[AuthControllor::class,'logout']);
+    Route::post('product',[ApiProduct::class,'product']);
 
     // // test
     // Route::get('test',function(){
