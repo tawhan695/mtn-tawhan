@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Catagory;
 class ApiProduct extends Controller
 {
     public function product(Request $request){
@@ -27,6 +28,11 @@ class ApiProduct extends Controller
 
 
         return response()->json($product);
+    }
+
+    public function catagory(Request $request){
+        $category = Catagory::where('branch_id',auth()->user()->branch_id())->get();
+        return response()->json($category);
     }
 
 

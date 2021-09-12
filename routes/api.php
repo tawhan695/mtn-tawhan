@@ -50,6 +50,7 @@ Route::get('login',function(){
 Route::group(['middleware' => 'auth:sanctum'],function (){
     Route::post('logout',[AuthControllor::class,'logout']);
     Route::post('product',[ApiProduct::class,'product']);
+    Route::post('catagory',[ApiProduct::class,'catagory']);
 
     // // test
     // Route::get('test',function(){
