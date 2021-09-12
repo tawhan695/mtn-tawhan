@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Defective;
 use App\Models\Order;
+use App\Models\Order_Details;
 
 class DashboardController extends Controller
 {
@@ -28,8 +29,19 @@ class DashboardController extends Controller
         $dayDefective = Defective::where('created_at','like','%'.date('Y-m-d').'%')->count();
         $dayOrder = Order::where('created_at','like','%'.date('Y-m-d').'%')->count();
         $sumOrder = Order::where('created_at','like','%'.date('Y-m-d').'%')->sum('net_amount');
+        $Product = Product::where('branch_id',auth()->user()->branch_id())->get(['id','name','unit','retail_price','wholesale_price']);
+        // $Product_day = Product::where('branch_id',auth()->user()->branch_id())
+
+        //     ->get(['id','name','unit','retail_price','wholesale_price']);
         // print_r(date());
-        return view('admin.dashboard.index')->with(['Defective'=>$dayDefective,'Order'=>$dayOrder,'ordersum'=>$sumOrder]);
+        return view('admin.dashboard.index')->with([
+            'Defective'=>$dayDefective,
+            'Order'=>$dayOrder,
+            'ordersum'=>$sumOrder,
+            'product'=>$Product,
+            // 'product_day'=>$Product_day,
+
+        ]);
     }
 
     /**

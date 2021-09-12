@@ -141,6 +141,20 @@
                                 <td style="width: 1px">ยอดสุทธิ</td>
                                 <td style="width: 1px">฿ {{number_format($item->net_amount , 2, '.', ',')}}</td>
                             </tr>
+                            <tr class="noBorder">
+                                <td style="width: 1px"></td>
+                                <td style="width: 1px"></td>
+                                <td style="width: 1px"></td>
+                                <td style="width: 1px">รับเงินสด</td>
+                                <td style="width: 1px">฿ {{number_format($item->cash , 2, '.', ',')}}</td>
+                            </tr>
+                            <tr class="noBorder">
+                                <td style="width: 1px"></td>
+                                <td style="width: 1px"></td>
+                                <td style="width: 1px"></td>
+                                <td style="width: 1px">เงินทอน</td>
+                                <td style="width: 1px">฿ {{number_format($item->change , 2, '.', ',')}}</td>
+                            </tr>
 
                     </tbody>
                     </table>

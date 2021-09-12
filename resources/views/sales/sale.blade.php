@@ -153,60 +153,61 @@
                             <div class="tab-pane @if ($loop->index == 0) active @endif" id="catagory{{ $item->id }}">
                                 <div class="row text-center">
                                     @foreach ($products as $product)
-                                        @if ($product->catagory_id == $item->id)
-                                            <div id="P{{ $product->id }}" class=" card m-1  p-2"
-                                                style="width: 130px; height: 195px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->retail_price }},{{ $product->qty }},'{{ asset($product->image) }}')" @endif>
 
-                                                <div class="d-flex sale ">
+                                       @if ($product->catagory_id == $item->id)
+                                       <div id="P{{ $product->id }}" class=" card m-1  p-2"
+                                           style="width: 130px; height: 195px;  " @if (intval($product->qty) > 0) onclick="AddItem({{ $product->id }},'{{ $product->name }}',{{ $product->retail_price }},{{ $product->qty }},'{{ asset($product->image) }}')" @endif>
+
+                                           <div class="d-flex sale ">
 
 
-                                                </div> <img class='' src="{{ asset($product->image) }}"
-                                                    style="width:100%;height:115px; " />
-                                                <div class="card-body text-center mx-auto p-2">
-                                                    <h5 class="card-title" style="font-size:15px">{{ $product->name }}
-                                                    </h5>
-                                                    <p class="card-text" style="font-size:15px">฿
-                                                        {{ $product->retail_price }}</p>
-                                                </div>
+                                           </div> <img class='' src="{{ asset($product->image) }}"
+                                               style="width:100%;height:115px; " />
+                                           <div class="card-body text-center mx-auto p-2">
+                                               <h5 class="card-title" style="font-size:15px">{{ $product->name }}
+                                               </h5>
+                                               <p class="card-text" style="font-size:15px">฿
+                                                   {{ $product->retail_price }}</p>
+                                           </div>
 
-                                                <style>
-                                                    #P{{ $product->id }} {
-                                                        position: relative;
+                                           <style>
+                                               #P{{ $product->id }} {
+                                                   position: relative;
 
-                                                        -webkit-transition-duration: 0.1s;
-                                                        /* Safari */
-                                                        transition-duration: 0s;
-                                                        text-decoration: none;
-                                                        overflow: hidden;
-                                                        cursor: pointer;
-                                                    }
+                                                   -webkit-transition-duration: 0.1s;
+                                                   /* Safari */
+                                                   transition-duration: 0s;
+                                                   text-decoration: none;
+                                                   overflow: hidden;
+                                                   cursor: pointer;
+                                               }
 
-                                                    #P{{ $product->id }}:after {
-                                                        content: "";
-                                                        background: #ffc107;
-                                                        display: block;
-                                                        position: absolute;
-                                                        padding-top: 300%;
-                                                        padding-left: 350%;
-                                                        margin-left: -20px !important;
-                                                        margin-top: -120%;
-                                                        opacity: 0;
-                                                        transition: all 0.4s
-                                                    }
+                                               #P{{ $product->id }}:after {
+                                                   content: "";
+                                                   background: #ffc107;
+                                                   display: block;
+                                                   position: absolute;
+                                                   padding-top: 300%;
+                                                   padding-left: 350%;
+                                                   margin-left: -20px !important;
+                                                   margin-top: -120%;
+                                                   opacity: 0;
+                                                   transition: all 0.4s
+                                               }
 
-                                                    #P{{ $product->id }}:active:after {
-                                                        padding: 0;
-                                                        margin: 0;
-                                                        opacity: 1;
-                                                        transition: 0s
-                                                    }
+                                               #P{{ $product->id }}:active:after {
+                                                   padding: 0;
+                                                   margin: 0;
+                                                   opacity: 1;
+                                                   transition: 0s
+                                               }
 
-                                                </style>
-                                                @if (intval($product->qty) < 1)
-                                                    <span class="am2 rounded">สินค้าหมด</span>
-                                                @endif
-                                            </div>
-                                        @endif
+                                           </style>
+                                           @if (intval($product->qty) < 1)
+                                               <span class="am2 rounded">สินค้าหมด</span>
+                                           @endif
+                                       </div>
+                                   @endif
                                     @endforeach
                                 </div>
                             </div>
@@ -426,7 +427,7 @@
                                     },
 
                                     success: function(data) {
-                                        console.log(data['product']);
+                                        console.log(data);
                                         console.log("@222222");
                                         console.log(data['order_detail']);
                                         var number = parseFloat(data['Change']);
@@ -445,6 +446,7 @@
                                             showCancelButton: true,
                                         }).then((result) => {
                                             /* Read more about isConfirmed, isDenied below */
+                                            console.log('data');
                                             console.log(data);
                                             if (result.isConfirmed) {
                                                 var resourceH = '';
@@ -546,7 +548,7 @@
                                                                 หรือ@line : 092-293-1906
                                                                 <br>
                                                                 <hr>
-                                                            <button class="btn btn-primary btn-block" id="btnPrint" onclick="printT()">ปริ๊นท์</button>
+                                                            <button disabled class="btn btn-primary btn-block" id="btnPrint" onclick="">ปริ๊นท์</button>
                                                             </section>
                                                     </div>`;
                                                 Swal.fire({

@@ -108,7 +108,7 @@
                     <a class="nav-link">
                         <i class="fas fa-wallet"></i>
                         <span>
-                            ฿{{ number_format(App\Models\Wallet::where('branch_id', App\Models\Has_Branchs::where('user_id', Auth::user()->id)->first()->id)->first()->balance, 2, '.', ',') }}</span>
+                            ฿{{ number_format(App\Models\Wallet::where('branch_id', auth()->user()->branch_id())->first()->balance, 2, '.', ',') }}</span>
                     </a>
                 </li>
                 <!-- Navbar Search -->
@@ -162,7 +162,7 @@
                     <div class="info">
                         <a href="{{ route('user.index') }}" class="d-block">{{ Auth::user()->name }}</a>
                         <p class="">
-                            {{ App\Models\Branchs::where('id', App\Models\Has_Branchs::where('user_id', auth()->user()->id)->first()->id)->first()->name }}
+                            {{ App\Models\Branchs::where('id',auth()->user()->branch_id())->first()->name }}
                         </p>
                         @if (auth()->user()->hasRole('admin'))
                             <a class="text-success" href="{{ route('dashboard.index') }}">จัดการหลังร้าน</a>
@@ -224,6 +224,7 @@
                                 </p>
                             </a>
                         </li>
+                        <hr>
                         <li class="nav-item">
                             <a href="{{ Route('user.index') }}"
                                 class="nav-link {{ request()->routeIs('user.index') ? 'active' : '' }}">

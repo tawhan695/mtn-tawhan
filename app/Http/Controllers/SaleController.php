@@ -11,6 +11,7 @@ use App\Models\Has_Branchs;
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Catagory;
+use Exception;
 class SaleController extends Controller
 {
       /**
@@ -30,8 +31,10 @@ class SaleController extends Controller
      */
     public function index()
     {
-        $Product = Product::all();
+        $Product = Product::where('branch_id',auth()->user()->branch_id())->get();
         $Catagory = Catagory::where('branch_id',auth()->user()->branch_id())->get();
+
+        // dd($Product);
         // print_r($Catagory);
         return view('sales.sale')->with(['products'=>$Product,'catagory'=>$Catagory]);
 
@@ -57,7 +60,8 @@ class SaleController extends Controller
     {
 
 
-        // print_r($request->product);
+       try {
+            // print_r($request->product);
         $totol = 0.0;
         $discount = 0;
         foreach ($request->product as $key => $value) {
@@ -79,13 +83,13 @@ class SaleController extends Controller
         $order->status_sale=$request->status_sale;   // สถานะ
         $order->paid_by=$request->paid_by;   // ชำระโดย
         $order->user_id=auth()->user()->id;  // คนขาย
-        $order->branch_id = Has_Branchs::where('user_id',auth()->user()->id)->first()->id;  // สาขา
+        $order->branch_id = auth()->user()->branch_id();  // สาขา
         $order->save();  // คนขาย
 
         // เพิ่มเงินใส่กระเป๋า
 
-        $walwt = Wallet::where('branch_id', Has_Branchs::where('user_id',auth()->user()->id)->first()->id)->first()->balance;
-        Wallet::where('branch_id', Has_Branchs::where('user_id',auth()->user()->id)->first()->id)->update(['balance'=> floatval($net_amount) + floatval($walwt)]);
+        $walwt = Wallet::where('branch_id', auth()->user()->branch_id())->first()->balance;
+        Wallet::where('branch_id', auth()->user()->branch_id())->update(['balance'=> floatval($net_amount) + floatval($walwt)]);
 
         foreach ($request->product as $key => $value) {
             $order_detail = new Order_details;
@@ -122,6 +126,11 @@ class SaleController extends Controller
             'D' =>  $order
             ]);
 
+        } catch (Exception $e){
+            return response()->json([
+                'error' =>$e,
+            ]);
+        }
     }
 
     /**

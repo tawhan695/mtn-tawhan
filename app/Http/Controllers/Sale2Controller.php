@@ -25,7 +25,7 @@ class Sale2Controller extends Controller
      */
     public function index()
     {
-        $Product = Product::all();
+        $Product = Product::where('branch_id',auth()->user()->branch_id())->get();
         $Catagory = Catagory::where('branch_id',auth()->user()->branch_id())->get();
         // print_r($Catagory);
         return view('sales.sale2')->with(['products'=>$Product,'catagory'=>$Catagory]);

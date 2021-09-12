@@ -412,7 +412,7 @@
                                         'cash': cash,
                                         'discount': discount,
                                         'status': 'สำเร็จ',
-                                        'status_sale': 'ขายปลีก',
+                                        'status_sale': 'ขายส่ง',
                                         'paid_by': 'เงินสด',
                                     },
                                     beforeSend: function() {
@@ -546,7 +546,7 @@
                                                                 หรือ@line : 092-293-1906
                                                                 <br>
                                                                 <hr>
-                                                            <button class="btn btn-primary btn-block" id="btnPrint" onclick="printT()">ปริ๊นท์</button>
+                                                            <button disabled class="btn btn-primary btn-block" id="btnPrint" onclick="printT()">ปริ๊นท์</button>
                                                             </section>
                                                     </div>`;
                                                 Swal.fire({

@@ -16,9 +16,9 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name')->index();
-            $table->string('slug')->unique();
-            $table->string('sku', 128)->unique();
-            $table->string('des')->default('');
+            $table->string('slug')->nullable();
+            $table->string('sku', 128)->nullable();
+            $table->string('des')->default('null')->nullable();
             $table->string('unit')->nullable();
             $table->double('retail_price',15,2)->default(0)->comment('ราคาปลีก'); // ราคาส่ง
             $table->double('wholesale_price',15,2)->default(0)->comment('ราคาส่ง'); // ราคาปลีก
