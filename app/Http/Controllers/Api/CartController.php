@@ -10,12 +10,12 @@ class CartController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->wantsJson()) {
+        // if ($request->wantsJson()) {
             return response(
                 $request->user()->cart()->get()
             );
-        }
-        return view('cart.index');
+        // }
+        // return view('cart.index');
     }
 
     public function store(Request $request)
