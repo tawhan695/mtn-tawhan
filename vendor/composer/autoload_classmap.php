@@ -13,6 +13,8 @@ return array(
     'App\\Actions\\Fortify\\UpdateUserProfileInformation' => $baseDir . '/app/Actions/Fortify/UpdateUserProfileInformation.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\Api\\ApiProduct' => $baseDir . '/app/Http/Controllers/Api/ApiProduct.php',
+    'App\\Http\\Controllers\\Api\\AuthControllor' => $baseDir . '/app/Http/Controllers/Api/AuthControllor.php',
     'App\\Http\\Controllers\\Api\\Auth\\ForgotController' => $baseDir . '/app/Http/Controllers/Api/Auth/ForgotController.php',
     'App\\Http\\Controllers\\Api\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Api/Auth/LoginController.php',
     'App\\Http\\Controllers\\Api\\Auth\\LogoutController' => $baseDir . '/app/Http/Controllers/Api/Auth/LogoutController.php',

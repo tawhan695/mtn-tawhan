@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\AuthControllor;
 use App\Http\Controllers\Api\ApiProduct;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CartController;
 
 // use App\Http\Controllers\;
 
@@ -51,6 +52,13 @@ Route::group(['middleware' => 'auth:sanctum'],function (){
     Route::post('logout',[AuthControllor::class,'logout']);
     Route::post('product',[ApiProduct::class,'product']);
     Route::post('catagory',[ApiProduct::class,'catagory']);
+
+    // chart
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+    Route::post('/cart/change-qty', [CartController::class, 'changeQty']);
+    Route::delete('/cart/delete', [CartController::class, 'delete']);
+    Route::delete('/cart/empty', [CartController::class, 'empty']);
 
     // // test
     // Route::get('test',function(){

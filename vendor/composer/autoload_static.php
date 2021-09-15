@@ -658,6 +658,8 @@ class ComposerStaticInit4219f555eec4ef86ba62d4a17c660307
         'App\\Actions\\Fortify\\UpdateUserProfileInformation' => __DIR__ . '/../..' . '/app/Actions/Fortify/UpdateUserProfileInformation.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\Api\\ApiProduct' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/ApiProduct.php',
+        'App\\Http\\Controllers\\Api\\AuthControllor' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/AuthControllor.php',
         'App\\Http\\Controllers\\Api\\Auth\\ForgotController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/Auth/ForgotController.php',
         'App\\Http\\Controllers\\Api\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/Auth/LoginController.php',
         'App\\Http\\Controllers\\Api\\Auth\\LogoutController' => __DIR__ . '/../..' . '/app/Http/Controllers/Api/Auth/LogoutController.php',

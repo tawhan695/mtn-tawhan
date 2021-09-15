@@ -17,7 +17,7 @@ class User extends Authenticatable
     // use HasFactory, Notifiable,HasApiTokens ;
     use HasFactory, Notifiable,HasApiTokens,HasRoles ;
 
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -48,7 +48,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-      
+
     ];
     // public $timestamps = true;
     // public function profile(){
@@ -65,4 +65,8 @@ class User extends Authenticatable
     // {
     //     return $this->belongsToMany(Role::class);
     // }
+    public function cart()
+    {
+        return $this->belongsToMany(Product::class, 'user_cart')->withPivot('quantity');
+    }
 }

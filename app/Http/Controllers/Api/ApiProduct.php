@@ -14,7 +14,6 @@ class ApiProduct extends Controller
             $sale = "wholesale_price";
         }else{
             $sale = "retail_price";
-
         }
         if ($request->catagory) {
             # code...
