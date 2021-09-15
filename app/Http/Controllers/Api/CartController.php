@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class CartController extends Controller
 {
@@ -20,17 +21,17 @@ class CartController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'barcode' => 'required|exists:products,barcode',
+            'sku' => 'required|exists:products,sku',
         ]);
-        $barcode = $request->barcode;
+        $sku = $request->sku;
 
-        $cart = $request->user()->cart()->where('barcode', $barcode)->first();
+        $cart = $request->user()->cart()->where('sku', $sku)->first();
         if ($cart) {
             // update only quantity
             $cart->pivot->quantity = $cart->pivot->quantity + 1;
             $cart->pivot->save();
         } else {
-            $product = Product::where('barcode', $barcode)->first();
+            $product = Product::where('sku', $sku)->first();
             $request->user()->cart()->attach($product->id, ['quantity' => 1]);
         }
 
