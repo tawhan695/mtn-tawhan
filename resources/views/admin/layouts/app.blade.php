@@ -198,6 +198,16 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ Route('customer.index') }}"
+                                class="nav-link {{ request()->routeIs('customer.index') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-users"></i>
+                                <p>
+                                    จักการลูกค้า
+                                    {{-- <span class="right badge badge-danger">2</span> --}}
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ Route('branchs.index') }}"
                                 class="nav-link {{ request()->routeIs('branchs.index') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-home"></i>

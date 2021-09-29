@@ -47,6 +47,7 @@ Route::resource('admin/product',App\Http\Controllers\admin\ProductController::cl
 Route::resource('admin/catagory',App\Http\Controllers\admin\CatagoryController::class);
 Route::resource('admin/employee',App\Http\Controllers\admin\EmployeeController::class);
 Route::resource('admin/branchs',App\Http\Controllers\admin\BranchsController::class);
+Route::resource('admin/customer',App\Http\Controllers\admin\CustomerController::class);
 
 Route::get('admin/finance',[App\Http\Controllers\admin\FinanceController::class,'index']);
 Route::get('admin/history',[App\Http\Controllers\admin\HistoryProductController::class,'index']);
