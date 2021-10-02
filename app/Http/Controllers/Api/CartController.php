@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\customer;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Order;
@@ -104,7 +105,7 @@ class CartController extends Controller
 [pivot_quantity] => 10
         */
 
-        $customer = $request->customer;
+
         $user_id = auth()->user()->branch_id();
         $cash = $request->cash;
         $payid_by = $request->payid_by;
@@ -145,19 +146,19 @@ class CartController extends Controller
             // print_r($value);
         }
         $change = $cash - $net_amount;
-        echo ($totol);
-        echo ("|");
-        echo ($cash);
-        echo ("|");
-        echo ($change);
-        echo ("|");
-        echo ($status);
-        echo ("|");
-        echo ($status_sale);
-        echo ("|");
-        echo ($customer);
-        echo ("|");
-        echo ($net_amount);
+        // echo ($totol);
+        // echo ("|");
+        // echo ($cash);
+        // echo ("|");
+        // echo ($change);
+        // echo ("|");
+        // echo ($status);
+        // echo ("|");
+        // echo ($status_sale);
+        // echo ("|");
+        // echo ($customer);
+        // echo ("|");
+        // echo ($net_amount);
 
         $order = new Order;
         $order->cash_totol = $totol;  // รวมราคาสินค้า
@@ -169,7 +170,11 @@ class CartController extends Controller
         $order->status_sale = $status_sale;   // การขาย
         $order->paid_by = $payid_by;   // ชำระโดย
         $order->user_id = $user_id;  // คนขาย
-        $order->customer_id = $customer;  // คนขาย
+        if($request->customer != 0){
+
+            $customer = customer::where('phone',$request->customer)->first()->id;
+            $order->customer_id = $customer;  // คนขาย
+        }
         $order->branch_id = auth()->user()->branch_id();  // สาขา
         $order->save();  // คนขาย
 
