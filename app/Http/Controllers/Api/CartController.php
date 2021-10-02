@@ -192,6 +192,7 @@ class CartController extends Controller
                 $order_detail->save();
                 // echo $value['name'];
             }
+            $request->user()->cart()->detach();
             return response([
        'success' => true,
        'change' =>$change,
