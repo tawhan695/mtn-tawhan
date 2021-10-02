@@ -5,15 +5,18 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Order;
+use App\Models\Order_Details;
+use App\Models\Wallet;
 
 class CartController extends Controller
 {
     public function index(Request $request)
     {
         // if ($request->wantsJson()) {
-            return response(
-                $request->user()->cart()->get()
-            );
+        return response(
+            $request->user()->cart()->get()
+        );
         // }
         // return view('cart.index');
     }
@@ -32,8 +35,8 @@ class CartController extends Controller
             $cart->pivot->save();
         } else {
             $product = Product::where('sku', $sku)
-            ->where('branch_id',auth()->user()->branch_id())
-            ->first();
+                ->where('branch_id', auth()->user()->branch_id())
+                ->first();
             $request->user()->cart()->attach($product->id, ['quantity' => 1]);
         }
 
@@ -74,5 +77,129 @@ class CartController extends Controller
         $request->user()->cart()->detach();
 
         return response('', 204);
+    }
+
+    public function sale(Request $request)
+    {
+        /*
+[id] => 1
+[name] => ไข่ไก่ No.0
+[slug] => 2265452
+[sku] => 251182
+[des] => ไข่ไก่ มัทนาฟาร์ม
+[unit] => แผง
+[retail_price] => 72
+[wholesale_price] => 98
+[sale_price] => 0
+[qty] => 0
+[featured] => 0
+[retail] => 1
+[image] => images/products/1629691656.png
+[catagory_id] => 1
+[branch_id] => 1
+[created_at] => 2021-08-14 08:23:31
+[updated_at] => 2021-08-23 04:17:01
+[pivot_user_id] => 1
+[pivot_product_id] => 1
+[pivot_quantity] => 10
+        */
+
+        $customer = $request->customer;
+        $user_id = auth()->user()->branch_id();
+        $cash = $request->cash;
+        $payid_by = $request->payid_by;
+        $discount = 0.0;
+        $net_amount = 0.0;
+        $change = 0.0;
+        $totol = 0.0;  // รวมราคาสินค้า
+        $status = 'สำเร็จ';   // สถานะ
+        $status_sale = '';   // การขาย
+        $cart =  $request->user()->cart()->get();
+        $price = 0.0;
+
+        $detail = [];
+        foreach ($cart as $key => $value) {
+            // print_r($value['id']);
+            if ($value['pivot']['quantity'] > 10) { //อย่าลืมทำตัวตั้งค่านะของแต่ละสาขา
+                # code...
+                $totol =  $value['pivot']['quantity'] * $value['wholesale_price'];
+                $status_sale = 'ขายส่ง';
+                $price =  $value['wholesale_price'];
+            } else {
+                $totol =  $value['pivot']['quantity'] * $value['retail_price'];
+                $status_sale = 'ขายปลีก';
+                $price =  $value['retail_price'];
+                # code...
+            }
+            $net_amount += $totol;
+
+            array_push($detail, [
+                'product_id' => $value['id'],
+                'order_id' => $value['id'],
+                'name' => $value['name'],
+                'price' => $price,
+                'totol' => $totol,
+                'qty' => $value['pivot']['quantity'],
+            ]);
+
+            // print_r($value);
+        }
+        $change = $cash - $net_amount;
+        echo ($totol);
+        echo ("|");
+        echo ($cash);
+        echo ("|");
+        echo ($change);
+        echo ("|");
+        echo ($status);
+        echo ("|");
+        echo ($status_sale);
+        echo ("|");
+        echo ($customer);
+        echo ("|");
+        echo ($net_amount);
+
+        $order = new Order;
+        $order->cash_totol = $totol;  // รวมราคาสินค้า
+        $order->cash = $cash;   //เงินสด
+        $order->discount = $discount; // ส่วนลด
+        $order->net_amount = $net_amount;   // ยอดสุุทธิ
+        $order->change = $change;   // เงินทอน
+        $order->status = $status;   // สถานะ
+        $order->status_sale = $status_sale;   // การขาย
+        $order->paid_by = $payid_by;   // ชำระโดย
+        $order->user_id = $user_id;  // คนขาย
+        $order->customer_id = $customer;  // คนขาย
+        $order->branch_id = auth()->user()->branch_id();  // สาขา
+        $order->save();  // คนขาย
+
+        if ($order) {
+            # code...
+            // echo "Id $order->id";
+            foreach ($detail as $key => $value) {
+                $order_detail = new Order_details;
+                $order_detail->product_id = $value['product_id'];
+                $order_detail->order_id = $order->id;
+                $order_detail->name = $value['name'];
+                $order_detail->price = $value['price'];
+                $order_detail->totol = $value['totol'];
+                $order_detail->qty = $value['qty'];
+                $order_detail->save();
+                // echo $value['name'];
+            }
+            return response([
+       'success' => true,
+       'change' =>$change,
+
+       ]);
+        } else {
+             return response([
+        'success' => false
+        ]);
+        }
+
+        // return response([
+        // 'success' => true
+        // ]);
     }
 }

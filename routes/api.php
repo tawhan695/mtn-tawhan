@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth:sanctum'],function (){
     // chart
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+    Route::post('/sale', [CartController::class, 'sale'])->name('cart.sale');
     Route::post('/cart/change-qty', [CartController::class, 'changeQty']);
     Route::delete('/cart/delete', [CartController::class, 'delete']);
     Route::delete('/cart/empty', [CartController::class, 'empty']);
