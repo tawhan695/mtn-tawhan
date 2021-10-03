@@ -107,7 +107,7 @@ class CartController extends Controller
 
 
         $user_id = auth()->user()->branch_id();
-        $cash = $request->cash;
+        $cash =floatval( $request->cash);
         $payid_by = $request->payid_by;
         $discount = 0.0;
         $net_amount = 0.0;
@@ -123,13 +123,13 @@ class CartController extends Controller
             // print_r($value['id']);
             if ($value['pivot']['quantity'] > 10) { //อย่าลืมทำตัวตั้งค่านะของแต่ละสาขา
                 # code...
-                $totol =  $value['pivot']['quantity'] * $value['wholesale_price'];
-                $status_sale = 'ขายส่ง';
                 $price =  $value['wholesale_price'];
+                $totol =  $value['pivot']['quantity'] * $price;
+                $status_sale = 'ขายส่ง';
             } else {
-                $totol =  $value['pivot']['quantity'] * $value['retail_price'];
-                $status_sale = 'ขายปลีก';
                 $price =  $value['retail_price'];
+                $totol =  $value['pivot']['quantity'] * $price;
+                $status_sale = 'ขายปลีก';
                 # code...
             }
             $net_amount += $totol;
@@ -145,7 +145,7 @@ class CartController extends Controller
 
             // print_r($value);
         }
-        $change = $cash - $net_amount;
+        $change = floatval($cash) - $net_amount ;
         // echo ($totol);
         // echo ("|");
         // echo ($cash);
@@ -170,7 +170,7 @@ class CartController extends Controller
         $order->status_sale = $status_sale;   // การขาย
         $order->paid_by = $payid_by;   // ชำระโดย
         $order->user_id = $user_id;  // คนขาย
-        if($request->customer != 0){
+        if($request->customer != '0'){
 
             $customer = customer::where('phone',$request->customer)->first()->id;
             $order->customer_id = $customer;  // คนขาย
