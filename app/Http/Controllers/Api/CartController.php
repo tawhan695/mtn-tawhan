@@ -69,13 +69,13 @@ class CartController extends Controller
             $Qty = $cart->pivot->quantity - $request->quantity;
             $cart->pivot->quantity = $request->quantity;
             $cart->pivot->save();
-            $product = Product::where('id', $request->product_id);
-            // ->where('branch_id', auth()->user()->branch_id());
-            $qty = $product->first()->qty;
-            $product->update([
-                'qty'=>$qty + ($Qty)
-            ]);
         }
+        $product = Product::where('id', $request->product_id);
+        // ->where('branch_id', auth()->user()->branch_id());
+        $qty = $product->first()->qty;
+        $product->update([
+            'qty'=>$qty + ($Qty)
+        ]);
         // if($Qty > 0){
 
         // }else if($Qty < 0){
