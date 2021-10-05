@@ -35,7 +35,8 @@ class CartController extends Controller
             $cart->pivot->quantity = $cart->pivot->quantity + 1;
             $cart->pivot->save();
         } else {
-            $product = Product::where('sku', $sku)
+            $product = Product::where('sku', $sku);
+            $product
                 ->where('branch_id', auth()->user()->branch_id())
                 ->first();
             $request->user()->cart()->attach($product->id, ['quantity' => 1]);
@@ -190,6 +191,12 @@ class CartController extends Controller
                 $order_detail->totol = $value['totol'];
                 $order_detail->qty = $value['qty'];
                 $order_detail->save();
+
+                $product = Product::where('id', $value['product_id']);
+                $qty = $product->first()->qty;
+                $product->update([
+                    'qty'=> $qty - $value['qty']
+                ]);
                 // echo $value['name'];
             }
             $request->user()->cart()->detach();
