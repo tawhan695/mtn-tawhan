@@ -95,6 +95,14 @@ class CartController extends Controller
         $request->validate([
             'product_id' => 'required|integer|exists:products,id'
         ]);
+        $cart = $request->user()->cart()->where('id', $request->product_id)->first();
+        $product = Product::where('id', $request->product_id);
+        // ->where('branch_id', auth()->user()->branch_id());
+        $qty = $product->first()->qty;
+        $product->update([
+            'qty'=>$qty + $cart->pivot->quantity
+        ]);
+
         $request->user()->cart()->detach($request->product_id);
 
         return response('', 204);
@@ -102,6 +110,17 @@ class CartController extends Controller
 
     public function empty(Request $request)
     {
+        $cart =  $request->user()->cart()->get();
+        foreach ($cart as $key => $value) {
+            $product = Product::where('id', $value['pivot']['product_id']);
+            $qty = $product->first()->qty;
+            $product->update([
+                'qty'=>$qty +$value['pivot']['quantity']
+            ]);
+
+
+        }
+
         $request->user()->cart()->detach();
 
         return response('', 204);
