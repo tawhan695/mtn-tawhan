@@ -35,10 +35,14 @@ class CartController extends Controller
             $cart->pivot->quantity = $cart->pivot->quantity + 1;
             $cart->pivot->save();
         } else {
-            $product = Product::where('sku', $sku);
-            $id = $product->where('branch_id', auth()->user()->branch_id())
-                ->first();
+            $product = Product::where('sku', $sku)
+            ->where('branch_id', auth()->user()->branch_id());
+            $id = $product->first()->id;
             $request->user()->cart()->attach($id, ['quantity' => 1]);
+            $qty = $product->first()->qty;
+            $product->update([
+                'qty'=>$qty-1
+            ]);
 
         }
 
