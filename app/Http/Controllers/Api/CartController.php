@@ -36,9 +36,9 @@ class CartController extends Controller
             $cart->pivot->save();
         } else {
             $product = Product::where('sku', $sku);
-            $product->where('branch_id', auth()->user()->branch_id())
+            $id = $product->where('branch_id', auth()->user()->branch_id())
                 ->first();
-            $request->user()->cart()->attach($product->id, ['quantity' => 1]);
+            $request->user()->cart()->attach($id, ['quantity' => 1]);
 
         }
 
