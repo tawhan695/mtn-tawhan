@@ -61,6 +61,8 @@ Route::group(['middleware' => 'auth:sanctum'],function (){
     Route::delete('/cart/delete', [CartController::class, 'delete']);
     Route::delete('/cart/empty', [CartController::class, 'empty']);
     Route::resource('customer',App\Http\Controllers\Api\CustomerController::class);
+    Route::resource('order',App\Http\Controllers\Api\OrderController::class);
+    Route::post('/order/detail', [App\Http\Controllers\Api\OrderController::class, 'detail']);
 
     // // test
     // Route::get('test',function(){

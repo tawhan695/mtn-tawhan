@@ -26,7 +26,7 @@ class TransectionController extends Controller
      */
     public function index()
     {
-        return view('sales.transection')->with(['order' => Order::orderBy('created_at', 'desc')->paginate(10) ]);
+        return view('sales.transection')->with(['order' => Order::where('branch_id',auth()->user()->branch_id())->orderBy('created_at', 'desc')->paginate(10) ]);
     }
 
     /**
@@ -61,7 +61,8 @@ class TransectionController extends Controller
         // Has_Branchs::where('user_id',auth()->user()->id)->first()->id
         $order = Order::where('branch_id',Has_Branchs::where('user_id',auth()->user()->id)->first()->id)->where('id','like','%'.$request->id.'%')->get();
         return response()->json([
-            'data' =>  $order
+            'data' =>  $order,
+            
             ]);
     }
 
@@ -96,7 +97,7 @@ class TransectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
+
     }
 
     /**

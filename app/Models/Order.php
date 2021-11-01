@@ -16,6 +16,6 @@ class Order extends Model
          'user_id',
         ];
     public function order_details() {
-            return $this->hasMany('App\Models\Order_Details');
+            return $this->hasMany('App\Models\Order_Details','order_id');
     }
 }
