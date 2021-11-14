@@ -118,10 +118,10 @@
                 <!-- /.card-body -->
                 <div class="card-footer clearfix">
                     <ul class="pagination pagination-sm m-0 float-left">
-                        {{-- ทั้งหมด {{ $payment->total() }} รายการ --}}
+                        ทั้งหมด {{ $payment->total() }} รายการ
                     </ul>
                     <ul class="pagination pagination-sm m-0 float-right">
-                        {{-- {{ $payment->onEachSide(5)->links("pagination::bootstrap-4")}} --}}
+                        {{ $payment->onEachSide(5)->links("pagination::bootstrap-4")}}
                     </ul>
                   </div>
                 </div>

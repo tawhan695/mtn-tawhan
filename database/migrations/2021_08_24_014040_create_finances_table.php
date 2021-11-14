@@ -16,7 +16,9 @@ class CreateFinancesTable extends Migration
         Schema::create('finances', function (Blueprint $table) {
             $table->id();
             $table->double('amount',15,2)->default(0);
+            $table->bigInteger('branch_id')->unsigned()->nullable();
             $table->timestamps();
+            $table->foreign('branch_id')->references('id')->on('branchs')->onDelete('cascade');
         });
     }
 

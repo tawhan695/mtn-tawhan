@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\AuthControllor;
 use App\Http\Controllers\Api\ApiProduct;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\DashboardController;
 
 // use App\Http\Controllers\;
 
@@ -64,6 +65,8 @@ Route::group(['middleware' => 'auth:sanctum'],function (){
     Route::resource('order',App\Http\Controllers\Api\OrderController::class);
     Route::post('/order/detail', [App\Http\Controllers\Api\OrderController::class, 'detail']);
 
+    Route::get('/wallet', [DashboardController::class, 'wallet'])->name('cart.index');
+    Route::post('/product/details', [DashboardController::class, 'order_detail']);
     // // test
     // Route::get('test',function(){
     //     return response()->json([

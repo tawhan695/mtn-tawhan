@@ -6,6 +6,8 @@ use App\Models\Order;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order_Details;
+use App\Models\Product;
+use App\Models\Wallet;
 
 class OrderController extends Controller
 {
@@ -98,8 +100,26 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Order $order)
+    public function destroy($id)
     {
-        //
+        $or = Order::where('id', $id)->with(['order_details']);
+        $order_details = $or->first()->order_details;
+        foreach ($order_details as $item){
+           $product = Product::where('id',$item->product_id);
+           $qty = $product->first()->qty;
+           $product->update([
+                'qty' => $qty + $item->qty,
+           ]);
+          $walwt = Wallet::where('branch_id', auth()->user()->branch_id());
+          $Price = $walwt->first()->balance;
+          $walwt->update([
+               'balance' => $Price - ($item->qty * $item->price)
+            ]);
+            Wallet::where('branch_id', auth()->user()->branch_id())->first()->del_payment($or->first()->id);
+        }
+        $or->delete();
+        return response([
+            'success' => true,
+        ]);
     }
 }

@@ -25,7 +25,24 @@ class Wallet extends Model
             if ($des == "ฝากเงิน") {
                 # code...
                 $payment->amount = 0+$amount;
-            }else if ($des == "ถอนเงิน"){
+            }
+            else if ($des == "ถอนเงิน"){
+
+                $payment->amount = 0-$amount;
+            }
+            else if ($des == "เงินสด"){
+
+                $payment->amount = 0+$amount;
+            }
+            else if ($des == "พร้อมเพย์"){
+
+                $payment->amount = 0+$amount;
+            }
+            else if ($des == "ธนาคาร"){
+
+                $payment->amount = 0+$amount;
+            }
+            else if ($des == "เงินทอน"){
 
                 $payment->amount = 0-$amount;
             }
@@ -40,6 +57,7 @@ class Wallet extends Model
                 $payment->order_id = $order ;
             }
             $payment->user_id = auth()->user()->id;
+            $payment->branch_id = auth()->user()->branch_id();
             $payment->save();
 
             // $this->update([

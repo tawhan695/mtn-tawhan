@@ -18,7 +18,9 @@ class CreateDefectivesTable extends Migration
             $table->unsignedInteger('qty')->default(0); // quantity
             $table->bigInteger('product_id')->unsigned()->nullable();
             $table->string('status')->nullable();
+            $table->bigInteger('branch_id')->unsigned()->nullable();
             $table->timestamps();
+            $table->foreign('branch_id')->references('id')->on('branchs')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Wallet;
+use App\Models\payment;
 class FinanceController extends Controller
 {
     public function __construct()
@@ -18,8 +19,9 @@ class FinanceController extends Controller
      */
     public function index()
     {
-        $Wallet =  Wallet::where('branch_id',auth()->user()->branch_id())->with(['payment'])->get();
-        return view('admin.finance.index')->with(['payment' => $Wallet[0]->payment]);
+        $Wallet =  payment::where('branch_id',auth()->user()->branch_id())->orderBy('created_at', 'desc')->paginate(10);
+        // var_dump($Wallet);
+        return view('admin.finance.index')->with(['payment' => $Wallet]);
     }
 
     public function deposit( Request $request){ // ฝาก
@@ -35,7 +37,7 @@ class FinanceController extends Controller
 
         $Wallet = Wallet::where('branch_id',auth()->user()->branch_id());
         $Wallet->update([
-            'balance' => $Wallet->first()->balance - $request->balance
+            'balance' => $Wallet->first()->balance - $request->balance,
         ]);
         $Wallet->first()->payment_add('NULL',intval($request->balance),'ถอนเงิน');
         return back();

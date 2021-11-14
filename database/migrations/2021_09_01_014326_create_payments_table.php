@@ -20,7 +20,9 @@ class CreatePaymentsTable extends Migration
             $table->foreignId('wallet_id');
             $table->foreignId('order_id')->nullable();
             $table->foreignId('user_id');
+            $table->bigInteger('branch_id')->unsigned()->nullable();
             $table->timestamps();
+            $table->foreign('branch_id')->references('id')->on('branchs')->onDelete('cascade');
 
             $table->foreign('wallet_id')->references('id')->on('wallets')->onDelete('cascade');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');

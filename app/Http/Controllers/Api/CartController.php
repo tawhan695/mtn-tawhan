@@ -238,6 +238,16 @@ class CartController extends Controller
                 $order_detail->save();
                 // echo $value['name'];
             }
+
+            $Wallet = Wallet::where('branch_id',auth()->user()->branch_id());
+            $Wallet->update([
+                'balance' => $Wallet->first()->balance + floatval($cash)
+            ]);
+            $Wallet->first()->payment_add('NULL',$cash,$payid_by);
+            if($change > 0){
+                $Wallet->first()->payment_add('NULL',$change,'เงินทอน');
+            }
+
             $request->user()->cart()->detach();
             return response([
        'success' => true,
