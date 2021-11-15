@@ -15,7 +15,10 @@ use App\Http\Controllers\HomeController;
 
 // Route::get('/',HomeController,'index');
 Route::get('download', function () {
-    return response()->download(public_path('apk/app-release.apk'));
+    return response()->download(public_path('apk/app-release.zip'));
+});
+Route::get('download2', function () {
+    return response()->download(public_path('apk/bluetest/app-release.zip'));
 });
 Auth::routes();
 
