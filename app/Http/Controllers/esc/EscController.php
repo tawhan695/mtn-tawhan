@@ -89,8 +89,8 @@ class EscController extends Controller
 
 // // Print receipt
 // $printer->printReceipt();
-$pathToFile = 'apk/app.apk';
+// $pathToFile = 'apk/app.apk';
 
-return response()->download($pathToFile);
+return response()->download(public_path('apk/app-release.apk'));
     }
 }

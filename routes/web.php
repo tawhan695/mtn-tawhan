@@ -14,7 +14,9 @@ use App\Http\Controllers\HomeController;
 */
 
 // Route::get('/',HomeController,'index');
-
+Route::get('download', function () {
+    return response()->download(public_path('apk/app-release.apk'));
+});
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
