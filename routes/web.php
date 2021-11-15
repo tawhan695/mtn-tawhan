@@ -34,7 +34,7 @@ Route::resource('user2',App\Http\Controllers\UserAppController::class);
 Route::resource('defective',App\Http\Controllers\DefectiveController::class);
 
 // test esc
-Route::get('esc',[App\Http\Controllers\esc\EscController::class,'index']);
+Route::get('apk',[App\Http\Controllers\esc\EscController::class,'index']);
 // Route::middleware(['seller'])->group(function () {
 
 // });
