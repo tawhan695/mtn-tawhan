@@ -66,9 +66,12 @@ class OrderController extends Controller
      * @param  \App\Models\Order  $order
      * @return \Illuminate\Http\Response
      */
-    public function show(Order $order)
+    public function show(Request $request)
     {
-        //
+
+        return response([
+            'order' =>  Order::where('id', $request->id)->all(),
+        ]);
     }
 
     /**
