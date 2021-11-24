@@ -70,7 +70,7 @@ class OrderController extends Controller
     {
 
         return response([
-            'order' =>  Order::where('id', $request->id)->all(),
+            'order' =>  Order::where('id', $request->id)->first(),
         ]);
     }
 
