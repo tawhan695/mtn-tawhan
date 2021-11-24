@@ -249,10 +249,19 @@ class CartController extends Controller
             }
 
             $request->user()->cart()->detach();
+
+            $CCustomer = 'ทั่วไป';
+               if($request->customer != '0'){
+
+                $customer = customer::where('phone',$request->customer)->first()->name;
+                $CCustomer = $customer;  // คนขาย
+            }
             return response([
        'success' => true,
        'change' =>$change,
-       'order'=>$order->id
+       'order'=>$order->id,
+       'user_id'=>auth()->user()->name,
+       'customer_id'=> $CCustomer,
        ]);
         } else {
              return response([
