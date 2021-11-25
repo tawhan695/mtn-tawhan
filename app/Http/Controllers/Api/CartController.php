@@ -192,8 +192,8 @@ class CartController extends Controller
 
             // print_r($value);
         }
-        $change = floatval($cash) - $net_amount ;
         $net_amount =  $totolall - $discount;
+        $change = floatval($cash) - $net_amount ;
         // echo ($totol);
         // echo ("|");
         // echo ($cash);
@@ -210,8 +210,8 @@ class CartController extends Controller
 
         $order = new Order;
         $order->cash_totol = floatval($totolall);  // รวมราคาสินค้า
-        $order->cash = $cash;   //เงินสด
         $order->discount = $discount; // ส่วนลด
+        $order->cash = $cash;   //เงินสด
         $order->net_amount = $net_amount;   // ยอดสุุทธิ
         $order->change = $change;   // เงินทอน
         $order->status = $status;   // สถานะ
