@@ -207,7 +207,7 @@ class CartController extends Controller
         // echo ($net_amount);
 
         $order = new Order;
-        $order->cash_totol = $totol;  // รวมราคาสินค้า
+        $order->cash_totol = floatval($cash);  // รวมราคาสินค้า
         $order->cash = $cash;   //เงินสด
         $order->discount = $discount; // ส่วนลด
         $order->net_amount = $net_amount;   // ยอดสุุทธิ
