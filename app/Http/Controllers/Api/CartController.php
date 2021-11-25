@@ -158,6 +158,7 @@ class CartController extends Controller
         $discount = 0.0;
         $net_amount = 0.0;
         $change = 0.0;
+        $totolall = 0.0;  // รวมราคาสินค้า
         $totol = 0.0;  // รวมราคาสินค้า
         $status = 'สำเร็จ';   // สถานะ
         $status_sale = '';   // การขาย
@@ -178,7 +179,7 @@ class CartController extends Controller
                 $status_sale = 'ขายปลีก';
                 # code...
             }
-            $net_amount += $totol;
+            $totolall += $totol;
 
             array_push($detail, [
                 'product_id' => $value['id'],
@@ -192,6 +193,7 @@ class CartController extends Controller
             // print_r($value);
         }
         $change = floatval($cash) - $net_amount ;
+        $net_amount =  $totolall - $discount;
         // echo ($totol);
         // echo ("|");
         // echo ($cash);
@@ -207,7 +209,7 @@ class CartController extends Controller
         // echo ($net_amount);
 
         $order = new Order;
-        $order->cash_totol = floatval($cash);  // รวมราคาสินค้า
+        $order->cash_totol = floatval($totolall);  // รวมราคาสินค้า
         $order->cash = $cash;   //เงินสด
         $order->discount = $discount; // ส่วนลด
         $order->net_amount = $net_amount;   // ยอดสุุทธิ
