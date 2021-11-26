@@ -50,6 +50,7 @@ class AuthControllor extends Controller
                     'sucess' => true,
                     'user' => $user,
                     'token' => $token,
+                    'branch' => $user->Branch(),
                     ])
                     ->header('Content-Type', 'application/json','charset=utf-8');
             }
