@@ -31,6 +31,7 @@ class AuthControllor extends Controller
             $Username= $request->username;
             $Password= $request->password;
             $user = User::where('email','=',$Username)->first();
+            $user_id = User::where('email','=',$Username)->first()->id;
             if (! $user || ! Hash::check( $Password, $user->password)) {
                 return response()->json([
                     'sucess' => false,
@@ -50,7 +51,7 @@ class AuthControllor extends Controller
                     'sucess' => true,
                     'user' => $user,
                     'token' => $token,
-                    // 'branch' => $user->branch_id(),
+                    'branch' => $user_id,
                     ])
                     ->header('Content-Type', 'application/json','charset=utf-8');
             }
