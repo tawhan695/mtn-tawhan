@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
-
+use App\Models\Has_Branchs;
+use App\Models\Branchs;
 class AuthControllor extends Controller
 {
     public function login(Request $request)
@@ -32,6 +33,7 @@ class AuthControllor extends Controller
             $Password= $request->password;
             $user = User::where('email','=',$Username)->first();
             $user_id = User::where('email','=',$Username)->first()->id;
+            $branch_id = Has_Branchs::where('user_id',$user_id)->first()->branchs_id;
             if (! $user || ! Hash::check( $Password, $user->password)) {
                 return response()->json([
                     'sucess' => false,
@@ -51,7 +53,7 @@ class AuthControllor extends Controller
                     'sucess' => true,
                     'user' => $user,
                     'token' => $token,
-                    'branch' => $user_id,
+                    'branch' => Branchs::where('id',$branch_id)->first(),
                     ])
                     ->header('Content-Type', 'application/json','charset=utf-8');
             }
