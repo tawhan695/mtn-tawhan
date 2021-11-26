@@ -56,11 +56,7 @@ class User extends Authenticatable
     // }
     public function Branch(){
         // echo $this->profile()->first();
-        // return Branchs::where('id',
-        // auth()->user()->branch_id()
-        // )->first();
-
-        return Has_Branchs::where('user_id',auth()->user()->id)->first()->branchs_id;
+        return $this->hasOne(Has_Branchs::class);
     }
     public function branch_id(){
        return Has_Branchs::where('user_id',auth()->user()->id)->first()->branchs_id;
