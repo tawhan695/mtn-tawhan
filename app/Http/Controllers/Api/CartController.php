@@ -33,27 +33,26 @@ class CartController extends Controller
         if ($cart) {
             // update only quantity
             $product = Product::where('sku', $sku)
-            ->where('branch_id', auth()->user()->branch_id());
+                ->where('branch_id', auth()->user()->branch_id());
             $qty = $product->first()->qty;
 
-            if ($qty > 0){
+            if ($qty > 0) {
                 $cart->pivot->quantity = $cart->pivot->quantity + 1;
                 $cart->pivot->save();
 
                 $product->update([
-                    'qty'=>$qty-1
+                    'qty' => $qty - 1
                 ]);
             }
         } else {
             $product = Product::where('sku', $sku)
-            ->where('branch_id', auth()->user()->branch_id());
+                ->where('branch_id', auth()->user()->branch_id());
             $id = $product->first()->id;
             $request->user()->cart()->attach($id, ['quantity' => 1]);
             $qty = $product->first()->qty;
             $product->update([
-                'qty'=>$qty-1
+                'qty' => $qty - 1
             ]);
-
         }
 
         return response('', 204);
@@ -77,7 +76,7 @@ class CartController extends Controller
         // ->where('branch_id', auth()->user()->branch_id());
         $qty = $product->first()->qty;
         $product->update([
-            'qty'=>$qty + ($Qty)
+            'qty' => $qty + ($Qty)
         ]);
         // if($Qty > 0){
 
@@ -100,7 +99,7 @@ class CartController extends Controller
         // ->where('branch_id', auth()->user()->branch_id());
         $qty = $product->first()->qty;
         $product->update([
-            'qty'=>$qty + $cart->pivot->quantity
+            'qty' => $qty + $cart->pivot->quantity
         ]);
 
         $request->user()->cart()->detach($request->product_id);
@@ -115,10 +114,8 @@ class CartController extends Controller
             $product = Product::where('id', $value['pivot']['product_id']);
             $qty = $product->first()->qty;
             $product->update([
-                'qty'=>$qty +$value['pivot']['quantity']
+                'qty' => $qty + $value['pivot']['quantity']
             ]);
-
-
         }
 
         $request->user()->cart()->detach();
@@ -153,7 +150,7 @@ class CartController extends Controller
 
 
         $user_id = auth()->user()->branch_id();
-        $cash =floatval( $request->cash);
+        $cash = floatval($request->cash);
         $payid_by = $request->payid_by;
         $discount = 0.0;
         $net_amount = 0.0;
@@ -170,30 +167,31 @@ class CartController extends Controller
         //     print_r($value);
 
         // }
-    //     $detail = [];
-        foreach ($cart as $key => $value) {
-            // print_r($value['id']);
-                //อย่าลืมทำตัวตั้งค่านะของแต่ละสาขา
-                # code...
-                $price =  $value['price'];
-                $totol =  $value['quantity'] * $price;
-                $status_sale = $value['status_sale'];
+        $detail = [];
+        // print_r($cart);
+        foreach ($cart as  $value) {
+            // print_r($value['price']);
+            //อย่าลืมทำตัวตั้งค่านะของแต่ละสาขา
+            # code...
+            $price =  $value->price;
+            $totol =  $value->quantity * $price;
+            $status_sale = $value->status_sale;
 
             $totolall += $totol;
-
+            $Name = Product::where('id', $value->product_id)->first()->name;
             array_push($detail, [
-                'product_id' => $value['id'],
-                'order_id' => $value['id'],
-                'name' => $value['name'],
+                'product_id' => $value->product_id,
+                'order_id' => null,
+                'name' => $Name,
                 'price' => $price,
                 'totol' => $totol,
-                'qty' => $value['pivot']['quantity'],
+                'qty' => $value->quantity,
             ]);
 
             // print_r($value);
         }
         $net_amount =  $totolall - $discount;
-        $change = floatval($cash) - $net_amount ;
+        $change = floatval($cash) - $net_amount;
         $order = new Order;
         $order->cash_totol = floatval($totolall);  // รวมราคาสินค้า
         $order->discount = $discount; // ส่วนลด
@@ -204,9 +202,9 @@ class CartController extends Controller
         $order->status_sale = $status_sale;   // การขาย
         $order->paid_by = $payid_by;   // ชำระโดย
         $order->user_id = $user_id;  // คนขาย
-        if($request->customer != '0'){
+        if ($request->customer != '0') {
 
-            $customer = customer::where('phone',$request->customer)->first()->id;
+            $customer = customer::where('phone', $request->customer)->first()->id;
             $order->customer_id = $customer;  // คนขาย
         }
         $order->branch_id = auth()->user()->branch_id();  // สาขา
@@ -215,11 +213,12 @@ class CartController extends Controller
         if ($order) {
             # code...
             // echo "Id $order->id";
-            foreach ($detail as $key => $value) {
+            print_r($detail);
+            foreach ($detail as $key=> $value) {
                 $order_detail = new Order_details;
                 $order_detail->product_id = $value['product_id'];
                 $order_detail->order_id = $order->id;
-                $order_detail->name = $value['name'];
+                $order_detail->name =$Name;
                 $order_detail->price = $value['price'];
                 $order_detail->totol = $value['totol'];
                 $order_detail->qty = $value['qty'];
@@ -227,38 +226,38 @@ class CartController extends Controller
                 // echo $value['name'];
             }
 
-            $Wallet = Wallet::where('branch_id',auth()->user()->branch_id());
+            $Wallet = Wallet::where('branch_id', auth()->user()->branch_id());
             $Wallet->update([
                 'balance' => $Wallet->first()->balance + floatval($cash)
             ]);
-            $Wallet->first()->payment_add('NULL',$cash,$payid_by);
-            if($change > 0){
-                $Wallet->first()->payment_add('NULL',$change,'เงินทอน');
+            $Wallet->first()->payment_add('NULL', $cash, $payid_by);
+            if ($change > 0) {
+                $Wallet->first()->payment_add('NULL', $change, 'เงินทอน');
             }
 
             $request->user()->cart()->detach();
 
             $CCustomer = 'ทั่วไป';
-               if($request->customer != '0'){
+            if ($request->customer != '0') {
 
-                $customer = customer::where('phone',$request->customer)->first()->name;
+                $customer = customer::where('phone', $request->customer)->first()->name;
                 $CCustomer = $customer;  // คนขาย
             }
             return response([
-       'success' => true,
-       'change' =>$change,
-       'order'=>$order->id,
-       'user_id'=>auth()->user()->name,
-       'customer_id'=> $CCustomer,
-       ]);
+                'success' => true,
+                'change' => $change,
+                'order' => $order->id,
+                'user_id' => auth()->user()->name,
+                'customer_id' => $CCustomer,
+            ]);
         } else {
-             return response([
-        'success' => false
-        ]);
+            return response([
+                'success' => false
+            ]);
         }
 
         return response([
-        'success' => true
+            'success' => true
         ]);
     }
 }
