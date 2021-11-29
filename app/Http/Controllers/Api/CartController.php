@@ -213,7 +213,7 @@ class CartController extends Controller
         if ($order) {
             # code...
             // echo "Id $order->id";
-            print_r($detail);
+            // print_r($detail);
             foreach ($detail as $key=> $value) {
                 $order_detail = new Order_details;
                 $order_detail->product_id = $value['product_id'];
