@@ -27,6 +27,6 @@ class HomeController extends Controller
         $Product = Product::all();
         $user = User::where('id',1)->first()->Branch()->get();
         // dd($user);
-        return redirect(route('sale.index'));
+        return redirect(route('dashboard.index'));
     }
 }

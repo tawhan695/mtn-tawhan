@@ -129,10 +129,10 @@
                         <p class="">
                             {{ App\Models\Branchs::where('id', App\Models\Has_Branchs::where('user_id', auth()->user()->id)->first()->id)->first()->name }}
                         </p>
-                        @if (auth()->user()->hasRole('admin'))
+                        {{-- @if (auth()->user()->hasRole('admin'))
                             <a class="text-info" href="{{ route('sale.index') }}">จัดการหน้าร้าน</a>
 
-                        @endif
+                        @endif --}}
                     </div>
                 </div>
 

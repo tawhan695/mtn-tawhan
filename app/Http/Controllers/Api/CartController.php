@@ -162,23 +162,23 @@ class CartController extends Controller
         $totol = 0.0;  // รวมราคาสินค้า
         $status = 'สำเร็จ';   // สถานะ
         $status_sale = '';   // การขาย
-        $cart =  $request->user()->cart()->get();
+        $cart =  $request->cart;
         $price = 0.0;
 
-        $detail = [];
+        $cart = json_decode($cart);
+        // foreach ($cart as $key => $value) {
+        //     print_r($value);
+
+        // }
+    //     $detail = [];
         foreach ($cart as $key => $value) {
             // print_r($value['id']);
-            if ($value['pivot']['quantity'] > 10) { //อย่าลืมทำตัวตั้งค่านะของแต่ละสาขา
+                //อย่าลืมทำตัวตั้งค่านะของแต่ละสาขา
                 # code...
-                $price =  $value['wholesale_price'];
-                $totol =  $value['pivot']['quantity'] * $price;
-                $status_sale = 'ขายส่ง';
-            } else {
-                $price =  $value['retail_price'];
-                $totol =  $value['pivot']['quantity'] * $price;
-                $status_sale = 'ขายปลีก';
-                # code...
-            }
+                $price =  $value['price'];
+                $totol =  $value['quantity'] * $price;
+                $status_sale = $value['status_sale'];
+
             $totolall += $totol;
 
             array_push($detail, [
@@ -194,20 +194,6 @@ class CartController extends Controller
         }
         $net_amount =  $totolall - $discount;
         $change = floatval($cash) - $net_amount ;
-        // echo ($totol);
-        // echo ("|");
-        // echo ($cash);
-        // echo ("|");
-        // echo ($change);
-        // echo ("|");
-        // echo ($status);
-        // echo ("|");
-        // echo ($status_sale);
-        // echo ("|");
-        // echo ($customer);
-        // echo ("|");
-        // echo ($net_amount);
-
         $order = new Order;
         $order->cash_totol = floatval($totolall);  // รวมราคาสินค้า
         $order->discount = $discount; // ส่วนลด
@@ -271,8 +257,8 @@ class CartController extends Controller
         ]);
         }
 
-        // return response([
-        // 'success' => true
-        // ]);
+        return response([
+        'success' => true
+        ]);
     }
 }
