@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\WalletController;
 use App\Http\Controllers\Api\AuthControllor;
 use App\Http\Controllers\Api\ApiProduct;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\DefectiveController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\DashboardController;
 
@@ -67,6 +68,9 @@ Route::group(['middleware' => 'auth:sanctum'],function (){
 
     Route::get('/wallet', [DashboardController::class, 'wallet'])->name('cart.index');
     Route::post('/product/details', [DashboardController::class, 'order_detail']);
+    //route ของสินค้าชำรุด
+    Route::get('/product/defective', [DefectiveController::class, 'index']);
+    Route::post('/product/defective/add', [DefectiveController::class, 'store']);
     // // test
     // Route::get('test',function(){
     //     return response()->json([
