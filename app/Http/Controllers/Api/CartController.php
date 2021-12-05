@@ -179,6 +179,9 @@ class CartController extends Controller
 
             $totolall += $totol;
             $Name = Product::where('id', $value->product_id)->first()->name;
+            $PP = Product::where('id', $value->product_id);
+            $QTY = $PP->first()->qty;
+            $PP->update(['qty'=> intval($QTY)-intval($value->quantity)]);
             array_push($detail, [
                 'product_id' => $value->product_id,
                 'order_id' => null,
