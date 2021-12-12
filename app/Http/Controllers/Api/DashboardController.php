@@ -62,6 +62,7 @@ class DashboardController extends Controller
                     "price_2"=>$price_2,
                     "sum_qty"=>$qty_1 + $qty_2,
                     "sum_price"=>$price_1 + $price_2,
+                    "img"=>$key->image,
                 ]);
                 $i++;
             }

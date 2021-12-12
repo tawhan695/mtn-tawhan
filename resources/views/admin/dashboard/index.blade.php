@@ -93,6 +93,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>รูปสินค้า</th>
                                             <th>สินค้า</th>
                                             <th>ยอยขายปลีก</th>
                                             <th>ยอดเงิน (ขายปลีก)</th>
@@ -103,9 +104,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         @foreach ($product as $item)
                                             <tr>
                                                 <td>{{ $loop->index++ }}</td>
+                                                <td><img style="width: 60px" src="{{ asset($item->image) }}" alt="{{ $item->name }}"></td>
                                                 <td>{{ $item->name }}</td>
 
                                                 @php
@@ -115,13 +118,19 @@
                                                     $price_2 = 0;
                                                     $det = App\Models\Order_Details::where('product_id', $item->id)
                                                         ->where('created_at', 'like', '%' . date('Y-m-d') . '%')
+                                                        // ->where('created_at', 'like', '%2021-11-14%')
+                                                        // ->where('branch_id',auth()->user()->branch_id())
                                                         ->with(['order'])
                                                         ->get();
-                                                    foreach ($det as $item2) {
-                                                        if ($item2->order->status_sale == 'ขายปลีก') {
+                                                        // print_r( date('Y-m-d'));
+                                                        foreach ($det as $item2) {
+                                                        // print_r( $item2->order->created_at);
+                                                        $DATE =    Str::substr($item2->order->created_at, 0, 10);
+                                                        // echo "$DATE";
+                                                        if ($item2->order->status_sale == 'ขายปลีก' && $DATE == "".date('Y-m-d')) {
                                                             $price_1 += $item->retail_price * $item2->qty;
                                                             $qty_1 += $item2->qty;
-                                                        } else {
+                                                        } else if ($item2->order->status_sale == 'ขายส่ง' && $DATE == "".date('Y-m-d')) {
                                                             $price_2 += $item->wholesale_price * $item2->qty;
                                                             $qty_2 += $item2->qty;
                                                         }
@@ -134,15 +143,16 @@
                                                     //    print_r($det);
 
                                                 @endphp
-                                                <td>{{ App\Models\Order_Details::where('product_id', $item->id)->sum('qty') }}
+                                                <td>{{ App\Models\Order_Details::where('product_id', $item->id)->where('created_at', 'like', '%' . date('Y-m-d') . '%')->sum('qty') }}
                                                 </td>
-                                                <td>{{ App\Models\Order_Details::where('product_id', $item->id)->sum('totol') }}
+                                                <td>{{ App\Models\Order_Details::where('product_id', $item->id)->where('created_at', 'like', '%' . date('Y-m-d') . '%')->sum('totol') }}
                                                 </td>
 
 
                                             </tr>
                                         @endforeach
                                         <tr class="bg-success">
+                                            <td></td>
                                             <td></td>
                                             <td>รวม</td>
                                             <td id="sum_day1"></td>
@@ -216,6 +226,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>รูปสินค้า</th>
                                             <th>สินค้า</th>
                                             <th>ยอยขายปลีก</th>
                                             <th>ยอดเงิน (ขายปลีก)</th>
@@ -229,6 +240,7 @@
                                         @foreach ($product as $item)
                                             <tr>
                                                 <td>{{ $loop->index++ }}</td>
+                                                <td><img style="width: 60px" src="{{ asset($item->image) }}" alt="{{ $item->name }}"></td>
                                                 <td>{{ $item->name }}</td>
 
                                                 @php
@@ -240,6 +252,7 @@
                                                     ->where('created_at', 'like', '%' . date('Y-m') . '%')
                                                     ->with(['order'])
                                                         ->get();
+                                                    // print_r($det);
                                                     foreach ($det as $item2) {
                                                         if ($item2->order->status_sale == 'ขายปลีก') {
                                                             $price_1 += $item->retail_price * $item2->qty;
@@ -257,9 +270,9 @@
                                                     //    print_r($det);
 
                                                 @endphp
-                                                <td>{{ App\Models\Order_Details::where('product_id', $item->id)->sum('qty') }}
+                                                <td>{{ App\Models\Order_Details::where('product_id', $item->id)->where('created_at', 'like', '%' . date('Y-m') . '%')->sum('qty') }}
                                                 </td>
-                                                <td>{{ App\Models\Order_Details::where('product_id', $item->id)->sum('totol') }}
+                                                <td>{{ App\Models\Order_Details::where('product_id', $item->id)->where('created_at', 'like', '%' . date('Y-m') . '%')->sum('totol') }}
                                                 </td>
 
 
@@ -267,6 +280,7 @@
 
                                         @endforeach
                                         <tr class="bg-info">
+                                            <td></td>
                                             <td></td>
                                             <td>รวม</td>
                                             <td id="sum_m1"></td>
@@ -333,6 +347,7 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
+                                            <th>รูปสินค้า</th>
                                             <th>สินค้า</th>
                                             <th>ยอยขายปลีก</th>
                                             <th>ยอดเงิน (ขายปลีก)</th>
@@ -346,6 +361,7 @@
                                         @foreach ($product as $item)
                                             <tr>
                                                 <td>{{ $loop->index++ }}</td>
+                                                <td><img style="width: 60px" src="{{ asset($item->image) }}" alt="{{ $item->name }}"></td>
                                                 <td>{{ $item->name }}</td>
 
                                                 @php
@@ -354,6 +370,7 @@
                                                     $qty_2 = 0;
                                                     $price_2 = 0;
                                                     $det = App\Models\Order_Details::where('product_id', $item->id)
+                                                    ->where('created_at', 'like', '%' . date('Y') . '%')
                                                         ->with(['order'])
                                                         ->get();
                                                     foreach ($det as $item2) {
@@ -373,9 +390,9 @@
                                                     //    print_r($det);
 
                                                 @endphp
-                                                <td>{{ App\Models\Order_Details::where('product_id', $item->id)->sum('qty') }}
+                                                <td>{{ App\Models\Order_Details::where('product_id', $item->id)->where('created_at', 'like', '%' . date('Y') . '%')->sum('qty') }}
                                                 </td>
-                                                <td>{{ App\Models\Order_Details::where('product_id', $item->id)->sum('totol') }}
+                                                <td>{{ App\Models\Order_Details::where('product_id', $item->id)->where('created_at', 'like', '%' . date('Y') . '%')->sum('totol') }}
                                                 </td>
 
 
@@ -383,6 +400,7 @@
 
                                         @endforeach
                                         <tr class="bg-warning">
+                                            <td></td>
                                             <td></td>
                                             <td>รวม</td>
                                             <td id="sum1"></td>

@@ -29,7 +29,9 @@ class DashboardController extends Controller
 $dayDefective = Defective::where('branch_id', auth()->user()->branch_id())->where('created_at','like','%'.date('Y-m-d').'%')->count();
 $dayOrder = Order::where('branch_id', auth()->user()->branch_id())->where('created_at','like','%'.date('Y-m-d').'%')->count();
 $sumOrder = Order::where('branch_id', auth()->user()->branch_id())->where('created_at','like','%'.date('Y-m-d').'%')->sum('net_amount');
-$Product = Product::where('branch_id',auth()->user()->branch_id())->get(['id','name','unit','retail_price','wholesale_price']);
+$Product = Product::where('branch_id',auth()->user()->branch_id())
+->get();
+// ->get(['id','name','unit','retail_price','wholesale_price']);
         // $Product_day = Product::where('branch_id',auth()->user()->branch_id())
 
         //     ->get(['id','name','unit','retail_price','wholesale_price']);
