@@ -4,7 +4,7 @@
 @endsection
 @section('content')
     <section class="content ">
-        {{App\Models\customer::all()}}
+        {{App\Models\customer::where('branch_id', auth()->user()->branch_id)}}
 
         @if (session()->has('success'))
             <script>

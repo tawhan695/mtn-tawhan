@@ -24,7 +24,7 @@ class EmployeeController extends Controller
             ->where('has__branchs.branchs_id', auth()->user()->branch_id())
             ->get(['users.*', 'has__branchs.*']);
 
-        $branchs = Branchs::all();
+        $branchs = Branchs::where('id', auth()->user()->branch_id())->first();
         return view('admin.employee.index')->with(['employee' => $users,'branchs' => $branchs]);
     }
 

@@ -42,7 +42,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <p>{{ number_format(App\Models\Wallet::where('branch_id', App\Models\Has_Branchs::where('user_id', Auth::user()->id)->first()->id)->first()->balance, 2, '.', ',') }}
+                            {{-- <p>{{ number_format(App\Models\Wallet::where('branch_id', auth()->user()->branch_id())->first()->balance, 2, '.', ',') }} --}}
                             </p>
 
                             <p>เงินในกระเป๋า</p>
@@ -164,7 +164,7 @@
                                         </tr>
                                         <script>
                                             var table = document.getElementById("product_table_dat"),
-                                                sum_dayVal_day1 = 0;
+                                            sum_dayVal_day1 = 0;
                                             sum_dayVal_day2 = 0;
                                             sum_dayVal_day3 = 0;
                                             sum_dayVal_day4 = 0;
@@ -172,17 +172,17 @@
                                             sum_dayVal_day6 = 0;
                                             for (var i = 1; i < table.rows.length; i++) {
                                                 // console.log(table.rows[i].cells[2].innerHTML);
-                                                if (table.rows[i].cells[2].innerHTML != 0) sum_dayVal_day1 = sum_dayVal_day1 + parseFloat(table.rows[i].cells[2]
+                                                if (table.rows[i].cells[3].innerHTML != 0) sum_dayVal_day1 = sum_dayVal_day1 + parseFloat(table.rows[i].cells[3]
                                                     .innerHTML);
-                                                if (table.rows[i].cells[3].innerHTML != 0) sum_dayVal_day2 = sum_dayVal_day2 + parseFloat(table.rows[i].cells[3]
+                                                if (table.rows[i].cells[4].innerHTML != 0) sum_dayVal_day2 = sum_dayVal_day2 + parseFloat(table.rows[i].cells[4]
                                                     .innerHTML);
-                                                if (table.rows[i].cells[4].innerHTML != 0) sum_dayVal_day3 = sum_dayVal_day3 + parseFloat(table.rows[i].cells[4]
+                                                if (table.rows[i].cells[5].innerHTML != 0) sum_dayVal_day3 = sum_dayVal_day3 + parseFloat(table.rows[i].cells[5]
                                                     .innerHTML);
-                                                if (table.rows[i].cells[5].innerHTML != 0) sum_dayVal_day4 = sum_dayVal_day4 + parseFloat(table.rows[i].cells[5]
+                                                if (table.rows[i].cells[6].innerHTML != 0) sum_dayVal_day4 = sum_dayVal_day4 + parseFloat(table.rows[i].cells[6]
                                                     .innerHTML);
-                                                if (table.rows[i].cells[6].innerHTML != 0) sum_dayVal_day5 = sum_dayVal_day5 + parseFloat(table.rows[i].cells[6]
+                                                if (table.rows[i].cells[7].innerHTML != 0) sum_dayVal_day5 = sum_dayVal_day5 + parseFloat(table.rows[i].cells[7]
                                                     .innerHTML);
-                                                if (table.rows[i].cells[7].innerHTML != 0) sum_dayVal_day6 = sum_dayVal_day6 + parseFloat(table.rows[i].cells[7]
+                                                if (table.rows[i].cells[8].innerHTML != 0) sum_dayVal_day6 = sum_dayVal_day6 + parseFloat(table.rows[i].cells[8]
                                                     .innerHTML);
                                             }
                                             // console.log("product_table" ,sum_dayVal_day);
@@ -303,12 +303,12 @@
                                     sumVal_m6 = 0;
                                     for (var i = 1; i < table.rows.length; i++) {
                                         // console.log(table.rows[i].cells[2].innerHTML);
-                                        if (table.rows[i].cells[2].innerHTML != 0) sumVal_m1 = sumVal_m1 + parseFloat(table.rows[i].cells[2].innerHTML);
-                                        if (table.rows[i].cells[3].innerHTML != 0) sumVal_m2 = sumVal_m2 + parseFloat(table.rows[i].cells[3].innerHTML);
-                                        if (table.rows[i].cells[4].innerHTML != 0) sumVal_m3 = sumVal_m3 + parseFloat(table.rows[i].cells[4].innerHTML);
-                                        if (table.rows[i].cells[5].innerHTML != 0) sumVal_m4 = sumVal_m4 + parseFloat(table.rows[i].cells[5].innerHTML);
-                                        if (table.rows[i].cells[6].innerHTML != 0) sumVal_m5 = sumVal_m5 + parseFloat(table.rows[i].cells[6].innerHTML);
-                                        if (table.rows[i].cells[7].innerHTML != 0) sumVal_m6 = sumVal_m6 + parseFloat(table.rows[i].cells[7].innerHTML);
+                                        if (table.rows[i].cells[3].innerHTML != 0) sumVal_m1 = sumVal_m1 + parseFloat(table.rows[i].cells[3].innerHTML);
+                                        if (table.rows[i].cells[4].innerHTML != 0) sumVal_m2 = sumVal_m2 + parseFloat(table.rows[i].cells[4].innerHTML);
+                                        if (table.rows[i].cells[5].innerHTML != 0) sumVal_m3 = sumVal_m3 + parseFloat(table.rows[i].cells[5].innerHTML);
+                                        if (table.rows[i].cells[6].innerHTML != 0) sumVal_m4 = sumVal_m4 + parseFloat(table.rows[i].cells[6].innerHTML);
+                                        if (table.rows[i].cells[7].innerHTML != 0) sumVal_m5 = sumVal_m5 + parseFloat(table.rows[i].cells[7].innerHTML);
+                                        if (table.rows[i].cells[8].innerHTML != 0) sumVal_m6 = sumVal_m6 + parseFloat(table.rows[i].cells[8].innerHTML);
                                     }
                                     // console.log("product_table" ,sumVal_m);
                                     // console.log(subTotal);
@@ -423,12 +423,12 @@
                                     sumVal6 = 0;
                                     for (var i = 1; i < table.rows.length; i++) {
                                         // console.log(table.rows[i].cells[2].innerHTML);
-                                        if (table.rows[i].cells[2].innerHTML != 0) sumVal1 = sumVal1 + parseFloat(table.rows[i].cells[2].innerHTML);
-                                        if (table.rows[i].cells[3].innerHTML != 0) sumVal2 = sumVal2 + parseFloat(table.rows[i].cells[3].innerHTML);
-                                        if (table.rows[i].cells[4].innerHTML != 0) sumVal3 = sumVal3 + parseFloat(table.rows[i].cells[4].innerHTML);
-                                        if (table.rows[i].cells[5].innerHTML != 0) sumVal4 = sumVal4 + parseFloat(table.rows[i].cells[5].innerHTML);
-                                        if (table.rows[i].cells[6].innerHTML != 0) sumVal5 = sumVal5 + parseFloat(table.rows[i].cells[6].innerHTML);
-                                        if (table.rows[i].cells[7].innerHTML != 0) sumVal6 = sumVal6 + parseFloat(table.rows[i].cells[7].innerHTML);
+                                        if (table.rows[i].cells[3].innerHTML != 0) sumVal1 = sumVal1 + parseFloat(table.rows[i].cells[3].innerHTML);
+                                        if (table.rows[i].cells[4].innerHTML != 0) sumVal2 = sumVal2 + parseFloat(table.rows[i].cells[4].innerHTML);
+                                        if (table.rows[i].cells[5].innerHTML != 0) sumVal3 = sumVal3 + parseFloat(table.rows[i].cells[5].innerHTML);
+                                        if (table.rows[i].cells[6].innerHTML != 0) sumVal4 = sumVal4 + parseFloat(table.rows[i].cells[6].innerHTML);
+                                        if (table.rows[i].cells[7].innerHTML != 0) sumVal5 = sumVal5 + parseFloat(table.rows[i].cells[7].innerHTML);
+                                        if (table.rows[i].cells[8].innerHTML != 0) sumVal6 = sumVal6 + parseFloat(table.rows[i].cells[8].innerHTML);
                                     }
                                     // console.log("product_table" ,sumVal);
                                     // console.log(subTotal);

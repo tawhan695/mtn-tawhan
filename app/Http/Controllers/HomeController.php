@@ -27,6 +27,12 @@ class HomeController extends Controller
         $Product = Product::all();
         $user = User::where('id',1)->first()->Branch()->get();
         // dd($user);
-        return redirect(route('dashboard.index'));
+        if (auth()->user()->hasRole('super_admin')){
+
+            return redirect(route('superadmin.index'));
+        }else{
+            return redirect(route('dashboard.index'));
+
+        }
     }
 }

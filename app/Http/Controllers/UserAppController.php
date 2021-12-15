@@ -4,7 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Branchs;
+use App\Models\Has_Branchs;
+use App\Models\Wallet;
 class UserAppController extends Controller
 {
     public function __construct()
@@ -18,7 +22,40 @@ class UserAppController extends Controller
      */
     public function index()
     {
-        //
+        //หน้าที่
+        // Role::create(['name' =>'super_admin']);
+        // สร้าง user
+        // $user = \App\Models\User::factory()->create([
+        //     'name' => 'พนักงานขาย',
+        //     'username' => 'sallermtn02',
+        //     'email' => 'sallermtn02@gmail.com',
+        //     'password' => Hash::make('123456789'),
+
+        // ]);
+        // $user->assignRole('seller');
+        // echo"super_admin";
+        // สร้างสาขา
+        // $b = new Branchs;
+        // $b->timestamps   = false;
+        // $b->name = 'Admin';
+        // $b->des ='หจก.มัทนาไข่สด ฟาร์ม (แม่)';
+        // // $b->created_at ='สาขา 1';
+        // $b->save();
+
+        //เพิ่มผุ้ใช้ ใส่สาขา
+        // $add_branch = new  Has_Branchs;
+        // $add_branch->timestamps   = false;
+        // $add_branch->user_id = 6;
+        // $add_branch->branchs_id = 2;
+        // $add_branch->save();
+
+        // เพิ่มกระเป๋า
+        // $wallet = new Wallet;
+        // $wallet->timestamps   = false;
+        // $wallet->balance = 0;
+        // $wallet->branch_id =3;
+        // $wallet->save();
+         echo"200 โอเค";
     }
 
     /**
@@ -78,9 +115,9 @@ class UserAppController extends Controller
         // print_r($pathImage);
         // print_r($imageName);
         print_r($id);
-        
 
-        // $user->image = 
+
+        // $user->image =
         User::where('id',$id)->update([
             'image'=>'images/profiles/'.$imageName,
             'name'=>$request->name

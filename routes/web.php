@@ -62,3 +62,6 @@ Route::get('admin/history',[App\Http\Controllers\admin\HistoryProductController:
 
 Route::post('admin/finance/deposit',[App\Http\Controllers\admin\FinanceController::class,'deposit']);
 Route::post('admin/finance/withdraw',[App\Http\Controllers\admin\FinanceController::class,'withdraw']);
+
+//supdre admin
+Route::resource('superadmin',App\Http\Controllers\superadmin\DashboardController::class);
