@@ -11,7 +11,7 @@ class DefectiveController extends Controller
 {
     public function index (){
         // รายการสินค้าชำรุด
-        $Defective = Defective::orderBy('created_at', 'desc')->paginate(10);
+        $Defective = Defective::where('branch_id', auth()->user()->branch_id())->orderBy('created_at', 'desc')->paginate(10);
         return response(['defective' => $Defective]);
     }
     public function store(Request $request){
