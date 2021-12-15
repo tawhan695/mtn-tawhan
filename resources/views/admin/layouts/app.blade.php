@@ -127,7 +127,7 @@
                     <div class="info">
                         <a href="#" class="d-block">{{ Auth::user()->name }}</a>
                         <p class="">
-                            {{ App\Models\Branchs::where('id', App\Models\Has_Branchs::where('user_id', auth()->user()->id)->first()->id)->first()->name }}
+                            {{ App\Models\Branchs::where('id', auth()->user()->branch_id())->first()->name }}
                         </p>
                         {{-- @if (auth()->user()->hasRole('admin'))
                             <a class="text-info" href="{{ route('sale.index') }}">จัดการหน้าร้าน</a>
