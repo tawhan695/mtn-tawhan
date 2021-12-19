@@ -42,7 +42,7 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            {{-- <p>{{ number_format(App\Models\Wallet::where('branch_id', auth()->user()->branch_id())->first()->balance, 2, '.', ',') }} --}}
+                            <p>{{ number_format(App\Models\Wallet::where('branch_id', auth()->user()->branch_id())->first()->balance, 2, '.', ',') }}
                             </p>
 
                             <p>เงินในกระเป๋า</p>

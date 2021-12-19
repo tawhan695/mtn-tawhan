@@ -25,14 +25,14 @@ class UserAppController extends Controller
         //หน้าที่
         // Role::create(['name' =>'super_admin']);
         // สร้าง user
-        // $user = \App\Models\User::factory()->create([
-        //     'name' => 'พนักงานขาย',
-        //     'username' => 'sallermtn02',
-        //     'email' => 'sallermtn02@gmail.com',
-        //     'password' => Hash::make('123456789'),
+        $user = \App\Models\User::factory()->create([
+            'name' => 'พนักงานขาย',
+            'username' => 'adminrmtn02',
+            'email' => 'adminrmtn02@gmail.com',
+            'password' => Hash::make('123456789'),
 
-        // ]);
-        // $user->assignRole('seller');
+        ]);
+        $user->assignRole('admin');
         // echo"super_admin";
         // สร้างสาขา
         // $b = new Branchs;
@@ -43,11 +43,11 @@ class UserAppController extends Controller
         // $b->save();
 
         //เพิ่มผุ้ใช้ ใส่สาขา
-        // $add_branch = new  Has_Branchs;
-        // $add_branch->timestamps   = false;
-        // $add_branch->user_id = 6;
-        // $add_branch->branchs_id = 2;
-        // $add_branch->save();
+        $add_branch = new  Has_Branchs;
+        $add_branch->timestamps   = false;
+        $add_branch->user_id = $user->id;
+        $add_branch->branchs_id = auth()->user()->branch_id();
+        $add_branch->save();
 
         // เพิ่มกระเป๋า
         // $wallet = new Wallet;

@@ -30,9 +30,10 @@ class HomeController extends Controller
         if (auth()->user()->hasRole('super_admin')){
 
             return redirect(route('superadmin.index'));
-        }else{
+        }else if (auth()->user()->hasRole('admin')){
             return redirect(route('dashboard.index'));
-
+        }else{
+            return "<h1>ไม่มีสิทธิ์เข้าถึง</h1>";
         }
     }
 }

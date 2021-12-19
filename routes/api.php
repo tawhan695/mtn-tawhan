@@ -70,6 +70,7 @@ Route::group(['middleware' => 'auth:sanctum'],function (){
     Route::post('/product/details', [DashboardController::class, 'order_detail']);
     //route ของสินค้าชำรุด
     Route::get('/product/defective', [DefectiveController::class, 'index']);
+    Route::get('/product/defective/{id}', [DefectiveController::class, 'show']);
     Route::post('/product/defective/add', [DefectiveController::class, 'store']);
     // // test
     // Route::get('test',function(){
