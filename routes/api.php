@@ -19,6 +19,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\DefectiveController;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\DashboardController;
+use App\Http\Controllers\Api\OrderCustomerController;
 
 // use App\Http\Controllers\;
 
@@ -64,6 +65,7 @@ Route::group(['middleware' => 'auth:sanctum'],function (){
     Route::delete('/cart/empty', [CartController::class, 'empty']);
     Route::resource('customer',App\Http\Controllers\Api\CustomerController::class);
     Route::resource('order',App\Http\Controllers\Api\OrderController::class);
+    Route::get('order/customer/{customer_id}',[OrderCustomerController::class,'order']);
     Route::post('/order/detail', [App\Http\Controllers\Api\OrderController::class, 'detail']);
 
     Route::get('/wallet', [DashboardController::class, 'wallet'])->name('cart.index');
