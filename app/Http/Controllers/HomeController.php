@@ -33,7 +33,8 @@ class HomeController extends Controller
         }else if (auth()->user()->hasRole('admin')){
             return redirect(route('dashboard.index'));
         }else{
-            return "<h1>ไม่มีสิทธิ์เข้าถึง</h1>";
+            return redirect(route('dashboard.index'));
+            // return "<h1>ไม่มีสิทธิ์เข้าถึง</h1>";
         }
     }
 }
