@@ -20,7 +20,8 @@ class BranchsController extends Controller
     public function index()
     {
         $branchs = Branchs::all();
-        return view('admin.branchs.index')->with(['branchs'=>$branchs]);
+        $branchs_manager = Branchs::where('id',auth()->user()->branch_id())->get();
+        return view('admin.branchs.index')->with(['branchs'=>$branchs,'branchs_manager'=>$branchs_manager]);
     }
 
     /**
@@ -63,7 +64,7 @@ class BranchsController extends Controller
      */
     public function edit(Branchs $branchs)
     {
-        //
+        dd( $branchs);
     }
 
     /**
@@ -73,9 +74,26 @@ class BranchsController extends Controller
      * @param  \App\Models\Branchs  $branchs
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Branchs $branchs)
+    public function update(Request $request,  $branchs)
     {
-        //
+        // echo ' updating';
+        // $branchs->
+        // print_r( $request);
+        Branchs::where('id',$branchs)->update([
+                'name' => $request->name,
+                'des' => $request->des,
+            ]);
+            // $branchs->update([
+            //         'name' => $request->name,
+            //         'des' => $request->des,
+            //     ]);
+            // print_r( $branchs->first());
+
+        // $branchs->name = $request->name;
+        // $branchs->des = $request->des;
+        // $branchs->save();
+        // echo ' updating';
+        return redirect()->back();
     }
 
     /**

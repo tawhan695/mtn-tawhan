@@ -12,10 +12,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -24,17 +24,22 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $Product = Product::all();
-        $user = User::where('id',1)->first()->Branch()->get();
-        // dd($user);
-        if (auth()->user()->hasRole('super_admin')){
+        // $Product = Product::all();
+        // $user = User::where('id',1)->first()->Branch()->get();
+        // // dd($user);
+        // if (auth()->user()->hasRole('super_admin')){
 
-            return redirect(route('superadmin.index'));
-        }else if (auth()->user()->hasRole('admin')){
-            return redirect(route('dashboard.index'));
-        }else{
-            return redirect(route('dashboard.index'));
-            // return "<h1>ไม่มีสิทธิ์เข้าถึง</h1>";
-        }
+        //     return redirect(route('superadmin.index'));
+        // }else if (auth()->user()->hasRole('admin')){
+        //     return redirect(route('dashboard.index'));
+        // }else{
+        //     return redirect(route('dashboard.index'));
+        //     // return "<h1>ไม่มีสิทธิ์เข้าถึง</h1>";
+        // }
+        return view("welcome");
+    }
+
+    public function app(){
+        return view("dowload");
     }
 }

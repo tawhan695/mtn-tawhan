@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Models\customer;
 class CustomerController extends Controller
 {
     /**
@@ -14,7 +14,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return view('admin.customer.index');
+       $customer = customer::where('branch_id', auth()->user()->branch_id())->get();
+        return view('admin.customer.index')->with('customer', $customer);
     }
 
     /**

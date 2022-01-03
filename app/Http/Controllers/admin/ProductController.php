@@ -69,6 +69,7 @@ class ProductController extends Controller
         }
 
         if(empty($request->image)){
+            $imageName = 'default.png';
             $pathImage = 'default.png';
         }else{
             $imageName = time().'.'.$request->image->getClientOriginalExtension();

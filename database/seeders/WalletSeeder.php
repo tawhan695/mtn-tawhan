@@ -23,7 +23,7 @@ class WalletSeeder extends Seeder
             // id	balance	branch_id	created_at	updated_at
             $wallet = new Wallet;
             $wallet->timestamps   = false;
-            $wallet->balance = 0;
+            $wallet->balance = 0.0;
             $wallet->branch_id =$value->id;
             $wallet->save();
         }

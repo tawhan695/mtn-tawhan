@@ -68,18 +68,6 @@
 
                         <div class=" tab-pane fade  show  " id="custom-tabs-ty" role="tabpanel"
                             aria-labelledby="custom-tabs-ty-tab">
-                            {{-- <h5>
-                            รออัพเดท
-                          </h5> --}}
-
-                            {{-- Full texts
-id
-name
-username
-tel
-email
-address
-image --}}
                             <form action="{{ route('employee.store') }}" method="post" enctype="multipart/form-data"
                                 class="needs-validation" novalidate>
                                 @csrf
@@ -100,8 +88,8 @@ image --}}
                                 </div>
                                 <div class="form-group">
                                     <label for="uname">อีเมล์:</label>
-                                    <input type="text" class="form-control" id="email" placeholder="Enter Mail" name="email"
-                                        required>
+                                    <input type="text" class="form-control" id="email" placeholder="Enter Mail"
+                                        name="email" required>
                                     <div class="valid-feedback">Valid.</div>
                                     <div class="invalid-feedback">Please fill out this field.</div>
                                 </div>
@@ -111,8 +99,8 @@ image --}}
                                         <input class="form-control" type="password" name="password" placeholder="Enter">
                                         <div class="input-group-addon">
                                             <a href=""><i class="fa fa-eye-slash" aria-hidden="true" style="hover{
-                                                    color:#333
-                                                  }"></i></a>
+                                                            color:#333
+                                                          }"></i></a>
                                         </div>
                                     </div>
                                     <script>
@@ -143,7 +131,8 @@ image --}}
                                 </div>
                                 <div class="form-group">
                                     <label for="comment">ที่อยู่:</label>
-                                    <textarea class="form-control" rows="3" id="address" name="address" placeholder="ที่อยู่"></textarea>
+                                    <textarea class="form-control" rows="3" id="address" name="address"
+                                        placeholder="ที่อยู่"></textarea>
                                 </div>
                                 <div class="form-group">
                                     <input class="float-right btn btn-primary btn-block" type="submit" value="บันทึกข้อมูล">
@@ -155,32 +144,33 @@ image --}}
                 <!-- /.card -->
             </div>
         </div>
+    </section>
+    @if (session()->has('success'))
+        <script>
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            });
+            Toast.fire({
+                icon: 'success',
+                title: '{{ session()->get('success') }} '
+            })
+        </script>
+    @endif
 
-        @if (session()->has('success'))
-            <script>
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-                Toast.fire({
-                    icon: 'success',
-                    title: '{{ session()->get('success') }} '
-                })
-            </script>
-        @endif
+    @error('del')
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'เกิดข้อผิดพลาด',
+                text: '{{ $message }}',
+            })
+        </script>
 
-        @error('del')
-            <script>
-                Swal.fire({
-                    icon: 'error',
-                    title: 'เกิดข้อผิดพลาด',
-                    text: '{{ $message }}',
-                })
-            </script>
-
-        @enderror
+    @enderror
 
 
-    @endsection
+
+@endsection
