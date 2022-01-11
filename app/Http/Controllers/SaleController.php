@@ -94,9 +94,13 @@ class SaleController extends Controller
 
         $walwt = Wallet::where('branch_id', auth()->user()->branch_id())->first()->balance;
         Wallet::where('branch_id', auth()->user()->branch_id())->update(['balance'=> floatval($net_amount) + floatval($walwt)]);
-        $customer = customer::where('id',$request->customer)->first()->company;
         $text_line = "แคชเชียร์ ".auth()->user()->name ."/n";
-        $text_line = "ลูกค้า ". $customer ."/n";
+        $customer = customer::where('id',$request->customer)->first()->company;
+        if( $customer){
+            $text_line = "ลูกค้า ". $customer ."/n";
+        }else{
+            $text_line = "ลูกค้า :ทั่วไป/n";
+        }
         $text_line += "---------------";
         $text_line = "เลขที่ใบเสร็จ ". $order->id ."/n";
         $text_line += "---------------";
