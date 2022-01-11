@@ -9,6 +9,8 @@ use App\Models\Product;
 use App\Models\Order;
 use App\Models\Order_Details;
 use App\Models\Wallet;
+use Phattarachai\LineNotify\Line;
+use App\Models\Linenotify;
 
 class CartController extends Controller
 {
@@ -243,8 +245,16 @@ class CartController extends Controller
             $CCustomer = 'ทั่วไป';
             if ($request->customer != '0') {
 
-                $customer = customer::where('phone', $request->customer)->first()->name;
-                $CCustomer = $customer;  // คนขาย
+                $CCustomer= customer::where('phone', $request->customer)->first()->company;
+                // $CCustomer = $customer;  // คนขาย
+            }
+            try{
+
+                $linetoken =  Linenotify::where('branch_id',auth()->user()->branch_id())->first()->token;
+                $line = new Line($linetoken);
+                $line->send('ขายสินค้า:'.$request->customer);
+            }catch(\Exception $e){
+
             }
             return response([
                 'success' => true,
