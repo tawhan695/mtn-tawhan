@@ -58,7 +58,7 @@ class UserSeeder extends Seeder
         $user01->assignRole('manager');
 
         $user2 = \App\Models\User::factory()->create([
-            'name' => ' manager มัทนาไข่สด ฟาร์ม',
+            'name' => ' cashier มัทนาไข่สด ฟาร์ม',
             'username' => 'cashiermtn',
             'email' => 'cashiermtn@gmail.com',
             'password' => Hash::make('123456789'),
@@ -84,7 +84,7 @@ class UserSeeder extends Seeder
         $user01->assignRole('manager');
 
         $user2 = \App\Models\User::factory()->create([
-            'name' => ' manager มัทนาไข่สด ฟาร์ม',
+            'name' => ' cashier มัทนาไข่สด ฟาร์ม',
             'username' => 'cashiermtn02',
             'email' => 'cashiermtn02@gmail.com',
             'password' => Hash::make('123456789'),
@@ -111,7 +111,7 @@ class UserSeeder extends Seeder
         $user01->assignRole('manager');
 
         $user2 = \App\Models\User::factory()->create([
-            'name' => ' manager มัทนาไข่สด ฟาร์ม',
+            'name' => ' cashier มัทนาไข่สด ฟาร์ม',
             'username' => 'cashiermtn03',
             'email' => 'cashiermtn03@gmail.com',
             'password' => Hash::make('123456789'),
@@ -137,7 +137,7 @@ $add_branch->save();
 $user01->assignRole('manager');
 
 $user2 = \App\Models\User::factory()->create([
-    'name' => ' manager มัทนาไข่สด ฟาร์ม',
+    'name' => ' cashier มัทนาไข่สด ฟาร์ม',
     'username' => 'cashiermtn04',
     'email' => 'cashiermtn04@gmail.com',
     'password' => Hash::make('123456789'),

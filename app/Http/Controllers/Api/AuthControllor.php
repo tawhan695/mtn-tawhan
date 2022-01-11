@@ -12,6 +12,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Has_Branchs;
 use App\Models\Branchs;
+use Phattarachai\LineNotify\Line;
+use App\Models\Linenotify;
+use App\Models\customer;
 class AuthControllor extends Controller
 {
     public function login(Request $request)
@@ -49,6 +52,14 @@ class AuthControllor extends Controller
                     $token =$user->createToken($request->device_name)->plainTextToken;
 
                 }
+                try{
+
+                    $linetoken =  Linenotify::where('branch_id',$branch_id)->first()->token;
+                    $line = new Line($linetoken);
+                    $line->send('เปิดร้าน เวลา : '. date("Y-m-d H:i:s")."พนักงาน : ".$user->name);
+                }catch(\Exception $e){
+
+                }
                 return response()->json([
                     'sucess' => true,
                     'user' => $user,
@@ -61,6 +72,14 @@ class AuthControllor extends Controller
     }
     public function logout( Request $request) {
         // $request()->user();
+        try{
+
+            $linetoken =  Linenotify::where('branch_id',auth()->user()->branch_id())->first()->token;
+            $line = new Line($linetoken);
+            $line->send('ปิดร้าน:'. date("Y-m-d H:i:s").auth()->user()->name);
+        }catch(\Exception $e){
+
+        }
         return response()->json([
             // 'success' => true,
             'success'=> $request->user()->currentAccessToken()->delete(),

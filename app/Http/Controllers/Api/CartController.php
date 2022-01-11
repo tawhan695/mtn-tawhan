@@ -214,11 +214,26 @@ class CartController extends Controller
         }
         $order->branch_id = auth()->user()->branch_id();  // สาขา
         $order->save();  // คนขาย
+        $CCustomer = 'ทั่วไป';
+        if (customer::where('phone', $request->customer)->first()) {
 
+            $CCustomer= customer::where('phone', $request->customer)->first()->company;
+            // $CCustomer = $customer;  // คนขาย
+        }
+        // เพิ่มเงินใส่กระเป๋า
+        $text_line = "\n";
+        $text_line .= "--------------------------\n";
+        $text_line .= "เลขที่ใบเสร็จ : ". $order->id ."\n";
+        $text_line .= "--------------------------\n";
+        $text_line .= "แคชเชียร์ : ".auth()->user()->name ."\n";
+
+        $text_line .= "ลูกค้า : ".  $CCustomer ."\n";
+        $text_line .= "--------------------------\n";
         if ($order) {
             # code...
             // echo "Id $order->id";
             // print_r($detail);
+            $i = 1;
             foreach ($detail as $key=> $value) {
                 $order_detail = new Order_details;
                 $order_detail->product_id = $value['product_id'];
@@ -228,9 +243,13 @@ class CartController extends Controller
                 $order_detail->totol = $value['totol'];
                 $order_detail->qty = $value['qty'];
                 $order_detail->save();
+                $text_line .=$i++.': '. $value['name']. ",ราคา:".$value['price'] .",จำนวน ".$value['qty'].",รวม ".$value['totol']."\n";
                 // echo $value['name'];
             }
-
+            $text_line .= "--------------------------\n";
+            $date = date_create($order->created_at);
+            $date_up = date_format($date,'Y-m-d H:i:s');
+            // $text_line .= $date_up;
             $Wallet = Wallet::where('branch_id', auth()->user()->branch_id());
             $Wallet->update([
                 'balance' => $Wallet->first()->balance + floatval($cash)
@@ -242,17 +261,19 @@ class CartController extends Controller
 
             $request->user()->cart()->detach();
 
-            $CCustomer = 'ทั่วไป';
-            if ($request->customer != '0') {
-
-                $CCustomer= customer::where('phone', $request->customer)->first()->company;
-                // $CCustomer = $customer;  // คนขาย
-            }
+             $text_line .= "รวมยอด ". $totol."\n";
+            $text_line .= "เงิน".$request->paid_by."รับ ". $cash."\n";
+            $text_line .= "สวนลด ". $discount."\n";
+            $text_line .= "เงินทอน ". $change."\n";
+            // $text_line.= "เงินทอน ". $discount."\n";
+            $text_line .= "--------------------------\n";
+            $text_line .= " ". $date_up."\n";
             try{
 
                 $linetoken =  Linenotify::where('branch_id',auth()->user()->branch_id())->first()->token;
                 $line = new Line($linetoken);
-                $line->send('ขายสินค้า:'.$request->customer);
+                $line->send('ขายสินค้า'.  $text_line);
+                // $line->send('ขายสินค้า:'.customer::where('phone', $request->customer)->first()->company);
             }catch(\Exception $e){
 
             }
