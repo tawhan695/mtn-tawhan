@@ -20,6 +20,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "milon/barcode": "^8.0",
+        "phattarachai/line-notify": "^1.1",
         "picqer/php-barcode-generator": "^2.2",
         "spatie/laravel-permission": "^4.0"
     },

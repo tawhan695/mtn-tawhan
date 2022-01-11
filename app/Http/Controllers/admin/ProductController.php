@@ -5,11 +5,14 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Catagory;
+use App\Models\Linenotify;
 use App\Models\HistoryProduct;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Phattarachai\LineNotify\Line;
+
 
 class ProductController extends Controller
 {
@@ -100,7 +103,14 @@ class ProductController extends Controller
         $Product->branch_id = auth()->user()->branch_id();
         $Product->unit = $request->unit;
         $Product->save();
+        try{
+           $linetoken =  Linenotify::where('branch_id',auth()->user()->branch_id())->first()->token;
 
+            $line = new Line($linetoken);
+            $line->send('บันทึกสำเร็จ ชื่อสินค้า:'.$request->name.' ,ราคาปลีก :' . $request->price2.' ,ราคาส่ง :'. $request->price.' ,จำนวน :'.$request->qty);
+        }catch (\Exception $e){
+
+        }
         return redirect()->back()->withErrors(['sucess'=>'บันทึกสำเร็จ']);
         // $image = $request->image
     }

@@ -65,6 +65,7 @@ return array(
     'Picqer\\Barcode\\' => array($vendorDir . '/picqer/php-barcode-generator/src'),
     'PhpParser\\' => array($vendorDir . '/nikic/php-parser/lib/PhpParser'),
     'PhpOption\\' => array($vendorDir . '/phpoption/phpoption/src/PhpOption'),
+    'Phattarachai\\LineNotify\\' => array($vendorDir . '/phattarachai/line-notify/src'),
     'ParagonIE\\ConstantTime\\' => array($vendorDir . '/paragonie/constant_time_encoding/src'),
     'Opis\\Closure\\' => array($vendorDir . '/opis/closure/src'),
     'NunoMaduro\\Collision\\' => array($vendorDir . '/nunomaduro/collision/src'),

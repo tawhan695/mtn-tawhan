@@ -149,114 +149,136 @@ $add_branch->branchs_id = 4;
 $add_branch->save();
 $user2->assignRole('seller');
 
-        $Catagory = Catagory::create([
-            'name' => 'ไข่ไก่',
-            'slug' => 'ไข่ไก่',
-            'branch_id' => 1,
-        ]);
-        //  print_r( $Catagory->get()->id);
-        $Catagory2 = Catagory::create([
-            'name' => 'แผงไข่',
-            'slug' => 'แผงไข่',
-            'branch_id' => 1,
-        ]);
-        Catagory::create([
-            'name' => 'อาหารแปรรูป',
-            'slug' => 'อาหารแปรรูป',
-            'branch_id' => 1,
-        ]);
-        Catagory::create([
-            'name' => 'เครื่องดื่ม',
-            'slug' => 'เครื่องดื่ม',
-            'branch_id' => 1,
-        ]);
-        Catagory::create([
-            'name' => 'ไข่อื่นๆ',
-            'slug' => 'ไข่อื่นๆ',
-            'branch_id' => 1,
-        ]);
-        // $Branchs = Branchs::create([
-        //      'name' => 'สาขา 1',
-        //      'des' => 'สาขา 1',
-        //  ]);
-        //สาขา1
-        $Catagory = Catagory::create([
-            'name' => 'ไข่ไก่',
-            'slug' => 'ไข่ไก่',
-            'branch_id' => 2,
-        ]);
-        //  print_r( $Catagory->get()->id);
-        $Catagory2 = Catagory::create([
-            'name' => 'แผงไข่',
-            'slug' => 'แผงไข่',
-            'branch_id' => 2,
-        ]);
-        Catagory::create([
-            'name' => 'อาหารแปรรูป',
-            'slug' => 'อาหารแปรรูป',
-            'branch_id' => 2,
-        ]);
-        Catagory::create([
-            'name' => 'เครื่องดื่ม',
-            'slug' => 'เครื่องดื่ม',
-            'branch_id' => 2,
-        ]);
-        Catagory::create([
-            'name' => 'ไข่อื่นๆ',
-            'slug' => 'ไข่อื่นๆ',
-            'branch_id' => 2,
-        ]);
-        $Catagory = Catagory::create([
-            'name' => 'ไข่ไก่',
-            'slug' => 'ไข่ไก่',
-            'branch_id' => 3,
-        ]);
-        //  print_r( $Catagory->get()->id);
-        $Catagory2 = Catagory::create([
-            'name' => 'แผงไข่',
-            'slug' => 'แผงไข่',
-            'branch_id' => 3,
-        ]);
-        Catagory::create([
-            'name' => 'อาหารแปรรูป',
-            'slug' => 'อาหารแปรรูป',
-            'branch_id' => 3,
-        ]);
-        Catagory::create([
-            'name' => 'เครื่องดื่ม',
-            'slug' => 'เครื่องดื่ม',
-            'branch_id' => 3,
-        ]);
-        Catagory::create([
-            'name' => 'ไข่อื่นๆ',
-            'slug' => 'ไข่อื่นๆ',
-            'branch_id' => 3,
-        ]);
-         Catagory::create([
-            'name' => 'ไข่ไก่',
-            'slug' => 'ไข่ไก่',
-            'branch_id' => 4,
-        ]);
-        Catagory::create([
-            'name' => 'แผงไข่',
-            'slug' => 'แผงไข่',
-            'branch_id' => 4,
-        ]);
-        Catagory::create([
-            'name' => 'อาหารแปรรูป',
-            'slug' => 'อาหารแปรรูป',
-            'branch_id' => 4,
-        ]);
-        Catagory::create([
-            'name' => 'เครื่องดื่ม',
-            'slug' => 'เครื่องดื่ม',
-            'branch_id' => 4,
-        ]);
-        Catagory::create([
-            'name' => 'ไข่อื่นๆ',
-            'slug' => 'ไข่อื่นๆ',
-            'branch_id' => 4,
-        ]);
+        // $Catagory = Catagory::create([
+        //     'name' => 'ไข่ไก่',
+        //     'slug' => 'ไข่ไก่',
+        //     'branch_id' => 1,
+        // ]);
+        // //  print_r( $Catagory->get()->id);
+        // $Catagory2 = Catagory::create([
+        //     'name' => 'แผงไข่',
+        //     'slug' => 'แผงไข่',
+        //     'branch_id' => 1,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'อาหารแปรรูป',
+        //     'slug' => 'อาหารแปรรูป',
+        //     'branch_id' => 1,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'เครื่องดื่ม',
+        //     'slug' => 'เครื่องดื่ม',
+        //     'branch_id' => 1,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'ไข่อื่นๆ',
+        //     'slug' => 'ไข่อื่นๆ',
+        //     'branch_id' => 1,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'ทั่วไป',
+        //     'slug' => 'ทั่วไป',
+        //     'branch_id' => 1,
+        // ]);
+        // // $Branchs = Branchs::create([
+        // //      'name' => 'สาขา 1',
+        // //      'des' => 'สาขา 1',
+        // //  ]);
+        // //สาขา1
+        // $Catagory = Catagory::create([
+        //     'name' => 'ไข่ไก่',
+        //     'slug' => 'ไข่ไก่',
+        //     'branch_id' => 2,
+        // ]);
+        // //  print_r( $Catagory->get()->id);
+        // $Catagory2 = Catagory::create([
+        //     'name' => 'แผงไข่',
+        //     'slug' => 'แผงไข่',
+        //     'branch_id' => 2,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'อาหารแปรรูป',
+        //     'slug' => 'อาหารแปรรูป',
+        //     'branch_id' => 2,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'เครื่องดื่ม',
+        //     'slug' => 'เครื่องดื่ม',
+        //     'branch_id' => 2,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'ไข่อื่นๆ',
+        //     'slug' => 'ไข่อื่นๆ',
+        //     'branch_id' => 2,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'ทั่วไป',
+        //     'slug' => 'ทั่วไป',
+        //     'branch_id' => 2,
+        // ]);
+
+        // $Catagory = Catagory::create([
+        //     'name' => 'ไข่ไก่',
+        //     'slug' => 'ไข่ไก่',
+        //     'branch_id' => 3,
+        // ]);
+        // //  print_r( $Catagory->get()->id);
+        // $Catagory2 = Catagory::create([
+        //     'name' => 'แผงไข่',
+        //     'slug' => 'แผงไข่',
+        //     'branch_id' => 3,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'อาหารแปรรูป',
+        //     'slug' => 'อาหารแปรรูป',
+        //     'branch_id' => 3,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'เครื่องดื่ม',
+        //     'slug' => 'เครื่องดื่ม',
+        //     'branch_id' => 3,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'ไข่อื่นๆ',
+        //     'slug' => 'ไข่อื่นๆ',
+        //     'branch_id' => 3,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'ทั่วไป',
+        //     'slug' => 'ทั่วไป',
+        //     'branch_id' => 3,
+        // ]);
+
+        //  Catagory::create([
+        //     'name' => 'ไข่ไก่',
+        //     'slug' => 'ไข่ไก่',
+        //     'branch_id' => 4,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'แผงไข่',
+        //     'slug' => 'แผงไข่',
+        //     'branch_id' => 4,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'อาหารแปรรูป',
+        //     'slug' => 'อาหารแปรรูป',
+        //     'branch_id' => 4,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'เครื่องดื่ม',
+        //     'slug' => 'เครื่องดื่ม',
+        //     'branch_id' => 4,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'ไข่อื่นๆ',
+        //     'slug' => 'ไข่อื่นๆ',
+        //     'branch_id' => 4,
+        // ]);
+        // Catagory::create([
+        //     'name' => 'ทั่วไป',
+        //     'slug' => 'ทั่วไป',
+        //     'branch_id' => 4,
+        // ]);
 
         // $user->;
         //    print_r($user);

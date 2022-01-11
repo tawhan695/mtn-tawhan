@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\User;
 use App\Models\Catagory;
 use Exception;
+use Phattarachai\LineNotify\Line;
+use App\Models\Linenotify;
 class SaleController extends Controller
 {
       /**
@@ -113,6 +115,14 @@ class SaleController extends Controller
         $walet = Wallet::where('branch_id',auth()->user()->branch_id())->first()
         ->payment_add($order->id,$change,'เงินทอน');
 
+        try{
+
+            $linetoken =  Linenotify::where('branch_id',auth()->user()->branch_id())->first()->token;
+            $line = new Line($linetoken);
+            $line->send('ขายสินค้า:'.$request->product );
+        }catch(\Exception $e){
+
+        }
         return response()->json([
             'Change' => $change,
             'order_detail' => $request->product,

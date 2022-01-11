@@ -181,6 +181,23 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('orders.index') }}"
+                                class="nav-link {{ request()->routeIs('orders.index') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-history"></i>
+                                <p>ประวัติการขาย</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ Route('defective.index') }}"
+                                class="nav-link {{ request()->routeIs('defcetive.index') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-trash"></i>
+                                <p>
+                                    สินค้าชำรุด
+                                    <span class="right badge badge-danger">2</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ url('admin/finance') }}"
                                 class="nav-link {{ request()->is('admin/finance') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-coins"></i>
