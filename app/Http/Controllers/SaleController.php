@@ -14,6 +14,7 @@ use App\Models\Catagory;
 use Exception;
 use Phattarachai\LineNotify\Line;
 use App\Models\Linenotify;
+use App\Models\customer;
 class SaleController extends Controller
 {
       /**
@@ -85,6 +86,7 @@ class SaleController extends Controller
         $order->status_sale=$request->status_sale;   // สถานะ
         $order->paid_by=$request->paid_by;   // ชำระโดย
         $order->user_id=auth()->user()->id;  // คนขาย
+        $order->customer_id=$request->customer;  // คนขาย
         $order->branch_id = auth()->user()->branch_id();  // สาขา
         $order->save();  // คนขาย
 
@@ -92,7 +94,12 @@ class SaleController extends Controller
 
         $walwt = Wallet::where('branch_id', auth()->user()->branch_id())->first()->balance;
         Wallet::where('branch_id', auth()->user()->branch_id())->update(['balance'=> floatval($net_amount) + floatval($walwt)]);
-
+        $customer = customer::where('id',$request->customer)->first()->company;
+        $text_line = "แคชเชียร์ ".auth()->user()->name ."/n";
+        $text_line = "ลูกค้า ". $customer ."/n";
+        $text_line += "---------------";
+        $text_line = "เลขที่ใบเสร็จ ". $order->id ."/n";
+        $text_line += "---------------";
         foreach ($request->product as $key => $value) {
             $order_detail = new Order_details;
             $order_detail->product_id = $value['id'];
@@ -103,23 +110,37 @@ class SaleController extends Controller
             $order_detail->qty = $value['qty'];
             $order_detail->save();
 
+
+            $text_line += $value['name']. "ราคา ".$value['price'] ."จำนวน ".$value['qty']."รวม ".$value['totol']."/n";
+
             // ลบออกจากคลัง
             $p_qty = Product::where('id',$value['id'])->first()->qty;
             // $p_qty =  $Product;
            Product::where('id',$value['id'])->update(['qty'=> intval($p_qty)  -  intval($value['qty']) ] );
 
         }
+        $text_line += "---------------/n";
         $prod = Order::where('id',$order->id)->first();
 
         $date = date_create($order->created_at);
         $walet = Wallet::where('branch_id',auth()->user()->branch_id())->first()
         ->payment_add($order->id,$change,'เงินทอน');
 
+        $date_up = date_format($date,'Y-m-d H:i:s');
+
+        $text_line += "รวมยอด ". $totol."/n";
+        $text_line += "เงิน".$request->paid_by."รับ ". $cash."/n";
+        $text_line += "สวนลด ". $discount."/n";
+        $text_line += "เงินทอน ". $discount."/n";
+        $text_line += "เงินทอน ". $discount."/n";
+        $text_line += "---------------/n";
+        $text_line += " ". $date_up."/n";
+
         try{
 
             $linetoken =  Linenotify::where('branch_id',auth()->user()->branch_id())->first()->token;
             $line = new Line($linetoken);
-            $line->send('ขายสินค้า:'.$request->product );
+            $line->send('ขายสินค้า:'. $text_line  );
         }catch(\Exception $e){
 
         }
@@ -131,7 +152,7 @@ class SaleController extends Controller
             'discount' => $discount,
             'net_amount' => $net_amount,
             'change' => $change,
-            'date' =>date_format($date,'Y-m-d H:i:s') ,
+            'date' =>$date_up ,
             'sale' => User::where('id',$prod->user_id)->first()->name,
             'D' =>  $order
             ]);
