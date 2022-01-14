@@ -121,7 +121,7 @@ class OrderController extends Controller
           $walwt->update([
                'balance' => $Price -  $or->first()->cash_totol
             ]);
-            Wallet::where('branch_id', auth()->user()->branch_id())->first()->payment_add($or->first()->id,$or->first()->cash_totol,'ถอนเงิน');
+            Wallet::where('branch_id', auth()->user()->branch_id())->first()->payment_add($or->first()->id,$or->first()->cash_totol,'คืนเงิน');
         }
 
         $or->update([
