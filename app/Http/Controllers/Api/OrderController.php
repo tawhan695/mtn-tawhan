@@ -119,7 +119,7 @@ class OrderController extends Controller
           $walwt = Wallet::where('branch_id', auth()->user()->branch_id());
           $Price = $walwt->first()->balance;
           $walwt->update([
-               'balance' => $Price - ($item->qty * $item->price)
+               'balance' => $Price -  $or->first()->cash_totol
             ]);
             Wallet::where('branch_id', auth()->user()->branch_id())->first()->del_payment($or->first()->id);
         }
@@ -127,12 +127,10 @@ class OrderController extends Controller
         $or->update([
             'status' =>'คืนสินค้า/คืนเงิน'
         ]);
-
         try{
-
             $linetoken =  Linenotify::where('branch_id',auth()->user()->branch_id())->first()->token;
             $line = new Line($linetoken);
-            $line->send('ขายสินค้า คืนสินค้า/ยกเลิกสินค้า ใบเสร้จที่ :'.  $or->id);
+            $line->send('ขายสินค้า คืนสินค้า/ยกเลิกสินค้า ใบเสร้จที่ :'.  $or->id .' -'.$or->first()->cash_totol);
             // $line->send('ขายสินค้า:'.customer::where('phone', $request->customer)->first()->company);
         }catch(\Exception $e){
 

@@ -18,4 +18,9 @@ class Order_Details extends Model
         public function order() {
             return $this->belongsTo('App\Models\Order');
         }
+        public function sum_qty($id){
+           $product =  $this->where('product_id', $id)
+            ->with(['order'])
+            ->get();
+        }
 }
