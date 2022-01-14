@@ -30,6 +30,10 @@ class Wallet extends Model
 
                 $payment->amount = 0-$amount;
             }
+            else if ($des == "คืนเงิน"){
+
+                $payment->amount = 0-$amount;
+            }
             else if ($des == "เงินสด"){
 
                 $payment->amount = 0+$amount;
@@ -73,12 +77,20 @@ class Wallet extends Model
         ]);
     }
     public function del_payment($order_id){
-      $payment =   $this->payment()->where('order_id',$order_id);
-      if($payment->first()){
-        $this->update([
-            'balance' => $this->balance + $payment->first()->change
-          ]);
-        $payment->delete();
-      }
+        $payment  = new payment;
+        $payment->des= 'คืนเงิน';
+        $payment->wallet_id = $this->id;
+        $payment->order_id = $order_id ;
+        $payment->user_id = auth()->user()->id;
+        $payment->branch_id = auth()->user()->branch_id();
+        $payment->save();
+        // $payment =   $this->payment()->where('order_id',$order_id);
+    //     $this->update([
+    //      'balance' => $this->balance + $payment->first()->change
+    //    ]);
+        // if($payment->first()){
+            // payment_add($order_id,$payment->first()->change,'');
+        // $payment->delete();
+      
     }
 }
