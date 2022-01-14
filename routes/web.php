@@ -56,6 +56,7 @@ Route::middleware(['manager', 'admin'])->group(function () {
 
     Route::resource('admin/orders', App\Http\Controllers\admin\OrderController::class);
 
+    Route::get('admin/return',[App\Http\Controllers\admin\ReturnController::class,'index'])->name('product.return');
     Route::get('admin/finance', [App\Http\Controllers\admin\FinanceController::class, 'index']);
     Route::get('admin/history', [App\Http\Controllers\admin\HistoryProductController::class, 'index']);
 

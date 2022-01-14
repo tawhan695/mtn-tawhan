@@ -41,6 +41,7 @@
                                         <th>จำนวน</th>
                                         <th>ราคาปลีก</th>
                                         <th>ราคาส่ง</th>
+                                        <th>จำนวนค้าส่ง</th>
                                         <th>หมวดหมู่</th>
                                         <th style="width: 150px">จัดการ</th>
 
@@ -58,6 +59,8 @@
                                             </td>
                                             <td style="width: 1px">
                                                 {{ number_format($item->wholesale_price, 2, '.', ',') }}</td>
+                                            <td style="width: 1px">
+                                                {{ $item->wholesaler }}</td>
                                             <td style="width: 1px">
                                                 @if ( $item->catagory_id != null)
                                                 {{ App\Models\Catagory::where('id', $item->catagory_id)->first()->name }}

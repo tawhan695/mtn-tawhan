@@ -27,7 +27,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Admin') }}|Admin</title>
+    <title>มัทนาไข่สด POS Admin</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('homescreen/style/addtohomescreen.css') }}">
     <script src="{{ asset('homescreen/src/addtohomescreen.js') }}"></script>
     <script>
@@ -115,7 +115,7 @@
             <a href="/" class="brand-link">
                 <img src="{{ asset('images/logo/logo.jpg') }}" alt="Logo" class="brand-image img-circle elevation-3"
                     style="opacity: .8">
-                <span class="brand-text font-weight-light"> {{ config('app.name', 'Laravel') }}</span>
+                <span class="brand-text font-weight-light">MTN POS</span>
             </a>
 
             <!-- Sidebar -->
@@ -189,12 +189,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ Route('defective.index') }}"
-                                class="nav-link {{ request()->routeIs('defcetive.index') ? 'active' : '' }}">
+                            <a href="{{ Route('product.return') }}"
+                                class="nav-link {{ request()->routeIs('product.return') ? 'active' : '' }}">
                                 <i class="nav-icon fas fa-trash"></i>
                                 <p>
                                     สินค้าชำรุด
-                                    <span class="right badge badge-danger">2</span>
+                                    {{-- <span class="right badge badge-danger">2</span> --}}
                                 </p>
                             </a>
                         </li>
