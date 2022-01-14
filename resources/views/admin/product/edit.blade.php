@@ -80,12 +80,29 @@
                      name="price" min="0" max="100000" step="0.01"  required value="{{ $product->retail_price}}">
                   </div>
                 </div>
-                <div class="form-group row">
-                  <label for="inputPrice3" class="col-sm-2 col-form-label">ราคาส่ง</label>
-                  <div class="col-sm-10">
-                    <input type="number" class="form-control" id="inputPrice3" placeholder="Price"
-                     name="price2" min="0" max="100000" step="0.01"  required value="{{ $product->wholesale_price}}">
-                  </div>
+
+                <div class="row">
+                    <div class="col-sm-2">
+                        <label>ราคาส่ง</label>
+                    </div>
+                    <div class="col-sm-5 col-12">
+                        <div class="form-group row">
+                            <div class="col-sm-10">
+                              <input type="number" class="form-control" id="inputPrice3" placeholder="Price"
+                               name="price2" min="0" max="100000" step="0.01"  required value="{{ $product->wholesale_price}}">
+                            </div>
+                          </div>
+                    </div>
+                    <div class="col-sm-5 col-12">
+                        <div class="form-group row ">
+                            <label for="inputPrice4" class="col-sm-3 col-form-label">จำนวนค้าส่ง</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="inputPrice4"
+                                    placeholder="Price" name="wholesaler" min="0" max="100000" step="1"
+                                    value="{{ $product->wholesaler}}" required>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group row">
                   <label for="inputQty3" class="col-sm-2 col-form-label">จำนวน</label>
@@ -115,7 +132,7 @@
 
                     {{-- <input type="Unit" class="form-control" id="inputCat3" placeholder="Cat"> --}}
                     <select class="form-control" name="catagory" id="catagory">
-                      <option>เลือกหมวดหมู่</option>
+                      <option value="null">เลือกหมวดหมู่</option>
                       @foreach ($catagory as $item)
                           @if ($product->catagory_id == $item->id)
 

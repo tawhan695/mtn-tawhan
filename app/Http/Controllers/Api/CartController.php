@@ -268,6 +268,11 @@ class CartController extends Controller
             // $text_line.= "เงินทอน ". $discount."\n";
             $text_line .= "--------------------------\n";
             $text_line .= " ". $date_up."\n";
+            $text_line .= "**************************\n";
+            $text_line .= "   การเงิน  \n";
+            $text_line .= " รับ: +".$totol."\n";
+            $text_line .= " ยอดคงเหลือ : ". Wallet::where('branch_id', auth()->user()->branch_id())->first()->balance."\n";
+            $text_line .= "**************************\n";
             try{
 
                 $linetoken =  Linenotify::where('branch_id',auth()->user()->branch_id())->first()->token;

@@ -22,11 +22,12 @@ class CreateProductsTable extends Migration
             $table->string('unit')->nullable();
             $table->double('retail_price',15,2)->default(0)->comment('ราคาปลีก'); // ราคาส่ง
             $table->double('wholesale_price',15,2)->default(0)->comment('ราคาส่ง'); // ราคาปลีก
+            $table->integer('wholesaler')->default(5)->comment('จำนวนค้าส่ง'); // ราคาปลีก
             $table->double('sale_price',15,2)->default(0); // ราคาลดราคา
             // $table->double('price',15,2)->default(0);
             $table->unsignedInteger('qty')->default(0); // quantity
             $table->boolean('featured')->default(false);
-            $table->boolean('retail')->default(true);  // ขายปลีก
+            // $table->boolean('retail')->default(true);  // ขายปลีก
             $table->string('image')->default('images/products/default.png');
             $table->bigInteger('catagory_id')->unsigned()->nullable();
             $table->bigInteger('branch_id')->unsigned()->nullable();

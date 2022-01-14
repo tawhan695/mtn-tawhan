@@ -80,8 +80,9 @@
 
         <!-- Preloader -->
         <div class="preloader flex-column justify-content-center align-items-center bg-warning">
-            <img class="animation__shake" src="{{ asset('images/logo/mtn.png') }}" alt="Logo" height="200"
-                width="200">
+            {{-- <img class="animation__shake" src="{{ asset('images/logo/mtn.png') }}" alt="Logo" height="200"
+                width="200"> --}}
+            {{-- laod log --}}
         </div>
 
         <!-- Navbar -->

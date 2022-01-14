@@ -57,6 +57,7 @@ class ProductController extends Controller
             'unit' => 'required',
             'des' => 'required',
             'catagory' => 'required',
+            'wholesaler' => 'required',
             // 'image' => 'required',
         ]);
 
@@ -80,14 +81,7 @@ class ProductController extends Controller
         }
         print_r($request->all());
 
-        //Array ( [_token] => sUR44FvKgyfilaXODmQDFSL158hqLjoygZCLVfAD
-        // [image] =>
-        // [name] => 1627746078768
-        // [price] => 80.00
-        // [qty] => 20
-        // [unit] => แผง
-        // [des] => 5555555
-        // [catagory] => 1
+
 
 
         $Product = new Product;
@@ -99,7 +93,10 @@ class ProductController extends Controller
         $Product->qty = $request->qty;
         $Product->retail_price = $request->price;
         $Product->wholesale_price = $request->price2;
-        $Product->catagory_id = $request->catagory;
+        $Product->wholesaler = $request->wholesaler;
+        if($request->catagory != 'null'){
+            $Product->catagory_id = $request->catagory;
+        }
         $Product->branch_id = auth()->user()->branch_id();
         $Product->unit = $request->unit;
         $Product->save();
@@ -107,7 +104,7 @@ class ProductController extends Controller
            $linetoken =  Linenotify::where('branch_id',auth()->user()->branch_id())->first()->token;
 
             $line = new Line($linetoken);
-            $line->send('บันทึกสำเร็จ ชื่อสินค้า:'.$request->name.' ,ราคาปลีก :' . $request->price2.' ,ราคาส่ง :'. $request->price.' ,จำนวน :'.$request->qty);
+            $line->send('บันทึกสำเร็จ ชื่อสินค้า:'.$request->name.' ,ราคาปลีก :' . $request->price2.' ,ราคาส่ง :'. $request->price.',จำนวนค้าส่ง :'.$request->wholesaler.' ,จำนวน :'.$request->qty);
         }catch (\Exception $e){
 
         }
@@ -173,6 +170,7 @@ class ProductController extends Controller
             'unit' => 'required',
             'des' => 'required',
             'catagory' => 'required',
+            'wholesaler' => 'required',
             // 'image' => 'required',
         ]);
 
@@ -203,7 +201,10 @@ class ProductController extends Controller
         $Product->qty = $request->qty;
         $Product->retail_price = $request->price; //ราคาขายปลีก
         $Product->wholesale_price = $request->price2; //ราคาขายส่ง
-        $Product->catagory_id = $request->catagory;
+        $Product->wholesaler = $request->wholesaler;
+        if($request->catagory != 'null'){
+            $Product->catagory_id = $request->catagory;
+        }
         // $Product->branch_id = auth()->user()->branch_id();
         $Product->unit = $request->unit;
         $Product->update();

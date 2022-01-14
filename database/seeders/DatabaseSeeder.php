@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             BranchSeeder::class,
             UserSeeder::class,
             WalletSeeder::class,
+            LineSeeder::class,
         ]);
     }
 }
