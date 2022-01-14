@@ -133,7 +133,10 @@ class OrderController extends Controller
             $line->send('ขายสินค้า คืนสินค้า/ยกเลิกสินค้า ใบเสร้จที่ :'.  $or->id .' -'.$or->first()->cash_totol);
             // $line->send('ขายสินค้า:'.customer::where('phone', $request->customer)->first()->company);
         }catch(\Exception $e){
-
+            return response([
+                'success' => true,
+                'data' =>$e
+            ]);
         }
         return response([
             'success' => true,
