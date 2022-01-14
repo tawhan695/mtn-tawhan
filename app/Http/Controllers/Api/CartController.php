@@ -257,6 +257,9 @@ class CartController extends Controller
             $Wallet->first()->payment_add('NULL', $cash, $payid_by);
             if ($change > 0) {
                 $Wallet->first()->payment_add('NULL', $change, 'เงินทอน');
+                $Wallet->update([
+                    'balance' => $Wallet->first()->balance - floatval($change)
+                ]);
             }
 
             $request->user()->cart()->detach();
