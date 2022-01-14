@@ -8,11 +8,12 @@ use Illuminate\Http\Request;
 use App\Models\Order_Details;
 use App\Models\Product;
 use App\Models\Wallet;
-
+use Phattarachai\LineNotify\Line;
+use App\Models\Linenotify;
 class OrderController extends Controller
 {
 
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -122,7 +123,20 @@ class OrderController extends Controller
             ]);
             Wallet::where('branch_id', auth()->user()->branch_id())->first()->del_payment($or->first()->id);
         }
-        $or->delete();
+
+        $or->update([
+            'status' =>'คืนสินค้า/คืนเงิน'
+        ]);
+
+        try{
+
+            $linetoken =  Linenotify::where('branch_id',auth()->user()->branch_id())->first()->token;
+            $line = new Line($linetoken);
+            $line->send('ขายสินค้า คืนสินค้า/ยกเลิกสินค้า ใบเสร้จที่ :'.  $or->id);
+            // $line->send('ขายสินค้า:'.customer::where('phone', $request->customer)->first()->company);
+        }catch(\Exception $e){
+
+        }
         return response([
             'success' => true,
         ]);

@@ -261,7 +261,7 @@ class CartController extends Controller
 
             $request->user()->cart()->detach();
 
-             $text_line .= "รวมยอด ". $totol."\n";
+             $text_line .= "รวมยอด ".floatval($totolall)."\n";
             $text_line .= "เงิน".$request->paid_by."รับ ". $cash."\n";
             $text_line .= "สวนลด ". $discount."\n";
             $text_line .= "เงินทอน ". $change."\n";
