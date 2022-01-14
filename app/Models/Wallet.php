@@ -82,12 +82,12 @@ class Wallet extends Model
         $payment->des= 'คืนเงิน';
         $payment->wallet_id = $this->id;
         $payment->order_id = $order_id ;
-        $payment->amount = $payment_->first()->change;
+        $payment->amount = $payment_->first()->amount;
         $payment->user_id = auth()->user()->id;
         $payment->branch_id = auth()->user()->branch_id();
         $payment->save();
 
-    
+
 
     }
 }
