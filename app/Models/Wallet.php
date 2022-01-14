@@ -76,18 +76,18 @@ class Wallet extends Model
             'amount' => $amount,
         ]);
     }
-    public function del_payment($totol,$id){
-        // $payment_ =   $this->payment()->where('order_id',$order_id);
-        $payment  = new payment;
-        $payment->des= 'คืนเงิน';
-        $payment->wallet_id = $this->id;
-        $payment->order_id = $id ;
-        $payment->amount = $totol;
-        $payment->user_id = auth()->user()->id;
-        $payment->branch_id = auth()->user()->branch_id();
-        $payment->save();
+    // public function del_payment($totol,$id){
+    //     // $payment_ =   $this->payment()->where('order_id',$order_id);
+    //     $payment  = new payment;
+    //     $payment->des= 'คืนเงิน';
+    //     $payment->wallet_id = $this->id;
+    //     $payment->order_id = $id ;
+    //     $payment->amount = $totol;
+    //     $payment->user_id = auth()->user()->id;
+    //     $payment->branch_id = auth()->user()->branch_id();
+    //     $payment->save();
 
 
 
-    }
+    // }
 }
