@@ -204,6 +204,8 @@ class ProductController extends Controller
         $Product->wholesaler = $request->wholesaler;
         if($request->catagory != 'null'){
             $Product->catagory_id = $request->catagory;
+        }else{
+            $Product->catagory_id = null;
         }
         // $Product->branch_id = auth()->user()->branch_id();
         $Product->unit = $request->unit;
