@@ -74,6 +74,7 @@ Route::group(['middleware' => 'auth:sanctum'],function (){
     Route::get('/product/defective', [DefectiveController::class, 'index']);
     Route::get('/product/defective/{id}', [DefectiveController::class, 'show']);
     Route::post('/product/defective/add', [DefectiveController::class, 'store']);
+    Route::post('/product/defective/remove', [DefectiveController::class, 'remove']);
     // // test
     // Route::get('test',function(){
     //     return response()->json([

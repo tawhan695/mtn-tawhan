@@ -60,4 +60,9 @@ class DefectiveController extends Controller
         $Defective->save();
         return  response()->json(['success' => 'บันทึกเรียบร้อย']);
     }
+    public function remove(Request $request){
+        Defective::where('id', $request->id)
+        ->first();
+        ->delete();
+    }
 }
