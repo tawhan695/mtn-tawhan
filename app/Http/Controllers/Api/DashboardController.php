@@ -16,11 +16,11 @@ class DashboardController extends Controller
     {
         $dayDefective = Defective::where('branch_id', auth()->user()->branch_id())->where('created_at', 'like', '%' . date('Y-m-d') . '%')->count();
         $dayOrder = Order::where('branch_id', auth()->user()->branch_id())
-        ->where('status','สำเร็จ')
-        ->where('created_at', 'like', '%' . date('Y-m-d') . '%')->count();
+            ->where('status', 'สำเร็จ')
+            ->where('created_at', 'like', '%' . date('Y-m-d') . '%')->count();
         $sumOrder = Order::where('branch_id', auth()->user()->branch_id())
-        ->where('status','สำเร็จ')
-        ->where('created_at', 'like', '%' . date('Y-m-d') . '%')->sum('net_amount');
+            ->where('status', 'สำเร็จ')
+            ->where('created_at', 'like', '%' . date('Y-m-d') . '%')->sum('net_amount');
         $Product = Product::where('branch_id', auth()->user()->branch_id())->get(['id', 'name', 'unit', 'retail_price', 'wholesale_price']);
         return response([
             'wallet' => Wallet::where('branch_id', auth()->user()->branch_id())->first()->balance,
@@ -42,11 +42,22 @@ class DashboardController extends Controller
             $price_2 = 0;
 
             $det = Order_Details::where('product_id', $key->id)
+                // ->join('order','order__details.id','=','order.id')
                 ->where('created_at', 'like', '%' . date('Y-m-d') . '%')
-                ->with(['order'])
-                ->get();
 
+                // ->with('orders')->where('orders.branch_id','=',auth()->user()->branch_id())
+                ->with(['order' => function ($q) {
+                    $q->where('orders.branch_id', '=', auth()->user()->branch_id());
+                }])
+                ->get();
+            // dd($det);
             foreach ($det as $item2) {
+                if ($item2->order == null) {
+                    return response([
+
+                    ]);
+                }
+
                 if ($item2->order->status_sale == 'ขายปลีก') {
                     $price_1 += $key->retail_price * $item2->qty;
                     $qty_1 += $item2->qty;
@@ -55,27 +66,27 @@ class DashboardController extends Controller
                     $qty_2 += $item2->qty;
                 }
             }
-            if ( $qty_1 > 0 || $qty_2 > 0 ) {
+            if ($qty_1 > 0 || $qty_2 > 0) {
 
-                array_push($list_p,[
-                    "num"=>$i,
-                    "name"=>$key->name,
-                    "qty_1"=>$qty_1,
-                    "price_1"=>$price_1,
-                    "qty_2"=>$qty_2,
-                    "price_2"=>$price_2,
-                    "sum_qty"=>$qty_1 + $qty_2,
-                    "sum_price"=>$price_1 + $price_2,
-                    "img"=>$key->image,
+                array_push($list_p, [
+                    "num" => $i,
+                    "name" => $key->name,
+                    "qty_1" => $qty_1,
+                    "price_1" => $price_1,
+                    "qty_2" => $qty_2,
+                    "price_2" => $price_2,
+                    "sum_qty" => $qty_1 + $qty_2,
+                    "sum_price" => $price_1 + $price_2,
+                    "img" => $key->image,
                 ]);
                 $i++;
             }
-
         }
 
 
         return response([
-            'product' => $list_p,
+            // 'product' => $list_p,
+            'product' => $det,
             // 'det' =>$det,
             // 'qty_1' => $qty_1,
             // 'qty_2' => $qty_2,

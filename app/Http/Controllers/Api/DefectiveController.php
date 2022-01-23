@@ -63,6 +63,6 @@ class DefectiveController extends Controller
     public function remove(Request $request){
         Defective::where('id', $request->id)
         ->first();
-        ->delete();
+        // ->delete();
     }
 }
